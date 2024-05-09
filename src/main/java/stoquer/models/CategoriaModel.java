@@ -1,5 +1,6 @@
 package stoquer.models;
 
+import java.io.Serializable;
 import java.util.UUID;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -7,9 +8,10 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
+//Tabela Categoria
 @Entity
 @Table(name = "Categoria")
-public class CategoriaModel {
+public class CategoriaModel implements Serializable {
     private static final long serialVersioUID = 1;
 
     @Id

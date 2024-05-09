@@ -1,7 +1,5 @@
 package stoquer.models;
 
-import java.io.Serializable;
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -9,13 +7,13 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
-import stoquer.enums.TipoCliente;
+import stoquer.enums.Previlegio;
 
 
-//Tabela Cliente
+//Tabela funcionario
 @Entity
-@Table(name = "Cliente")
-public class ClienteModel implements Serializable{
+@Table(name = "Funcionario")
+public class funcionarioModel {
     private static final long serialVersioUID = 1;
 
     @Id
@@ -25,10 +23,15 @@ public class ClienteModel implements Serializable{
     @ManyToOne
     @JoinColumn(name = "id_usuario")
     private  stoquer.models.UsuarioModel usuario;
-    private TipoCliente tipo_cliente;
+    private Previlegio previlegio;
+
 
     public String getId() {return id;}
     public void setId(String id) {this.id = id;}
 
-   
+    public UsuarioModel getUsuario() {return usuario;}
+    public void setUsuario(UsuarioModel usuario) {this.usuario = usuario;}
+
+    public Previlegio getPrevilegio() {return previlegio;}
+    public void setPrevilegio(Previlegio previlegio) {this.previlegio = previlegio;}
 }

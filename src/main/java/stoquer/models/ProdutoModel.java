@@ -2,13 +2,15 @@ package stoquer.models;
 
 import java.io.Serializable;
 import java.util.UUID;
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
+//Tabela Produto
 @Entity
 @Table(name = "Produto")
 public class ProdutoModel implements Serializable {
@@ -20,6 +22,10 @@ public class ProdutoModel implements Serializable {
     private String nome;
     private String descricao;
     private double preco;
+
+    @ManyToOne
+    @JoinColumn(name = "categoria_id")
+    private  stoquer.models.CategoriaModel categoria;
 
 
     public String getId() {return id;}

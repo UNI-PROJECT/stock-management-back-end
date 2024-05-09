@@ -1,5 +1,6 @@
 package stoquer.models;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
 import jakarta.persistence.Entity;
@@ -10,9 +11,11 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
+
+//Tabela Entrada produto
 @Entity
 @Table(name = "entrada_produto")
-public class EntradaProduto {
+public class EntradaProduto implements Serializable {
     private static final long serialVersioUID = 1;
 
     @Id
