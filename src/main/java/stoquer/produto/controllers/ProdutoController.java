@@ -55,6 +55,7 @@ public class ProdutoController {
 
     }
 
+    //Deletar produto
     @DeleteMapping("/produto/{id}")
     public void deleteProduto(@PathVariable UUID id) {
         proService.delete(id);
