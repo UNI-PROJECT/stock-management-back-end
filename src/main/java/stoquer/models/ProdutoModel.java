@@ -18,18 +18,18 @@ public class ProdutoModel implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private String id;
+    private UUID id;
     private String nome;
     private String descricao;
     private double preco;
 
-    @ManyToOne
-    @JoinColumn(name = "categoria_id")
-    private  stoquer.models.CategoriaModel categoria;
+    // @ManyToOne
+    // @JoinColumn(name = "categoria_id")
+    // private  stoquer.models.CategoriaModel categoria;
 
 
-    public String getId() {return id;}
-    public void setId(String id) {this.id = id;}
+    public UUID getId() {return id;}
+    public void setId(UUID id) {this.id = id;}
 
     public String getNome() {return nome;}
     public void setNome(String nome) {this.nome = nome;}
