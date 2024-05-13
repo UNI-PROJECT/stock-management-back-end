@@ -1,4 +1,4 @@
-package models;
+package modules.models;
 
 import java.util.UUID;
 
@@ -24,7 +24,7 @@ public class funcionarioModel {
     
     @ManyToOne
     @JoinColumn(name = "id_usuario")
-    private  models.UsuarioModel usuario;
+    private  modules.models.UsuarioModel usuario;
     private Previlegio previlegio;
 
 

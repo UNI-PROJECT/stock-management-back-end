@@ -7,9 +7,9 @@ import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import models.CategoriaModel;
 import modules.categoria.dtos.CreateCategoriaInput;
 import modules.categoria.repository.CategoriaRepository;
+import modules.models.CategoriaModel;
 
 
 

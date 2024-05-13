@@ -1,4 +1,4 @@
-package models;
+package modules.models;
 
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -23,16 +23,16 @@ public class VendasApagadas implements Serializable{
 
     @ManyToOne
     @JoinColumn(name = "id_cliente")
-    private models.ClienteModel cliente;
+    private modules.models.ClienteModel cliente;
 
     @ManyToOne
     @JoinColumn(name = "id_produto")
-    private models.ProdutoModel produto;
+    private modules.models.ProdutoModel produto;
 
 
     @ManyToOne
     @JoinColumn(name = "id_funcionario")
-    private models.funcionarioModel funionario;
+    private modules.models.funcionarioModel funionario;
 
 
     private LocalDate data_da_venda;

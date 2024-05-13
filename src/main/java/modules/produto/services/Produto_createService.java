@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import models.ProdutoModel;
+import modules.models.ProdutoModel;
 import modules.produto.dtos.CreateProdutoInput;
 import modules.produto.dtos.UpdateProdutoInput;
 import modules.produto.repository.ProdutoRepository;

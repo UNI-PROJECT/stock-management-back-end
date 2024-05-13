@@ -1,33 +1,45 @@
-package models;
+package modules.models;
+
 
 import java.io.Serializable;
 import java.util.UUID;
 
 import enums.TipoCliente;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.MapsId;
 import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
 
 
 //Tabela Cliente
 @Entity
-@Table(name = "Cliente")
-public class ClienteModel implements Serializable{
-    private static final long serialVersioUID = 1;
+// @Table(name = "Cliente")
+public class ClienteModel implements Serializable {
+    private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
-    
+
+
+    // @Transient
+    // private UUID usuario_id;
+
     @ManyToOne
-    @JoinColumn(name = "id_usuario")
-    private  models.UsuarioModel usuario_id;
+    @JoinColumn(name = "usuario_id")
+    private UsuarioModel usuario;
     
+
+    @Column
     private TipoCliente tipo_cliente;
+
+    // Getters e setters
 
     public UUID getId() {
         return id;
@@ -45,11 +57,12 @@ public class ClienteModel implements Serializable{
         this.tipo_cliente = tipo_cliente;
     }
 
-    public UsuarioModel getUsuario_id() {
-        return usuario_id;
+    public void setUsuario(UsuarioModel usuario) {
+        this.usuario = usuario;
+
     }
 
-    public void setUsuario_id(UsuarioModel usuario_id) {
-        this.usuario_id = usuario_id;
+    public UsuarioModel getUsuario() {
+        return usuario;
     }
 }

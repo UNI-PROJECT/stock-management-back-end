@@ -1,4 +1,4 @@
-package models;
+package modules.models;
 
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -24,7 +24,7 @@ public class SaidaProduto implements Serializable {
 
     @ManyToOne
     @JoinColumn(name = "id_produto")
-    private  models.ProdutoModel produto;
+    private  modules.models.ProdutoModel produto;
     private Integer quantidade;
     private LocalDate data_de_saida;
 

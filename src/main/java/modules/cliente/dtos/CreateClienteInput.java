@@ -3,9 +3,16 @@ package modules.cliente.dtos;
 import java.util.UUID;
 
 import enums.TipoCliente;
-import models.UsuarioModel;
+import modules.models.UsuarioModel;
 
 public class CreateClienteInput {
     public UsuarioModel id_usuario;
     public TipoCliente tipo_cliente;
+    public String nome;
+    public String email;
+    public String telefone;
+    public String nacionalidade;
+    public String endereco;
+    public String senha;
+
 }

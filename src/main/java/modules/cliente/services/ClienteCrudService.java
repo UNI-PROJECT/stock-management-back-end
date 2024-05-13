@@ -4,25 +4,49 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
+import org.hibernate.mapping.Any;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import models.ClienteModel;
+import enums.TipoCliente;
+import enums.TipoUsuario;
 import modules.cliente.dtos.CreateClienteInput;
 import modules.cliente.repository.ClienteRepository;
-
-
+import modules.models.ClienteModel;
+import modules.models.UsuarioModel;
+import modules.usuario.repository.UsuarioRepository;
 
 @Service
 public class ClienteCrudService {
   @Autowired
   private ClienteRepository clienteRepository;
 
+  @Autowired
+  private UsuarioRepository usuarioRepository;
+
   // Cadastro das cliente
   public ClienteModel create(CreateClienteInput data) {
+    System.out.println("nome: " + data.nome);
+    var usuario = new UsuarioModel();
+    usuario.setNome(data.nome);
+    usuario.setEmail(data.email);
+    usuario.setTelefone(data.telefone);
+    usuario.setEndereco(data.endereco);
+    usuario.setTipoUsuario(TipoUsuario.CLIENTE);
+    usuario.setNacionalidade(data.nacionalidade);
+    usuarioRepository.save(usuario);
+    UUID userID = usuario.getId();
+
     var cliente = new ClienteModel();
-    cliente.setUsuario_id(data.id_usuario);
-    cliente.setTipo_cliente(data.tipo_cliente);
+
+    System.err.println("AAAAAAAAAAAAAAAA: " + userID);
+
+    // Define o usuário_id manualmente
+    cliente.setUsuario(usuario);
+    cliente.setTipo_cliente(TipoCliente.PARTICULAR);
+    System.out.println("tipo: " + cliente.getTipo_cliente());
+    // System.out.println("userID: " + cliente.getUsuario_id());
+
     return clienteRepository.save(cliente);
   }
 
@@ -41,5 +65,4 @@ public class ClienteCrudService {
     clienteRepository.deleteById(id);
   }
 
- 
 }

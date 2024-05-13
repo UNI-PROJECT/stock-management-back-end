@@ -1,13 +1,17 @@
-package models;
+package modules.models;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 import enums.TipoUsuario;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 //Tabele de cadastro de usuário
@@ -28,6 +32,8 @@ public class UsuarioModel implements Serializable{
     private String senha;
     private String avatar;
     private TipoUsuario tipoUsuario;
+
+   
 
     public UUID getId() {return id; }
     public void setId(UUID id) {this.id = id;}

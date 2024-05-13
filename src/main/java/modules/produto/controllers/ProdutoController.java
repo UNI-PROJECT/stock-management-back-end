@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import models.ProdutoModel;
+import modules.models.ProdutoModel;
 import modules.produto.dtos.CreateProdutoInput;
 import modules.produto.dtos.UpdateProdutoInput;
 import modules.produto.services.Produto_createService;

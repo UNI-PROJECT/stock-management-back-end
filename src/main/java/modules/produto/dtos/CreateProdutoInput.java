@@ -1,6 +1,6 @@
 package modules.produto.dtos;
 
-import models.CategoriaModel;
+import modules.models.CategoriaModel;
 
 public class CreateProdutoInput {
     public String nome;
