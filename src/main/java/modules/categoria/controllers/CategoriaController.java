@@ -17,6 +17,9 @@ import modules.categoria.services.CategoriaCrudService;
 import modules.models.CategoriaModel;
 
 
+
+//Essa camada se cominica com o SERVICE
+
 @RestController
 public class CategoriaController {
     @Autowired
@@ -32,7 +35,7 @@ public class CategoriaController {
     //     Optional<CategoriaModel> categoriaOptional = categoriaService.findById(id);
     //     if (categoriaOptional.isPresent()) {
     //         return ResponseEntity.ok(categoriaOptional.get());
-    //     } else {
+    //     } else {k
     //         return ResponseEntity.notFound().build();
     //     }
     // }

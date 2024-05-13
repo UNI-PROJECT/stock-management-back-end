@@ -24,7 +24,7 @@ public class ClienteCrudService {
   @Autowired
   private UsuarioRepository usuarioRepository;
 
-  // Cadastro das cliente
+  //  Cadastro das cliente
   public ClienteModel create(CreateClienteInput data) {
     System.out.println("nome: " + data.nome);
     var usuario = new UsuarioModel();
@@ -55,7 +55,7 @@ public class ClienteCrudService {
     return clienteRepository.findAll();
   }
 
-  // Encontrar cliente pelo ID
+  // Encontrar cliente pelo ID 
   public Optional<ClienteModel> findById(UUID id) {
     return clienteRepository.findById(id);
   }
