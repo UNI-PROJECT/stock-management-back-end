@@ -9,11 +9,8 @@ import org.springframework.stereotype.Service;
 
 import models.CategoriaModel;
 import modules.categoria.dtos.CreateCategoriaInput;
-import modules.categoria.dtos.UpdateCategoriaInput;
 import modules.categoria.repository.CategoriaRepository;
-import modules.produto.dtos.UpdateProdutoInput;
 
-import java.util.NoSuchElementException;
 
 
 @Service

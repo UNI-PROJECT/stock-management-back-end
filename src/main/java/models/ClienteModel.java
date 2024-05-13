@@ -25,11 +25,31 @@ public class ClienteModel implements Serializable{
     
     @ManyToOne
     @JoinColumn(name = "id_usuario")
-    private  models.UsuarioModel usuario;
+    private  models.UsuarioModel usuario_id;
+    
     private TipoCliente tipo_cliente;
 
-    public UUID getId() {return id;}
-    public void setId(UUID id) {this.id = id;}
+    public UUID getId() {
+        return id;
+    }
 
-   
+    public void setId(UUID id) {
+        this.id = id;
+    }
+
+    public TipoCliente getTipo_cliente() {
+        return tipo_cliente;
+    }
+
+    public void setTipo_cliente(TipoCliente tipo_cliente) {
+        this.tipo_cliente = tipo_cliente;
+    }
+
+    public UsuarioModel getUsuario_id() {
+        return usuario_id;
+    }
+
+    public void setUsuario_id(UsuarioModel usuario_id) {
+        this.usuario_id = usuario_id;
+    }
 }
