@@ -13,6 +13,7 @@ import modules.models.CategoriaModel;
 
 
 
+//Essa camada se cominica com o Repositorio
 @Service
 public class CategoriaCrudService {
   @Autowired

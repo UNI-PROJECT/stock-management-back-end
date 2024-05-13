@@ -21,6 +21,8 @@ import modules.models.ClienteModel;
 
 
 
+//Controller se comunica com a cadamada  de SERVICE
+
 @RestController
 public class ClienteCrudController {
     @Autowired
