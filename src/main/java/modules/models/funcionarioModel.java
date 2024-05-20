@@ -31,9 +31,12 @@ public class funcionarioModel {
     public UUID getId() {return id;}
     public void setId(UUID id) {this.id = id;}
 
+
     public UsuarioModel getUsuario() {return usuario;}
     public void setUsuario(UsuarioModel usuario) {this.usuario = usuario;}
 
     public Previlegio getPrevilegio() {return previlegio;}
     public void setPrevilegio(Previlegio previlegio) {this.previlegio = previlegio;}
 }
+
+
