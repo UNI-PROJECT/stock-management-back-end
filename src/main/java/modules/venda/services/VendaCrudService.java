@@ -1,5 +1,6 @@
 package modules.venda.services;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -7,52 +8,60 @@ import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import enums.Previlegio;
-import enums.TipoUsuario;
-import modules.funcionario.dtos.CreateFuncionarioInput;
+import modules.cliente.repository.ClienteRepository;
 import modules.funcionario.repository.FuncionarioRepository;
-import modules.models.UsuarioModel;
+import modules.models.ClienteModel;
+import modules.models.ProdutoModel;
+import modules.models.VendaModel;
 import modules.models.funcionarioModel;
-import modules.usuario.repository.UsuarioRepository;
+import modules.produto.repository.ProdutoRepository;
+import modules.venda.dtos.CreateVendaInput;
+import modules.venda.repository.VendaRepository;
 
 @Service
 public class VendaCrudService {
   @Autowired
-  private UsuarioRepository usuarioRepository;
+  private VendaRepository vendaRepository;
 
   @Autowired
+  private ClienteRepository clienteRepository;
+
+  @Autowired
+  private ProdutoRepository produtoRepository;
+
+  @Autowired 
   private FuncionarioRepository funcionarioRepository;
 
-  public funcionarioModel create(CreateFuncionarioInput data) {
-    var usuario = new UsuarioModel();
-    usuario.setNome(data.nome);
-    usuario.setEmail(data.email);
-    usuario.setTelefone(data.telefone);
-    usuario.setEndereco(data.endereco);
-    usuario.setTipoUsuario(TipoUsuario.FUNCIONARIO);
-    usuario.setNacionalidade(data.nacionalidade);
-    usuarioRepository.save(usuario);
+  public VendaModel create(CreateVendaInput data){
 
-    var funcionario = new funcionarioModel();
-    funcionario.setUsuario(usuario);
-    funcionario.setPrevilegio(Previlegio.EDITAR);
+  
+    ClienteModel cliente = clienteRepository.findById(data.cliente_id).orElseThrow(() -> new RuntimeException("Cliente não encontrado"));
+    ProdutoModel produto = produtoRepository.findById(data.produto_id).orElseThrow(() -> new RuntimeException("Produto não encontrado"));
+    funcionarioModel funcionario = funcionarioRepository.findById(data.funionario_id).orElseThrow(() -> new RuntimeException("Funcionario não encontrado"));
 
+    var venda = new VendaModel();
 
-    return funcionarioRepository.save(funcionario);
+    venda.setCliente(cliente);
+    venda.setProduto(produto);
+    venda.setFunionario(funcionario);
+    venda.setData_da_venda(LocalDate.now());
+    venda.setTotalDaVenda(produto.getPreco());
+
+    return vendaRepository.save(venda);
   }
 
 
-  public List<funcionarioModel> getAll() {
-    return funcionarioRepository.findAll();
+  public List<VendaModel> getAll() {
+    return vendaRepository.findAll();
   }
 
 
-  public Optional<funcionarioModel> findById(UUID id) {
-    return funcionarioRepository.findById(id);
+  public Optional<VendaModel> findById(UUID id) {
+    return vendaRepository.findById(id);
   }
 
   public void delete(UUID id) {
-    funcionarioRepository.deleteById(id);
+    vendaRepository.deleteById(id);
   }
 }
 

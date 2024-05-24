@@ -1,4 +1,4 @@
-package modules.funcionario.controllers;
+package modules.venda.controllers;
 
 import java.util.List;
 import java.util.Optional;
@@ -14,35 +14,36 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import modules.funcionario.dtos.CreateFuncionarioInput;
-import modules.funcionario.services.FuncinarioCrudService;
-import modules.models.funcionarioModel;
+import modules.models.VendaModel;
+import modules.venda.dtos.CreateVendaInput;
+import modules.venda.services.VendaCrudService;
+
 
 
 
 @RestController
-public class funcionarioCrudController {
+public class VendaCrudController {
     @Autowired
-    private FuncinarioCrudService funcionarioService;
+    private VendaCrudService vendaService;
 
-    @GetMapping("funcionario/listar")
-    public ResponseEntity<List<funcionarioModel>> findAll() {
-        return ResponseEntity.ok(funcionarioService.getAll());
+    @GetMapping("venda/listar")
+    public ResponseEntity<List<VendaModel>> findAll() {
+        return ResponseEntity.ok(vendaService.getAll());
     }
 
-    @GetMapping("/funcionario/{id}")
-    public ResponseEntity<funcionarioModel> getfuncionarioById(@PathVariable UUID id) {
-        Optional<funcionarioModel> funcionario = funcionarioService.findById(id);
-        if (funcionario.isPresent()) {
-            return ResponseEntity.ok(funcionario.get());
+    @GetMapping("/venda/{id}")
+    public ResponseEntity<VendaModel> getvendaById(@PathVariable UUID id) {
+        Optional<VendaModel> venda = vendaService.findById(id);
+        if (venda.isPresent()) {
+            return ResponseEntity.ok(venda.get());
         } else {
             return ResponseEntity.notFound().build();
         }
     }
 
-    @PostMapping("funcionario/cadastrar")
-    public ResponseEntity<funcionarioModel> create(@RequestBody CreateFuncionarioInput data) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(funcionarioService.create(data));
+    @PostMapping("venda/cadastrar")
+    public ResponseEntity<VendaModel> create(@RequestBody CreateVendaInput data) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(vendaService.create(data));
 
     }
 
@@ -54,9 +55,9 @@ public class funcionarioCrudController {
     // }
 
     //Deletar cliente
-    @DeleteMapping("/funcionario/{id}")
+    @DeleteMapping("/venda/{id}")
     public void deleteCliente(@PathVariable UUID id) {
-        funcionarioService.delete(id);
+        vendaService.delete(id);
     }
     
 

@@ -1,12 +1,12 @@
 package modules.venda.dtos;
 
-
-import modules.models.ClienteModel;
-import modules.models.ProdutoModel;
-import modules.models.funcionarioModel;
+import java.time.LocalDate;
+import java.util.UUID;
 
 public class CreateVendaInput {
-    public ClienteModel cliente;
-    public funcionarioModel funionario;
-    public ProdutoModel produto;
+    public UUID cliente_id;
+    public UUID funionario_id;
+    public UUID produto_id;
+    public LocalDate data_da_venda;
+    public String descricao;
 }
