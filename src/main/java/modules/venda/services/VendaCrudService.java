@@ -12,14 +12,20 @@ import modules.cliente.repository.ClienteRepository;
 import modules.funcionario.repository.FuncionarioRepository;
 import modules.models.ClienteModel;
 import modules.models.ProdutoModel;
+import modules.models.SaidaProduto;
 import modules.models.VendaModel;
 import modules.models.funcionarioModel;
 import modules.produto.repository.ProdutoRepository;
+import modules.saidaProduto.repository.SaidaProdutoRepository;
 import modules.venda.dtos.CreateVendaInput;
 import modules.venda.repository.VendaRepository;
 
 @Service
 public class VendaCrudService {
+
+  @Autowired
+  SaidaProdutoRepository saidaProdutoRepository;
+
   @Autowired
   private VendaRepository vendaRepository;
 
@@ -40,12 +46,21 @@ public class VendaCrudService {
     funcionarioModel funcionario = funcionarioRepository.findById(data.funionario_id).orElseThrow(() -> new RuntimeException("Funcionario não encontrado"));
 
     var venda = new VendaModel();
-
     venda.setCliente(cliente);
     venda.setProduto(produto);
     venda.setFunionario(funcionario);
     venda.setData_da_venda(LocalDate.now());
     venda.setTotalDaVenda(produto.getPreco());
+
+    var saidaProduto =  new SaidaProduto();
+
+    saidaProduto.setData_de_saida(LocalDate.now());
+    saidaProduto.setProduto(produto);
+    saidaProduto.setQuantidade(1);
+    saidaProdutoRepository.save(saidaProduto);
+
+
+
 
     return vendaRepository.save(venda);
   }
