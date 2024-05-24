@@ -35,16 +35,13 @@ public class ClienteCrudService {
     usuario.setTipoUsuario(TipoUsuario.CLIENTE);
     usuario.setNacionalidade(data.nacionalidade);
     usuarioRepository.save(usuario);
-    UUID userID = usuario.getId();
 
     var cliente = new ClienteModel();
 
-    System.err.println("AAAAAAAAAAAAAAAA: " + userID);
 
     // Define o usuário_id manualmente
     cliente.setUsuario(usuario);
     cliente.setTipo_cliente(TipoCliente.PARTICULAR);
-    System.out.println("tipo: " + cliente.getTipo_cliente());
     // System.out.println("userID: " + cliente.getUsuario_id());
 
     return clienteRepository.save(cliente);
