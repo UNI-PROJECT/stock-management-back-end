@@ -7,10 +7,8 @@ RUN apt-get update && apt-get install -y openjdk-17-jdk
 # Instalar o Maven
 RUN apt-get install -y maven
 
-# Definir o diretório de trabalho
 WORKDIR /app
 
-# Copiar o código fonte para o contêiner
 COPY . .
 
 # Executar o Maven para construir o projeto
@@ -26,7 +24,7 @@ WORKDIR /app
 EXPOSE 8080
 
 # Copiar o arquivo JAR do estágio de construção para o estágio final
-COPY --from=build /app/target/deploy_render-1.0.0.jar app.jar
+COPY --from=build ./target/deploy_render-1.0.0.jar app.jar
 
 # Comando para executar a aplicação
 ENTRYPOINT ["java", "-jar", "app.jar"]
