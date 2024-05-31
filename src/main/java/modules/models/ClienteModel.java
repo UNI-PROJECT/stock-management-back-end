@@ -12,14 +12,9 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.MapsId;
-import jakarta.persistence.Table;
-import jakarta.persistence.Transient;
 
 
-//Tabela Cliente
 @Entity
-// @Table(name = "Cliente")
 public class ClienteModel implements Serializable {
     private static final long serialVersionUID = 1L;
 
@@ -39,7 +34,6 @@ public class ClienteModel implements Serializable {
     @Column
     private TipoCliente tipo_cliente;
 
-    // Getters e setters
 
     public UUID getId() {
         return id;

@@ -8,7 +8,6 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
-//Tabela Categoria
 @Entity
 @Table(name = "Categoria")
 public class CategoriaModel implements Serializable {
@@ -33,5 +32,3 @@ public class CategoriaModel implements Serializable {
     
 }
 
-
-//GENHESssd

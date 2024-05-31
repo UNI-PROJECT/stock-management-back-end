@@ -13,7 +13,6 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 
-//Tabela Entrada produto
 @Entity
 @Table(name = "entrada_produto")
 public class EntradaProduto implements Serializable {
