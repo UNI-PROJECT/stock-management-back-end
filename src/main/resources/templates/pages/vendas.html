@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vendas - Gerencie as tuas vendas </title>
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/responsive.css">
+    <link rel="stylesheet" href="../css/vendas.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Ubuntu+Sans:ital,wght@0,100..800;1,100..800&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap"
+        rel="stylesheet">
+    <script defer type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script defer nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <script defer type="module" src="../js/controller.js"></script>
+</head>
+
+<body>
+    <!-- SESSÃO PRINCIPAL -->
+    <section class="dashboard-section main-section">
+        <!-- HEADER PRINCIPAL -->
+        <header class="main__header">
+
+            <div class="search__div">
+                <a href="#" class="header__btn toggleMenu__btn"> <ion-icon name="menu-outline"></ion-icon></a>
+                <!-- <div class="hidden">
+					<input type="text" placeholder="Pesquisar" class="input__search">
+					<ion-icon name="search-outline"></ion-icon>
+				</div> -->
+            </div>
+
+            <div class="header__user">
+                <a href="#" class="header__btn show-notification_btn notification__btn"> <ion-icon
+                        name="notifications-outline"></ion-icon></a>
+
+                <a href="#" class="header__btn toggle-dark-mode notification__btn"> <ion-icon name="sunny-outline"
+                        class="hidden light-icon"></ion-icon>
+                    <ion-icon name="moon-outline" class="dark-icon"></ion-icon>
+                </a>
+                <div class="notification-header">
+                    <h3 class="heading-h3">Notificações</h3>
+                    <div class="filter-noti"><span>Hoje</span>
+                        <span>Todos</span>
+                    </div>
+                    <div class="notitification-list-header">
+                        <div class="list">
+
+                            <div class="notifications-box">
+                                <ion-icon name="notifications-outline"></ion-icon>
+                                <div class="notification-text-container"><span class="notification-text-header">Estoque
+                                        Baixo</span>
+                                    <p><span class="notif-product-name">Computador</span> está com nível baixo de
+                                        estoque <span class="notif-product-sctock"></span> convêm actualizar</p>
+                                    <span class="notif-date">Agora mesmo</span>
+                                </div>
+                            </div>
+
+                            <div class="notifications-box">
+                                <ion-icon name="notifications-outline"></ion-icon>
+                                <div class="notification-text-container"><span class="notification-text-header">Estoque
+                                        Baixo</span>
+                                    <p><span class="notif-product-name">Computador</span> está com nível baixo de
+                                        estoque <span class="notif-product-sctock"></span> convêm actualizar</p>
+                                    <span class="notif-date">Há 2h</span>
+                                </div>
+                            </div>
+                            <div class="notifications-box">
+                                <ion-icon name="notifications-outline"></ion-icon>
+                                <div class="notification-text-container">
+                                    <span class="notification-text-header">Estoque Baixo</span>
+                                    <p><span class="notif-product-name">Computador</span> está com nível baixo de
+                                        estoque <span class="notif-product-sctock"></span> convêm actualizar</p>
+                                    <span class="notif-date">Ontem</span>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="header__profile-box">
+                    <img src="../assets/img/admin/admin.png" alt="" class="header__profile-img">
+                    <div class="profile__name-box">
+                        <span class="header__p-name">Timóteo Pembele</span>
+                        <span class="permission">Admin <ion-icon name="chevron-down-outline"
+                                class="profile-click-icon"></ion-icon></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="profile-infor-box">
+                <ul class="profile-list">
+                    <li><a href="#" class="p-link"><ion-icon name="person-outline"></ion-icon> Meu Perfil</a></li>
+                    <li><a href="#" class="p-link"><ion-icon name="settings-outline"></ion-icon> Configurações</a></li>
+                    <li><a href="#" class="p-link btn-log-out"><ion-icon name="log-out-outline"></ion-icon> Terminar
+                            Sessão</a></li>
+                </ul>
+            </div>
+        </header>
+
+
+        <!-- SESSÃO LATERAL ESQUERDO DO CONTAINER -->
+        <aside class="side__bar">
+            <!-- LOGOTIPO -->
+            <h1 class="logo"> <img src="../assets/img/logo/logo.png" class="icon-logo"><span
+                class="full-logo">StockMaster</span></h1>
+            <!-- BARRA DE MENU PRINCIPAL -->
+            <nav class="main-nav">
+                <ul class="main-nav-list">
+                    <li> <a href="../index.html" class="main-nav-link "><ion-icon name="grid-outline"></ion-icon>
+                            <span>Dashboard</span></a></li>
+                    <li><a href="products.html" class="main-nav-link "> <ion-icon name="layers-outline"></ion-icon>
+                            <span>Productos</span></a>
+                    </li>
+                    <li><a href="estoques.html" class="main-nav-link "> <ion-icon name="cube-outline"></ion-icon><span>
+                                Estoques</span> </a></li>
+                    <li><a href="vendas.html" class="main-nav-link active-link"><ion-icon
+                                name="cart-outline"></ion-icon><span>Vendas</span></a></li>
+                    <li><a href="clientes.html" class="main-nav-link "><ion-icon
+                                name="people-outline"></ion-icon><span>Clientes</span></a></li>
+                    <li><a href="fornecedores.html" class="main-nav-link"><ion-icon
+                                name="podium-outline"></ion-icon><span>Fornecedores</span></a></li>
+                    <li><a href="relatorios.html" class="main-nav-link"><ion-icon
+                                name="bar-chart-outline"></ion-icon><span>Relatórios e Análises</span></a></li>
+                    <li><a href="perfil.html" class="main-nav-link"><ion-icon
+                                name="person-circle-outline"></ion-icon><span>Perfil</span></a></li>
+                    <!-- <li>
+                        <button class="log-out-btn">
+                            <ion-icon name="log-out-outline"></ion-icon>
+                            <span>Sair</span>
+                        </button>
+                    </li> -->
+                </ul>
+
+            </nav>
+        </aside>
+
+        <!-- CONTEÚDO PRINCIPAL DA SESSÃO DE PRODUCTOS -->
+        <section class="main__content-section">
+            <!-- CABEÇÁRIO DA SESSÃO DE PRODUCTOS -->
+            <div class="section-header">
+                <header class="sect-head">
+                    <h2 class="heading-h2">Tuas vendas</h2>
+                    <span class="section-tag">Monitore as tuas vendas</span>
+                </header>
+                <!-- BOTÃO PARA MOSTRAR O FORMULÁRIO PARA ADICIONAR UM NOVO PRODUCTO -->
+                <div class="add-new-sell">
+                    <button class="btn-add-new-sell">
+                        <ion-icon name="add-outline"></ion-icon>
+                        Nova venda
+                    </button>
+                </div>
+            </div>
+
+            <!-- CONTAINER DOS PRODUCTOS -->
+            <div class="grid-sell">
+
+                <div class="sell-history">
+                    <div class="list-header">
+
+                        <h3 class="heading-h3">Histórico de vendas</h3>
+                        <div class="sub-box-header">
+
+                            <div class="seach-product">
+                                <ion-icon name="search-outline"></ion-icon>
+                                <input type="text" placeholder="Pesquisar nome do producto"
+                                    class="input__search search-input-sell">
+                            </div>
+
+                            <div class="sort-by">
+                                <ion-icon name="filter-outline"></ion-icon>
+                                <span class="default">Data</span>
+                                <div name="" id="" class="sort-list sell-sort-list">
+                                    <span class="date">Data</span>
+                                    <span class="amount">Preço</span>
+                                    <span class="success">Sucesso</span>
+                                    <span class="pending">Pendente</span>
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="container ">
+                        <div class="scroll-container">
+
+                            <div class="heading-sell">
+                                <div>
+                                    <span>Factura</span>
+                                </div>
+                                <span>Total</span>
+                                <span>Data</span>
+                                <span>Pagamento</span>
+                                <span class="client-label">Cliente</span>
+
+
+                            </div>
+
+                            <div class="sell-container-list">
+
+
+                                <div class="sell-box">
+                                    <div>
+                                        <span class="sell-icon"><ion-icon
+                                                name="swap-horizontal-outline"></ion-icon></span>
+                                        <div class="sell-product-description">
+                                            <span class="invoice-number">SMI034-950-9560</span>
+                                        </div>
+                                    </div>
+                                    <span class="selled-roduct-price">$ 1200</span>
+                                    <span class="selled-product-date">08 Abr 2023</span>
+                                    <span class="selled-product-status success-payment">Sucesso</span>
+                                    <span class="selled-product-costumer">Mardoquéu Dickson</span>
+
+                                </div>
+                            </div>
+
+
+                        </div>
+
+
+                    </div>
+                    <!-- PAGINAÇÃO DA LISTA DE VENDAS -->
+
+                    <div class="pagination-container">
+                        <div class="pagination">Páginas <span class="sell-total-page">10</span></div>
+                        <div class="btn-pages">
+                            <button class="btn-previous-page-sell">
+                                <ion-icon name="chevron-back-outline"></ion-icon>
+                            </button>
+                            <span class="curr-page-number-sell">1</span>
+                            <button class="btn-next-page-sell"> <ion-icon name="chevron-forward-outline"></ion-icon>
+                            </button>
+                        </div>
+                    </div>
+
+                </div>
+
+
+                <!-- -----------------DETAHLHES DO PRODUCTO------------------- -->
+                <div class="section-sell-ditails hide-detail">
+                    <div class="overlay-sell-detail"></div>
+                    <div class="sell-detail-container">
+                        <span class="btn-close-sell-details"><ion-icon name="close-outline"></ion-icon></span>
+                        <div class="current-sell-product btn-close-header">
+
+                            <div class="detail-header">
+                                <span class="sell-icon detail-icon"><ion-icon
+                                        name="swap-horizontal-outline"></ion-icon></span>
+                                <span class="current-product-sell-name invoice-number-label-header">Computador</span>
+                            </div>
+                            <span class="selled-product-status single-status ">Sucesso</span>
+                        </div>
+                        <div class="detail-container">
+                            <div class="current-sell-product border-detail">
+                                <div>
+                                    <span class="current-product-sell-name sell-label">Detalhes da venda</span>
+
+                                </div>
+                                <span class="hide-dett" data-class="data-sell-detail"><ion-icon
+                                        name="chevron-down-outline"></ion-icon></span>
+                            </div>
+                            <div class="details sell-details data-sell-detail">
+                                <div class="details-flex-box">
+                                    <span>Número da Fatura</span>
+                                    <span class="current-sell-invoice-number">SMI034-950-9560</span>
+                                </div>
+                                <div class="details-flex-box">
+                                    <span>Data da venda</span>
+                                    <span class="current-sell-date">Ago 23, 2023, 16:01 PM</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="detail-container">
+                            <div class="current-sell-product border-detail">
+                                <div>
+                                    <span class="current-product-sell-name sell-label">Detalhes dos Productos</span>
+
+                                </div>
+                                <span class="hide-dett" data-class="data-sell-product-detail"><ion-icon
+                                        name="chevron-down-outline"></ion-icon></span>
+                            </div>
+                            <div class="details sell-details data-sell-product-detail">
+                                <div class="sell-item-list">
+
+                                    <div class="details-flex-box">
+                                        <span>Producto 1</span>
+                                        <span class="costumer">Computador</span>
+                                    </div>
+                                    <ul class="product-description-list">
+                                        <li><span>Preço unitário</span> <span class="selled-product-price costumer">$
+                                                500</span></li>
+                                        <li><span>Quantidade</span> <span
+                                                class="selled-product-price costumer">40</span>
+                                        </li>
+                                    </ul>
+                                    <div class="details-flex-box">
+                                        <span>Producto 1</span>
+                                        <span class="costumer">Computador</span>
+                                    </div>
+                                    <ul class="product-description-list">
+                                        <li><span>Preço unitário</span> <span class="selled-product-price costumer">$
+                                                500</span></li>
+                                        <li><span>Quantidade</span> <span
+                                                class="selled-product-price costumer">40</span>
+                                        </li>
+                                    </ul>
+                                    <div class="details-flex-box">
+                                        <span>Producto 1</span>
+                                        <span class="costumer">Computador</span>
+                                    </div>
+                                    <ul class="product-description-list">
+                                        <li><span>Preço unitário</span> <span class="selled-product-price costumer">$
+                                                500</span></li>
+                                        <li><span>Quantidade</span> <span
+                                                class="selled-product-price costumer">40</span>
+                                        </li>
+                                    </ul>
+                                </div>
+
+                            </div>
+
+
+                        </div>
+                        <div class="detail-container">
+                            <div class="current-sell-product border-detail">
+                                <div>
+                                    <span class="current-product-sell-name sell-label">Informações do Cliente</span>
+
+                                </div>
+                                <span class="hide-dett" data-class="data-sell-costumer-detail"><ion-icon
+                                        name="chevron-down-outline"></ion-icon></span>
+                            </div>
+                            <div class="details sell-details data-sell-costumer-detail">
+                                <div class="details-flex-box">
+                                    <span>Nome</span>
+                                    <span class="costumer costumer-name">Mardoquéu Dickson</span>
+                                </div>
+                                <div class="details-flex-box">
+                                    <span>E-mail</span>
+                                    <span class="costumer costumer-email">mardoqueudickson@gmail.com</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="detail-container">
+                            <div class="current-sell-product border-detail">
+                                <div>
+                                    <span class="current-product-sell-name sell-label">Detalhe de Pagamento</span>
+
+                                </div>
+                                <span class="hide-dett" data-class="data-sell-payment-detail"><ion-icon
+                                        name="chevron-down-outline"></ion-icon></span>
+                            </div>
+                            <div class="details sell-details data-sell-payment-detail">
+                                <div class="details-flex-box">
+                                    <span>Método de Pagamento</span>
+                                    <span class="payment-type">Cartão</span>
+                                </div>
+                                <!-- <div class="details-flex-box">
+                                    <span>Preço Unitário </span>
+                                    <span class="current-parcel">$ 3050</span>
+                                </div>
+                                <div class="details-flex-box">
+                                    <span>Quantidade</span>
+                                    <span class="current-parcel">50</span>
+                                </div> -->
+                            </div>
+                        </div>
+                        <div class="detail-container">
+                            <div class="current-sell-product border-detail">
+                                <div>
+                                    <span class="current-product-sell-name sell-label">Total</span>
+
+                                </div>
+                                <span class="total-sell">$ 495 890,00</span>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <!-- -----------------REALIZAR NOVA VENDA------------------- -->
+                <div class="section-new-sell hidden">
+                    <div class="overlay-new-sell-form"></div>
+                    <div class="new-sell-container ">
+                        <div class="new-sell-heading">
+                            <div class="detail-header">
+                                <h3 class="heading-h3">Realizar Venda</h3>
+                            </div>
+                            <span class="btn-close-sell-form"><ion-icon name="close-outline"></ion-icon></span>
+                        </div>
+                        <form action="" class="new-sell-form">
+                            <div class="sell-input-group">
+                                <div class="current-sell-product border-detail">
+                                    <div>
+                                        <span class="current-product-sell-name sell-label">Selecionar Producto</span>
+                                    </div>
+                                </div>
+                                <div class="details new-sell-details">
+                                    <div class="new-sell-flex-box">
+                                        <span>Nome do Producto</span>
+                                        <input type="text" class="new-sell-input select-product-input"
+                                            placeholder="Digite o Producto...">
+                                    </div>
+
+                                    <!-- LISTA DE PRODCUTOS A SER SELECIONADO -->
+                                    <div class="product-list-select hidden">
+                                        <ul>
+                                            <li>
+                                                <span class="select-header">Producto</span>
+                                                <span class="select-header">Disponível</span>
+
+                                            </li>
+
+                                            <div class="mini-product-list">
+                                                <li class="product-item-select" data-product-id="">
+                                                    <span class="product-item-name">Computador</span>
+                                                    <span class="product-item-quantity">349</span>
+                                                </li>
+                                                <li class="product-item-select" data-product-id="">
+                                                    <span class="product-item-name">Computador</span>
+                                                    <span class="product-item-quantity">349</span>
+                                                </li>
+                                            </div>
+                                        </ul>
+                                    </div>
+                                    <div class="new-sell-flex-box">
+                                        <span>Quantidade do Producto</span>
+                                        <input type="number" class="new-sell-input product-quantity-input"
+                                            placeholder="Digite Quantidade">
+                                    </div>
+                                    <button class="btn-add-product-cart"><ion-icon
+                                            name="add-outline"></ion-icon>Adicionar</button>
+                                </div>
+                                <!-- PRODUCTOS ADICIONADOS NO CARRINHO -->
+                                <div class="cart-list">
+                                    <span class="header-cart">Productos no Carrinho <ion-icon
+                                            name="cart-outline"></ion-icon></span>
+                                    <ul class="added-cart-list">
+
+                                        <li class="cart-item">
+                                            <div class="added-product">
+                                                <span>Producto 02:</span>
+                                                <span class="added-product-name">Computador</span>
+                                            </div>
+                                            <div class="added-product">
+                                                <span>Quantidade:</span>
+                                                <span class="added-product-name">34</span>
+                                            </div>
+                                        </li>
+                                        <li class="cart-item">
+                                            <div class="added-product">
+                                                <span>Producto 02:</span>
+                                                <span class="added-product-name">Computador</span>
+                                            </div>
+                                            <div class="added-product">
+                                                <span>Quantidade:</span>
+                                                <span class="added-product-name">34</span>
+                                            </div>
+                                        </li>
+                                    </ul>
+
+                                </div>
+                            </div>
+                            <div class="sell-input-group">
+                                <div class="current-sell-product border-detail">
+                                    <div>
+                                        <span class="current-product-sell-name sell-label">Informações do Cliente</span>
+
+                                    </div>
+                                </div>
+                                <div class="details new-sell-details">
+                                    <div class="new-sell-flex-box">
+                                        <span>Nome do Cliente</span>
+                                        <input type="text" class="new-sell-input select-client-input"
+                                            placeholder="Digite Nome do Cliente">
+                                    </div>
+                                    <div class="mini-client-list-container hidden">
+                                        <ul>
+                                            <div class="mini-header"><span>Nome</span> <span>Compras</span></div>
+                                            <div class="mini-client-list">
+                                                <li data-id=""><span class="client-name">Manasse Timóteo</span>
+                                                    <span>123</span>
+                                                </li>
+
+
+                                            </div>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="sell-input-group">
+                                <div class="current-sell-product border-detail">
+                                    <div>
+                                        <span class="current-product-sell-name sell-label">Forma de Pagamento</span>
+
+                                    </div>
+                                </div>
+                                <div class="details new-sell-details">
+                                    <div class="new-sell-flex-box">
+                                        <span>Selecionar Forma de Pagamento</span>
+                                        <select name="" id="" class="sell-payment-way">
+                                            <option value="Cash">Cash</option>
+                                            <option value="Cartão">Cartão de Crédito</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+                            <div class="current-sell-product border-detail">
+                                <div>
+                                    <span class="current-product-sell-name sell-label">Total</span>
+
+                                </div>
+                                <span class="total-sell">$ 495 890,00</span>
+                            </div>
+
+                            <div class="current-sell-product">
+                                <div class="sell-btns">
+                                    <button class="btn-confirm-sell">Confirmar</button>
+                                    <button class="btn-cancel-sell">Cancelar</button>
+                                </div>
+
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="sell-succes-alert hidden">
+                    <div class="alert-succes">
+                        <ion-icon name="checkmark-circle-outline"></ion-icon>
+                        <span class="alert-sell-text">Venda realizada com sucesso</span>
+                        <span class="btn-ok-alert">OK</span>
+                    </div>
+                    <div class="sell-overlay"></div>
+                </div>
+            </div>
+            </div>
+
+
+        </section>
+
+    </section>
+
+</body>
+
+</html>

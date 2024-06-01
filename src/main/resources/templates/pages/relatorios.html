@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Relatórios e Análises</title>
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/responsive.css">
+    <link rel="stylesheet" href="../css/relatorios.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Ubuntu+Sans:ital,wght@0,100..800;1,100..800&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap"
+        rel="stylesheet">
+    <script defer src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script defer type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script defer nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <script defer type="module" src="../js/controller.js"></script>
+</head>
+
+<body>
+    <!-- SESSÃO PRINCIPAL -->
+    <section class="dashboard-section main-section">
+        <!-- HEADER PRINCIPAL -->
+        <header class="main__header">
+
+            <div class="search__div">
+                <a href="#" class="header__btn toggleMenu__btn"> <ion-icon name="menu-outline"></ion-icon></a>
+                <!-- <div class="hidden">
+					<input type="text" placeholder="Pesquisar" class="input__search">
+					<ion-icon name="search-outline"></ion-icon>
+				</div> -->
+            </div>
+
+            <div class="header__user">
+                <a href="#" class="header__btn show-notification_btn notification__btn"> <ion-icon
+                        name="notifications-outline"></ion-icon></a>
+
+                <a href="#" class="header__btn toggle-dark-mode notification__btn"> <ion-icon name="sunny-outline"
+                        class="hidden light-icon"></ion-icon>
+                    <ion-icon name="moon-outline" class="dark-icon"></ion-icon>
+                </a>
+                <div class="notification-header ">
+                    <h3 class="heading-h3">Notificações</h3>
+                    <div class="filter-noti"><span>Hoje</span>
+                        <span>Todos</span>
+                    </div>
+                    <div class="notitification-list-header">
+                        <div class="list">
+
+                            <div class="notifications-box">
+                                <ion-icon name="notifications-outline"></ion-icon>
+                                <div class="notification-text-container"><span class="notification-text-header">Estoque
+                                        Baixo</span>
+                                    <p><span class="notif-product-name">Computador</span> está com nível baixo de
+                                        estoque <span class="notif-product-sctock"></span> convêm actualizar</p>
+                                    <span class="notif-date">Agora mesmo</span>
+                                </div>
+                            </div>
+
+                            <div class="notifications-box">
+                                <ion-icon name="notifications-outline"></ion-icon>
+                                <div class="notification-text-container"><span class="notification-text-header">Estoque
+                                        Baixo</span>
+                                    <p><span class="notif-product-name">Computador</span> está com nível baixo de
+                                        estoque <span class="notif-product-sctock"></span> convêm actualizar</p>
+                                    <span class="notif-date">Há 2h</span>
+                                </div>
+                            </div>
+                            <div class="notifications-box">
+                                <ion-icon name="notifications-outline"></ion-icon>
+                                <div class="notification-text-container">
+                                    <span class="notification-text-header">Estoque Baixo</span>
+                                    <p><span class="notif-product-name">Computador</span> está com nível baixo de
+                                        estoque <span class="notif-product-sctock"></span> convêm actualizar</p>
+                                    <span class="notif-date">Ontem</span>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="header__profile-box">
+                    <img src="../assets/img/admin/admin.png" alt="" class="header__profile-img">
+                    <div class="profile__name-box">
+                        <span class="header__p-name">Timóteo Pembele</span>
+                        <span class="permission">Admin <ion-icon name="chevron-down-outline"
+                                class="profile-click-icon"></ion-icon></span>
+                    </div>
+                </div>
+            </div>
+            <div class="profile-infor-box">
+                <ul class="profile-list">
+                    <li><a href="#" class="p-link"><ion-icon name="person-outline"></ion-icon> Meu Perfil</a></li>
+                    <li><a href="#" class="p-link"><ion-icon name="settings-outline"></ion-icon> Configurações</a></li>
+                    <li><a href="#" class="p-link btn-log-out"><ion-icon name="log-out-outline"></ion-icon> Terminar
+                            Sessão</a></li>
+                </ul>
+            </div>
+        </header>
+
+
+        <!-- SESSÃO LATERAL ESQUERDO DO CONTAINER -->
+        <aside class="side__bar">
+            <!-- LOGOTIPO -->
+            <h1 class="logo"> <img src="../assets/img/logo/logo.png" class="icon-logo"><span
+                    class="full-logo">StockMaster</span></h1>
+            <!-- BARRA DE MENU PRINCIPAL -->
+            <nav class="main-nav">
+                <ul class="main-nav-list">
+                    <li> <a href="../index.html" class="main-nav-link "><ion-icon name="grid-outline"></ion-icon>
+                            <span>Dashboard</span></a></li>
+                    <li><a href="products.html" class="main-nav-link "> <ion-icon name="layers-outline"></ion-icon>
+                            <span>Productos</span></a>
+                    </li>
+                    <li><a href="estoques.html" class="main-nav-link "> <ion-icon name="cube-outline"></ion-icon><span>
+                                Estoques</span> </a></li>
+                    <li><a href="vendas.html" class="main-nav-link "><ion-icon
+                                name="cart-outline"></ion-icon><span>Vendas</span></a></li>
+                    <li><a href="clientes.html" class="main-nav-link "><ion-icon
+                                name="people-outline"></ion-icon><span>Clientes</span></a></li>
+                    <li><a href="fornecedores.html" class="main-nav-link"><ion-icon
+                                name="podium-outline"></ion-icon><span>Fornecedores</span></a></li>
+                    <li><a href="relatorios.html" class="main-nav-link active-link"><ion-icon
+                                name="bar-chart-outline"></ion-icon><span>Análises</span></a></li>
+                    <li><a href="perfil.html" class="main-nav-link"><ion-icon
+                                name="person-circle-outline"></ion-icon><span>Perfil</span></a></li>
+                    <!-- <li>
+                        <button class="log-out-btn">
+                            <ion-icon name="log-out-outline"></ion-icon>
+                            <span>Sair</span>
+                        </button>
+                    </li> -->
+                </ul>
+
+            </nav>
+        </aside>
+
+        <!-- CONTEÚDO PRINCIPAL DA SESSÃO DE PRODUCTOS -->
+        <section class="main__content-section">
+            <!-- CABEÇÁRIO DA SESSÃO DE PRODUCTOS -->
+            <div class="section-header">
+                <header class="sect-head">
+                    <h2 class="heading-h2">Relátorios e Análises</h2>
+                    <span class="section-tag">Vê as estátisticas</span>
+                </header>
+                <!-- BOTÃO PARA MOSTRAR O FORMULÁRIO PARA ADICIONAR UM NOVO PRODUCTO -->
+                <div class="filter-analitycs-container">
+                    <span class="filter-by today-reports filtered">Hoje</span>
+                    <div class=" filter-by date-filter">
+                        <p class="start-date">23, Jan 2023</p> - <p class="end-date">24, Jan 2023</p>
+
+                        <!-- CONTAINER PARA FILTRAR DADOS COM BASE AS DATAS INSERIDAS -->
+
+                    </div>
+                    <div class="filter-input hidden">
+                        <div>
+                            <form action="">
+                                <h4 class="filter-heading">Inserir Período <p class="btn-close-filter-analityc">
+                                        <ion-icon name="close-outline"></ion-icon>
+                                    </p>
+                                </h4>
+                                <label for="">De</label>
+                                <input type="date" class="date-filter-input">
+                                <label for="">Até</label>
+                                <input type="date" class="date-filter-input">
+                                <button class="btn-generate-report">Gerar Relatório</button>
+                            </form>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <!-- <div class="days-week-days-month-container">
+                <div class="weekdays">
+                    <span class="weekday">Dom</span>
+                    <span class="weekday active-weekday">Seg</span>
+                    <span class="weekday">Ter</span>
+                    <span class="weekday">Qua</span>
+                    <span class="weekday">Qui</span>
+                    <span class="weekday">Sex</span>
+                    <span class="weekday">Sáb</span>
+
+                </div>
+            </div> -->
+            <div class="analitycs-reports-container">
+                <div class="analitycs-summary-container">
+                    <div class="analityc-summary-box">
+                        <div class="summary">
+                            <span class="analityc-tag">Ganhos Totais</span>
+                            <span class="analityc-total-earning analityc-total">$ 45096</span>
+                        </div>
+                        <span class="analityc-summary-icon"><ion-icon name="logo-usd"></ion-icon></span>
+                    </div>
+                    <div class="analityc-summary-box">
+                        <div class="summary">
+                            <span class="analityc-tag">Número Vendas</span>
+                            <span class="analityc-total-order analityc-total">$ 45096</span>
+                        </div>
+                        <span class="analityc-summary-icon"><ion-icon name="cart-outline"></ion-icon></span>
+                    </div>
+                    <div class="analityc-summary-box">
+                        <div class="summary">
+                            <span class="analityc-tag">Lucros</span>
+                            <span class="analityc-total-lucr analityc-total">$ 45096</span>
+                        </div>
+                        <span class="analityc-summary-icon"><ion-icon name="trending-up-outline"></ion-icon></span>
+                    </div>
+                </div>
+
+                <div class="all-analitycs-charts">
+                    <div class="box-analityc">
+                        <h3 class="heading-h3">Análises de Vendas</h3>
+                        <canvas id="monthlySalesChart"></canvas>
+                    </div>
+                    <div class="most-selled-product-reports box-analityc">
+                        <h3 class="heading-h3">Mais Vendidos</h3>
+
+                        <div class="most-selled-analitycs">
+                            <div class="most-selled-heading">
+                                <span>Producto</span>
+                                <span>Quantidade</span>
+                                <span class="total-selled-amount">Total</span>
+                            </div>
+                            <div class="most-selled-list-report">
+
+                                <div class="most-selled-product">
+                                    <div class="product-name"> <ion-icon name="trending-up-outline"></ion-icon>
+                                        <div>
+                                            <span>Computador</span>
+                                            <span class="price-selled">3445 $</span>
+                                        </div>
+                                    </div>
+
+                                    <span class="quantity">34</span>
+
+                                    <span class="total-selled-amount">$ 459865</span>
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="stock-reports-container actual-stock-container">
+                    <div class="statics-box actual-stock">
+
+                        <h3 class="heading-h3">Productos Top</h3>
+
+
+                        <div class="container-stock">
+                            <div class="container-fixed-width">
+                                <div class="heading-stock">
+                                    <div>
+                                        <span>Productos</span>
+                                    </div>
+                                    <span>Categoria</span>
+                                    <span>Estoque</span>
+                                    <span>Preço</span>
+                                    <span>Vendas</span>
+                                </div>
+                                <div class="top-product-list">
+                                    <div class="product-box">
+                                        <div>
+                                            <span class="product-icon"><ion-icon
+                                                    name="bookmark-outline"></ion-icon></span>
+                                            <span class="">Computador</span>
+                                        </div>
+                                        <span class="">Informática</span>
+                                        <span class="">23</span>
+                                        <span class="">123</span>
+                                        <span class="">234</span>
+
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="stock-chart">
+                        <h3 class="heading-h3">Vendas por Categoria</h3>
+
+                        <div class="container-progress-sell-category">
+                            <div class="category-box">
+                                <div>
+                                    <span class="category-name">Computadores</span>
+                                    <span class="category-amount"> $ 344569</span>
+                                </div>
+                                <div class="progress">
+                                    <div class="progress-bar"></div>
+                                </div>
+                            </div>
+
+                            <div class="category-box">
+                                <div>
+                                    <span class="category-name">Computadores</span>
+                                    <span class="category-amount"> $ 344569</span>
+                                </div>
+                                <div class="progress">
+                                    <div class="progress-bar"></div>
+                                </div>
+                            </div>
+
+                            <div class="category-box">
+                                <div>
+                                    <span class="category-name">Computadores</span>
+                                    <span class="category-amount"> $ 344569</span>
+                                </div>
+                                <div class="progress">
+                                    <div class="progress-bar"></div>
+                                </div>
+                            </div>
+                            <div class="category-box">
+                                <div>
+                                    <span class="category-name">Outros</span>
+                                    <span class="category-amount"> $ 344569</span>
+                                </div>
+                                <div class="progress">
+                                    <div class="progress-bar"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- <canvas id="myDonutChart"></canvas> -->
+                    </div>
+
+
+                    <div class="statics-box static-stock-container">
+
+                        <h3 class="heading-h3">Estoque Actual</h3>
+                        <div class="container ">
+                            <div class="estatic">
+                                <!-- CABEÇÃO DA DESCRIÇÃO DOS PRODUCTOS -->
+                                <div class="heading-stock">
+                                    <span>Productos</span>
+
+                                    <span>Categoria</span>
+                                    <span>Estoques</span>
+                                    <span>Vendas</span>
+                                    <span>Status</span>
+                                </div>
+                                <!-- PRODUCTOS -->
+                                <div class="actual-stock-list">
+                                    <div class="product-box">
+                                        <div>
+                                            <span class="product-icon"><ion-icon
+                                                    name="trending-down-outline"></ion-icon></span>
+                                            <span class="">Computador</span>
+                                        </div>
+                                        <span class="">Informática</span>
+                                        <span class="">23</span>
+                                        <span class="">0</span>
+                                        <span class=" medium-stock">Médio</span>
+
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <!-- PAGINAÇÃO DO PRODUCTO -->
+                        <div class="subheader">
+                            <div class="pagination">Página <span class="current-product-page">01</span> de <span
+                                    class="current-product-page total-pages">10</span></div>
+                            <div class="btn-pages">
+                                <button class="btn-previous-page">
+                                    <ion-icon name="chevron-back-outline"></ion-icon></button>
+                                <span class="curr-page-number">1</span>
+                                <button class="btn-next-page"> <ion-icon name="chevron-forward-outline"></ion-icon>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+        </section>
+
+    </section>
+</body>
+
+</html>

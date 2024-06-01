@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estoques - Gerencie os teus Estoques </title>
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/responsive.css">
+    <link rel="stylesheet" href="../css/estoque.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Ubuntu+Sans:ital,wght@0,100..800;1,100..800&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap"
+        rel="stylesheet">
+    <script defer type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script defer nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <script defer type="module" src="../js/controller.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+</head>
+
+<body>
+
+    <!-- <div class="preloader"></div> -->
+    <section class="dashboard-section main-section">
+        <header class="main__header">
+            <div class="search__div">
+                <a href="#" class="header__btn toggleMenu__btn"> <ion-icon name="menu-outline"></ion-icon></a>
+                <!-- <div>
+                    <input type="text" placeholder="Pesquisar" class="input__search">
+                    <ion-icon name="search-outline"></ion-icon>
+                </div> -->
+            </div>
+            <div class="header__user">
+                <a href="#" class="header__btn show-notification_btn notification__btn"> <ion-icon
+                        name="notifications-outline"></ion-icon></a>
+
+                <a href="#" class="header__btn toggle-dark-mode notification__btn"> <ion-icon name="sunny-outline"
+                        class="hidden light-icon"></ion-icon>
+                    <ion-icon name="moon-outline" class="dark-icon"></ion-icon>
+                </a>
+                <div class="notification-header ">
+                    <h3 class="heading-h3">Notificações</h3>
+                    <div class="filter-noti"><span>Hoje</span>
+                        <span>Todos</span>
+                    </div>
+                    <div class="notitification-list-header">
+                        <div class="list">
+
+                            <div class="notifications-box">
+                                <ion-icon name="notifications-outline"></ion-icon>
+                                <div class="notification-text-container"><span class="notification-text-header">Estoque
+                                        Baixo</span>
+                                    <p><span class="notif-product-name">Computador</span> está com nível baixo de
+                                        estoque <span class="notif-product-sctock"></span> convêm actualizar</p>
+                                    <span class="notif-date">Agora mesmo</span>
+                                </div>
+                            </div>
+
+                            <div class="notifications-box">
+                                <ion-icon name="notifications-outline"></ion-icon>
+                                <div class="notification-text-container"><span class="notification-text-header">Estoque
+                                        Baixo</span>
+                                    <p><span class="notif-product-name">Computador</span> está com nível baixo de
+                                        estoque <span class="notif-product-sctock"></span> convêm actualizar</p>
+                                    <span class="notif-date">Há 2h</span>
+                                </div>
+                            </div>
+                            <div class="notifications-box">
+                                <ion-icon name="notifications-outline"></ion-icon>
+                                <div class="notification-text-container">
+                                    <span class="notification-text-header">Estoque Baixo</span>
+                                    <p><span class="notif-product-name">Computador</span> está com nível baixo de
+                                        estoque <span class="notif-product-sctock"></span> convêm actualizar</p>
+                                    <span class="notif-date">Ontem</span>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="header__profile-box">
+                    <img src="../assets/img/admin/admin.png" alt="" class="header__profile-img">
+                    <div class="profile__name-box">
+                        <span class="header__p-name">Timóteo Pembele</span>
+                        <span class="permission">Admin <ion-icon name="chevron-down-outline"
+                                class="profile-click-icon"></ion-icon></span>
+                    </div>
+                </div>
+            </div>
+            <div class="profile-infor-box">
+                <ul class="profile-list">
+                    <li><a href="#" class="p-link"><ion-icon name="person-outline"></ion-icon> Meu Perfil</a></li>
+                    <li><a href="#" class="p-link"><ion-icon name="settings-outline"></ion-icon> Configurações</a></li>
+                    <li><a href="#" class="p-link btn-log-out"><ion-icon name="log-out-outline"></ion-icon> Terminar
+                            Sessão</a></li>
+                </ul>
+            </div>
+        </header>
+
+        <aside class="side__bar">
+            <h1 class="logo"> <img src="../assets/img/logo/logo.png" class="icon-logo"><span
+                    class="full-logo">StockMaster</span></h1>
+            <nav class="main-nav">
+                <ul class="main-nav-list">
+                    <li> <a href="../index.html" class="main-nav-link "><ion-icon name="grid-outline"></ion-icon>
+                            <span>Dashboard</span></a></li>
+                    <li><a href="products.html" class="main-nav-link "> <ion-icon name="layers-outline"></ion-icon>
+                            <span>Productos</span></a>
+                    </li>
+                    <li><a href="estoques.html" class="main-nav-link active-link "> <ion-icon
+                                name="cube-outline"></ion-icon><span>
+                                Estoques</span> </a></li>
+                    <li><a href="vendas.html" class="main-nav-link "><ion-icon
+                                name="cart-outline"></ion-icon><span>Vendas</span></a></li>
+                    <li><a href="clientes.html" class="main-nav-link"><ion-icon
+                                name="people-outline"></ion-icon><span>Clientes</span></a></li>
+                    <li><a href="fornecedores.html" class="main-nav-link"><ion-icon
+                                name="podium-outline"></ion-icon><span>Fornecedores</span></a></li>
+                    <li><a href="relatorios.html" class="main-nav-link"><ion-icon
+                                name="bar-chart-outline"></ion-icon><span>Análises</span></a></li>
+                    <li><a href="perfil.html" class="main-nav-link"><ion-icon
+                                name="person-circle-outline"></ion-icon><span>Perfil</span></a></li>
+                    <!-- <li>
+                        <button class="log-out-btn">
+                            <ion-icon name="log-out-outline"></ion-icon>
+                            <span>Sair</span>
+                        </button>
+                    </li> -->
+                </ul>
+
+            </nav>
+        </aside>
+
+        <!-- CONTEÚDO PRINCIPAL DA SESSÃO DE PRODUCTOS -->
+        <section class="main__content-section main-stock-section ">
+            <div class="section-header">
+                <header class="sect-head">
+                    <h2 class="heading-h2">Teus Estoques</h2>
+                    <span class="section-tag">Monitorar os teus estoques</span>
+                </header>
+
+            </div>
+            <div class="managing-stock">
+                <div class="grid-02-cols">
+
+                    <div class="total-stock-box">
+                        <span class="stock-tag">Número total Productos</span>
+                        <div>
+                            <span class="total-stock-number counter-num">12670</span>
+                            <ion-icon name="file-tray-stacked-outline"></ion-icon>
+                        </div>
+
+                    </div>
+                    <div class="total-stock-box">
+                        <span class="stock-tag">Categorias</span>
+                        <div>
+                            <span class="total-stock-number counter-num">12800</span>
+                            <ion-icon name="refresh-outline"></ion-icon>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="stock-notification-container">
+                    <h3 class="heading-h3">Notificações de Estoque</h3>
+                    <div class="notification-stock-list">
+
+                        <div class="stock-notification-box">
+                            <ion-icon name="notifications-outline"></ion-icon>
+                            <div class="notification-content">
+                                <div class="text">
+                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore tenetur deserunt
+                                    </p>
+                                    <span class="notification-time">há 1 min</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="stock-notification-box">
+                            <ion-icon name="notifications-outline"></ion-icon>
+                            <div class="notification-content">
+                                <div class="text">
+                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore tenetur deserunt
+                                    </p>
+                                    <span class="notification-time">há 1 min</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+
+
+            <div class="statics-box product-container">
+
+                <div class="list-header">
+
+                    <h3 class="heading-h3">Movimentação de Productos</h3>
+                    <div class="sub-box-header">
+
+                        <div class="seach-product">
+                            <ion-icon name="search-outline"></ion-icon>
+                            <input type="text" placeholder="Pesquisar nome do producto"
+                                class="input__search search-input-history-product">
+                        </div>
+
+                        <div class="sort-by">
+                            <ion-icon name="filter-outline"></ion-icon>
+                            <span class="default">Data</span>
+                            <div name="" id="" class="sort-list">
+                                <span class="date">Data</span>
+                                <span class="qtd">Estoque</span>
+                                <span class="outcome">Entradas</span>
+                                <span class="income">Saídas</span>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="container ">
+                    <div class="estaticos">
+                        <div class="products-historic-header">
+                            <span>Productos</span>
+                            <span>Categoria</span>
+                            <span>Quantidade</span>
+                            <span>Tipo</span>
+                            <span>Data</span>
+                            <span>Ver</span>
+                        </div>
+
+                        <div class="product-in-out-history">
+                            <div class="product-item-history" data-id="">
+                                <span class="product-name"><ion-icon name="arrow-down-outline"
+                                        class="in-product"></ion-icon>
+                                    Computador</span>
+
+                                <span class="product-category">Electronicos</span>
+                                <span class="product-price"> 120</span>
+                                <span class="product-qtd ">Entrada</span>
+                                <span class="product-date">Agora mesmo</span>
+                                <!-- ACÇÃO DO PRODUCTO, EDITAR, ELIMINAR, VER DETALHES -->
+                                <span class="product-action">
+                                    <button class="btn-update-stock"><ion-icon name="eye-outline"></ion-icon></button>
+                                </span>
+                            </div>
+                            <div class="product-item-history" data-id="">
+
+                                <span class="product-name"><ion-icon name="arrow-up-outline"
+                                        class="out-product"></ion-icon>
+                                    Computador</span>
+
+                                <span class="product-category">Electronicos</span>
+                                <span class="product-price"> 120</span>
+                                <span class="product-qtd ">Saida</span>
+                                <span class="product-date">Agora mesmo</span>
+                                <!-- ACÇÃO DO PRODUCTO, EDITAR, ELIMINAR, VER DETALHES -->
+                                <span class="product-action">
+                                    <button class="btn-update-stock"><ion-icon name="eye-outline"></ion-icon></button>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <!-- PAGINAÇÃO DO PRODUCTO -->
+                <div class="pagination-box">
+
+                    <div class="pagination">Páginas <span class="total-pages">10</span></div>
+                    <div class="btn-pages">
+                        <button class="btn-previous-page">
+                            <ion-icon name="chevron-back-outline"></ion-icon></button>
+                        <span class="curr-page-number">1</span>
+                        <button class="btn-next-page"> <ion-icon name="chevron-forward-outline"></ion-icon> </button>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+    </section>
+
+
+    <section class="historic-product-detail hidden">
+        <div class="overlay-historic-detail"></div>
+        <div class="detail-historic">
+            <header class="">
+                <h2 class="heading-h3">Ver detalhes</h2>
+                <span class="btn-close-historic-detail"><ion-icon name="close-outline"></ion-icon></span>
+            </header>
+
+            <div>
+                <span class="detail-heading">Nome do Producto</span>
+                <span class="product-name-historic">Computador</span>
+            </div>
+            <div>
+                <span class="detail-heading">Categoria</span>
+                <span class="product-category-historic">Electronicos</span>
+            </div>
+
+            <div>
+                <span class="detail-heading">Evento</span>
+                <span class="product-event-type">Saida</span>
+            </div>
+
+            <div>
+                <span class="detail-heading">Quantidade</span>
+                <span class="product-qty-historic">Computador</span>
+            </div>
+            <div>
+                <span class="detail-heading">Data</span>
+                <span class="product-date-historic">12/05/2024</span>
+            </div>
+
+
+        </div>
+
+
+    </section>
+</body>
+
+</html>

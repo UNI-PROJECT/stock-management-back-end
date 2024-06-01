@@ -25,6 +25,12 @@ public class CategoriaController {
     @Autowired
     private CategoriaCrudService categoriaService;
 
+
+    @GetMapping("dashboard/listar")
+    public String index() {
+        return "index";
+    }
+
     @GetMapping("categoria/listar")
     public ResponseEntity<List<CategoriaModel>> findAll() {
         return ResponseEntity.ok(categoriaService.getAll());
