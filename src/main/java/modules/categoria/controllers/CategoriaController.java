@@ -26,10 +26,7 @@ public class CategoriaController {
     private CategoriaCrudService categoriaService;
 
 
-    @GetMapping("dashboard/listar")
-    public String index() {
-        return "index";
-    }
+ 
 
     @GetMapping("categoria/listar")
     public ResponseEntity<List<CategoriaModel>> findAll() {
