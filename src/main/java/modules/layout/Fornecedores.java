@@ -5,12 +5,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 
 @Controller
-public class Dashboard {
+public class Fornecedores {
 
 
-    @GetMapping("/")
-    public String dashboard() {
-        return "dashboard";
+    @GetMapping("/fornecedores")
+    public String fornecedores() {
+        return "fornecedores";
     }
     
 }
