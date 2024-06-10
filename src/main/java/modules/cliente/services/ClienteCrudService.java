@@ -36,12 +36,8 @@ public class ClienteCrudService {
     usuarioRepository.save(usuario);
 
     var cliente = new ClienteModel();
-
-
-    // Define o usuário_id manualmente
     cliente.setUsuario(usuario);
     cliente.setTipo_cliente(TipoCliente.PARTICULAR);
-    // System.out.println("userID: " + cliente.getUsuario_id());
 
     return clienteRepository.save(cliente);
   }

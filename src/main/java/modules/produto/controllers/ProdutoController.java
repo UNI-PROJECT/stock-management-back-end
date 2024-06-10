@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import modules.models.EntradaProduto;
 import modules.models.ProdutoModel;
 import modules.produto.dtos.CreateProdutoInput;
 import modules.produto.dtos.UpdateProdutoInput;
@@ -42,7 +43,7 @@ public class ProdutoController {
     }
 
     @PostMapping("produto/registrar")
-    public ResponseEntity<ProdutoModel> create(@RequestBody CreateProdutoInput data) {
+    public ResponseEntity<EntradaProduto> create(@RequestBody CreateProdutoInput data) {
         return ResponseEntity.status(HttpStatus.CREATED).body(proService.create(data));
 
     }

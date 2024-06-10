@@ -16,17 +16,16 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "Saida_produto")
 public class SaidaProduto implements Serializable {
-    private static final long serialVersioUID = 1;
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private UUID id;
+    public UUID id;
 
     @ManyToOne
     @JoinColumn(name = "id_produto")
-    private  modules.models.ProdutoModel produto;
-    private Integer quantidade;
-    private LocalDate data_de_saida;
+    public  modules.models.ProdutoModel produto;
+    public Integer quantidade;
+    public LocalDate data_de_saida;
 
 
     public UUID getId() {return id;}

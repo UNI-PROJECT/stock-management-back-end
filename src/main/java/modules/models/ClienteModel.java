@@ -28,11 +28,11 @@ public class ClienteModel implements Serializable {
 
     @ManyToOne
     @JoinColumn(name = "usuario_id")
-    private UsuarioModel usuario;
+    public UsuarioModel usuario;
     
 
     @Column
-    private TipoCliente tipo_cliente;
+    public TipoCliente tipo_cliente;
 
 
     public UUID getId() {

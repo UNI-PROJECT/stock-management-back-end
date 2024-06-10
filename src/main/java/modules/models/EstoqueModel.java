@@ -15,7 +15,6 @@ import jakarta.persistence.ManyToOne;
 @Entity
 @Table(name = "Estoque")
 public class EstoqueModel implements Serializable {
-    private static final long serialVersioUID = 1;
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -23,8 +22,8 @@ public class EstoqueModel implements Serializable {
 
     @ManyToOne
     @JoinColumn(name = "id_produto")
-    private  modules.models.ProdutoModel produto;
-    private Integer quantidade;
+    public  modules.models.ProdutoModel produto;
+    public Integer quantidade;
 
 
     public UUID getId() {return id;}

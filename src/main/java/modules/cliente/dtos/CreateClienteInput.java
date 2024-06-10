@@ -1,6 +1,5 @@
 package modules.cliente.dtos;
 
-import java.util.UUID;
 
 import enums.TipoCliente;
 import modules.models.UsuarioModel;

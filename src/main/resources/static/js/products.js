@@ -211,42 +211,42 @@ class ProductApp {
     
     
   
-    // Renderizar a lista de produtos
-    _renderProductList(arrList) {
-      if (arrList.length === 0) {
-        if (this.listContainer) this.listContainer.innerHTML = "";
-        const emptyList = `
-          <div class="empty-product">
-            <p>Nenhum producto encontrado</p>
-          </div>
-        `;
-        if (this.listContainer)
-          this.listContainer.insertAdjacentHTML("afterbegin", emptyList);
-      } else {
-        if (this.listContainer) this.listContainer.innerHTML = "";
-        arrList.forEach((element) => {
-          let html = `
-            <div class="product-item" data-id="${element.id}">
-              <div class="product-name-container">
-                <span class=""><ion-icon name="chevron-expand-outline"></ion-icon></span>
-                <span class="product-name">${element.name}</span>
-              </div>
-              <span class="product-category">${element.category}</span>
-              <span class="product-price">${formatNumbers.formatCurrency(element.price)}</span>
-              <span class="product-qtd">${element.stock}</span>
-              <span class="product-date">${formatNumbers.formatDates(new Date(element.date))}</span>
-              <span class="product-action">
-                <button class="btn-edit-product"><ion-icon name="create-outline"></ion-icon></button>
-                <button class="btn-delete-product"><ion-icon name="trash-outline"></ion-icon></button>
-                <button class="btn-details-product"><ion-icon name="ellipsis-vertical-outline"></ion-icon></button>
-              </span>
-            </div>
-          `;
-          if (this.listContainer)
-            this.listContainer.insertAdjacentHTML("afterbegin", html);
-        });
-      }
-    }
+    // // Renderizar a lista de produtos
+    // _renderProductList(arrList) {
+    //   if (arrList.length === 0) {
+    //     if (this.listContainer) this.listContainer.innerHTML = "";
+    //     const emptyList = `
+    //       <div class="empty-product">
+    //         <p>Nenhum producto encontrado</p>
+    //       </div>
+    //     `;
+    //     if (this.listContainer)
+    //       this.listContainer.insertAdjacentHTML("afterbegin", emptyList);
+    //   } else {
+    //     if (this.listContainer) this.listContainer.innerHTML = "";
+    //     arrList.forEach((element) => {
+    //       let html = `
+    //         <div class="product-item" data-id="${element.id}">
+    //           <div class="product-name-container">
+    //             <span class=""><ion-icon name="chevron-expand-outline"></ion-icon></span>
+    //             <span class="product-name">${element.name}</span>
+    //           </div>
+    //           <span class="product-category">${element.category}</span>
+    //           <span class="product-price">${formatNumbers.formatCurrency(element.price)}</span>
+    //           <span class="product-qtd">${element.stock}</span>
+    //           <span class="product-date">${formatNumbers.formatDates(new Date(element.date))}</span>
+    //           <span class="product-action">
+    //             <button class="btn-edit-product"><ion-icon name="create-outline"></ion-icon></button>
+    //             <button class="btn-delete-product"><ion-icon name="trash-outline"></ion-icon></button>
+    //             <button class="btn-details-product"><ion-icon name="ellipsis-vertical-outline"></ion-icon></button>
+    //           </span>
+    //         </div>
+    //       `;
+    //       if (this.listContainer)
+    //         this.listContainer.insertAdjacentHTML("afterbegin", html);
+    //     });
+    //   }
+    // }
   
 
     

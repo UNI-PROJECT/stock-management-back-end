@@ -1,37 +1,32 @@
 package modules.models;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.UUID;
 
 import enums.TipoUsuario;
-import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 //Tabele de cadastro de usuário
 @Entity
 @Table(name = "Usuario")
 public class UsuarioModel implements Serializable{
-    private static final long serialVersioUID = 1;
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private UUID id;
-    private String nome;
-    private String email;
-    private String telefone;
-    private String nacionalidade;
-    private String endereco;
-    private String data_nacimento;
-    private String senha;
-    private String avatar;
-    private TipoUsuario tipoUsuario;
+    public UUID id;
+    public String nome;
+    public String email;
+    public String telefone;
+    public String nacionalidade;
+    public String endereco;
+    public String data_nacimento;
+    public String senha;
+    public String avatar;
+    public TipoUsuario tipoUsuario;
 
    
 

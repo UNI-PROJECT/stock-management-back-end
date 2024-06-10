@@ -16,16 +16,16 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "Funcionario")
 public class funcionarioModel {
-    private static final long serialVersioUID = 1;
+    public static final long serialVersioUID = 1;
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private UUID id;
+    public UUID id;
     
     @ManyToOne
     @JoinColumn(name = "id_usuario")
-    private  modules.models.UsuarioModel usuario;
-    private Previlegio previlegio;
+    public  modules.models.UsuarioModel usuario;
+    public Previlegio previlegio;
 
 
     public UUID getId() {return id;}

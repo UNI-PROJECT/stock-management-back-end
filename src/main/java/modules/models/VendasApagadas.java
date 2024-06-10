@@ -15,28 +15,27 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "Vendas_apagadas")
 public class VendasApagadas implements Serializable{
-    private static final long serialVersioUID = 1;
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private UUID id;
+    public UUID id;
 
     @ManyToOne
     @JoinColumn(name = "id_cliente")
-    private modules.models.ClienteModel cliente;
+    public modules.models.ClienteModel cliente;
 
     @ManyToOne
     @JoinColumn(name = "id_produto")
-    private modules.models.ProdutoModel produto;
+    public modules.models.ProdutoModel produto;
 
 
     @ManyToOne
     @JoinColumn(name = "id_funcionario")
-    private modules.models.funcionarioModel funionario;
+    public modules.models.funcionarioModel funionario;
 
 
-    private LocalDate data_da_venda;
-    private Double totalDaVenda;
+    public LocalDate data_da_venda;
+    public Double totalDaVenda;
 
     public ClienteModel getCliente() {
         return cliente;
