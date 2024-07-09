@@ -48,14 +48,12 @@ public class ProdutoController {
 
     }
 
-    // Autualizar produto
     @PutMapping("/produto/{id}")
     public ResponseEntity<ProdutoModel> updateProduto(@PathVariable UUID id, @RequestBody UpdateProdutoInput data) {
         return ResponseEntity.status(HttpStatus.OK).body(proService.update(id, data));
 
     }
 
-    //Deletar produto
     @DeleteMapping("/produto/{id}")
     public void deleteProduto(@PathVariable UUID id) {
         proService.delete(id);
