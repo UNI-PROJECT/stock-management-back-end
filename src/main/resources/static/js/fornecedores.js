@@ -1,10 +1,10 @@
 // REFACTORING THE CODE
-import { appData } from "./data.js";
-const c = console.log.bind(document);
+// import { appData } from "./data.js";
+// const c = console.log.bind(document);
 
 class SupplierApp {
   constructor() {
-    // SELECIONANDO AS VARIÁVEIS
+    // SELECIONANDO AS VARIÁVEIS DO DOM
     this.btnShowNewSupplierForm = document.querySelector(".btn-add-supplier");
     this.supplierFormContainer = document.querySelector(
       ".add-new-supplier-container"
@@ -30,73 +30,39 @@ class SupplierApp {
     this.succesPopupContainer = document.querySelector(
       ".succes-alert-container"
     );
-    // this.overlayNewSupplierForm = document.querySelector('.overlay-new-supplier')
-    // LINDANDO COM OS EVENT LISTNERS
-    this.inputSearchSupplier?.addEventListener(
-      "input",
-      this._filterSearchSupp.bind(this)
-    );
-    this.sortByContainer?.addEventListener("click", this._sortBy.bind(this));
-    this.btnShowNewSupplierForm?.addEventListener(
-      "click",
-      this._showSupplierForm.bind(this)
-    );
-    this.supplierFormContainer?.addEventListener(
-      "click",
-      this._closeSupplierForm.bind(this)
-    );
-    this.supplierListContainer?.addEventListener(
-      "click",
-      this._editSupplierInfo.bind(this)
-    );
 
-    this.succesPopupContainer?.addEventListener(
-      "click",
-      this._hideSuccesPopup.bind(this)
-    );
-    // this.supplierListContainer?.addEventListener(
-    //   "click",
-    //   this._showSupplierDetail.bind(this)
-    // );
-    // this.closeSupplierDetail?.addEventListener(
-    //   "click",
-    //   this._closeSupplierDetail.bind(this)
-    // );
-
-    this.deleteSupplierAlert?.addEventListener(
-      "click",
-      this._hideAlert.bind(this)
-    );
-    this.supplerDetailContainer?.addEventListener(
-      "click",
-      this._closeSupplierDetail.bind(this)
-    );
-
-    this.btnNextPage?.addEventListener("click", this.goToNextPage.bind(this));
-    this.btnPrevPage?.addEventListener(
-      "click",
-      this.goToPreviousPage.bind(this)
-    );
-    this._pagination(appData.supplier);
+    // INICIALIZANDO AS FUNÇÕES
+    this._allEventListeners();
+    this._init();
   }
 
   // FUNCÇÕES DOS EVENT LISTENERS
+
+  // GUARDAR O POPUP DE ALERTA PARA ELIMINAR O FORNCEDOR
   _hideAlert(e) {
     const target = e.target;
     if (e.target.classList.contains("overlay-delete-supplier"))
       this.deleteSupplierAlert.classList.add("hidden");
+
     if (target.closest(".btn-confirm-delete-supplier"))
       this.deleteSupplierAlert.classList.add("hidden");
+
     if (target.closest(".btn-cancel-delete-supplier"))
       this.deleteSupplierAlert.classList.add("hidden");
   }
+
+  // FECHAR O POPUP DE SUCESSO
   _hideSuccesPopup(e) {
     const target = e.target;
+
     if (e.target.classList.contains("overlay-succes-alert"))
       this.succesPopupContainer.classList.add("hidden");
+
     if (target.closest(".close-succes-popup"))
       this.succesPopupContainer.classList.add("hidden");
   }
+
+  // MOSTRAR O FORMULÁRIO PARA ADICIONAR FORNECEDOR
   _showSupplierForm() {
     const header = document.querySelector(".form-header h3");
     const inputs = document.querySelectorAll(".form-new-supplier input");
@@ -106,10 +72,11 @@ class SupplierApp {
     header.textContent = "Adicionar Fornecedor";
     this.supplierFormContainer.classList.remove("hidden");
   }
+
+  // FECHAR O FORMULÁRIO PARA ADICIONAR FONRCEDOR
   _closeSupplierForm(e) {
     e.preventDefault();
     const target = e.target;
-    c(target);
     if (target.classList.contains("overlay-new-supplier")) {
       this.supplierFormContainer.classList.add("hidden");
     }
@@ -122,78 +89,44 @@ class SupplierApp {
     }
   }
 
+  // USANDO O EVENT DELEGATION PARA OS EVENTOS NOS BOTÕES DO FORNECEDOR
   _editSupplierInfo(e) {
     const target = e.target;
+    //EDITAR FORNECEDOR
     if (target.closest(".btn-edit-supplier")) {
       this._showSupplierForm();
-      const id = +target.closest(".supplier-box").dataset.id;
-      this._settingEditSupplierInputValues(id);
+
+      // DESCOMENTAR E USAR DADOS REAIS
+      //CONFIGURANDO OS VALUES DO INPUT DO BASE O FORNECEDOR SELECIONADO
+      // const id = +target.closest(".supplier-box").dataset.id;
+      // this._settingEditSupplierInputValues(id);
     }
+
+    //ELIMINAR FORNECEDOR
     if (target.closest(".btn-delete-supplier")) {
       this.deleteSupplierAlert.classList.remove("hidden");
     }
+    // VER DETALHES DO FORNCEDOR
     if (target.closest(".btn-details-supplier")) {
-      const id = +target.closest(".supplier-box").dataset.id;
-      this._settingSupplierDetailContent(id);
+      // DESCOMENTAR E PEGAR DADOS REAIS OU ID
+      // CONFIRGURANDO AS INFORMAÇÕES DO CLIENTE COM BASE O ID
+      // const id = +target.closest(".supplier-box").dataset.id;
+      // this._settingSupplierDetailContent(id);
       this.supplerDetailContainer.classList.remove("hidden");
     }
   }
-  // _showSupplierDetail(e) {
-  //   const target = e.target.closest(".btn-details-supplier");
-  //   if (!target) return;
-  // }
+
+  // FECHAR O CONTAINER DE DETALHES DO FORNECEDOR
   _closeSupplierDetail(e) {
     const target = e.target;
     if (target.classList.contains("overlay-supplier-detail"))
       this.supplerDetailContainer.classList.add("hidden");
+
     if (target.closest(".close-detail-supplier"))
       this.supplerDetailContainer.classList.add("hidden");
   }
 
-  _renderSupplierList(list) {
-    const suppliertList = document.querySelector(".supplier-list-container");
-    if (!suppliertList) return;
-    if (list.length < 1) {
-      const html = `
-      <div class="empty-product">
-      <p>Nenhum fornecedor encontrado</p>
-     </div>
-      `;
-      suppliertList.innerHTML = "";
-      suppliertList.insertAdjacentHTML("afterbegin", html);
-    }
-
-    if (list.length > 0) {
-      suppliertList.innerHTML = "";
-      list.forEach((supp) => {
-        const html = `
-        <div class="supplier-box" data-id="${supp.id}">
-        <div>
-            <span class="supplier-icon"><ion-icon
-                    name="person-outline"></ion-icon></span>
-            <span class="supllier-name">${supp.name} </span>
-        </div>
-        <span class="supplier-phone-number">${supp.phone}</span>
-        <span class="supplier-email">${supp.email}</span>
-        <span class="supplier-total-sell">${
-          supp.products.length > 1 ? supp.products[0] + "..." : supp.products[0]
-        }</span>
-
-        <span class="action-supplier-btns">
-            <button class="btn-edit-supplier"><ion-icon
-                    name="create-outline"></ion-icon></button>
-            <button class="btn-delete-supplier"><ion-icon
-                    name="trash-outline"></ion-icon></button>
-            <button class="btn-details-supplier"><ion-icon
-                    name="ellipsis-vertical-outline"></ion-icon></button>
-        </span>
-
-    </div>
-      `;
-        suppliertList.insertAdjacentHTML("afterbegin", html);
-      });
-    }
-  }
+  // FUNÇÃO PARA PESQUISAR NA LISTA DE FORNECEDORES
   _filterSearchSupp() {
     const value = this.inputSearchSupplier.value.toLowerCase();
     const filtered = appData.supplier.filter((sup) =>
@@ -201,18 +134,22 @@ class SupplierApp {
     );
     this._pagination(filtered);
   }
+
+  // FUNÇÃO PARA CLASSIFICAR A LISTA DE FORNCEDORES
   _sortBy(e) {
     const target = e.target.closest("span");
     if (!target) return;
     if (target.classList.contains("name")) this.sortByName();
   }
+
+  // CLASSFICIAR EM ORDEM ALFABÉTICA
   sortByName() {
     const filtered = appData.supplier.sort((a, b) =>
       b.name.localeCompare(a.name)
     );
     this._pagination(filtered);
   }
-
+  // CONFIGUTANDO OS VALUES NOS INPUTS PARA EDITAR INFORMAÇÕES DO FORNECEDOR
   _settingEditSupplierInputValues(e) {
     const supplier = appData.supplier.find((sup) => sup.id === e);
     const header = document.querySelector(".form-header h3");
@@ -232,6 +169,7 @@ class SupplierApp {
     inputSuppDesc.value = supplier.description;
   }
 
+  // CONFIGURANDO O CONTENT DOS DETALHES DO FORNECEDOR
   _settingSupplierDetailContent(e) {
     const supplier = appData.supplier.find((sup) => sup.id === e);
     const supplierName = document.querySelector(".supp-name-detail");
@@ -268,9 +206,8 @@ class SupplierApp {
   renderPage(page, list) {
     this.startIndex = (page - 1) * this.productsPerPage;
     this.endIndex = this.startIndex + this.productsPerPage;
+    //LISTA A SER RENDERIZADA
     this.productsToRender = list.slice(this.startIndex, this.endIndex);
-    console.log(this.productsToRender);
-    this._renderSupplierList(this.productsToRender);
   }
 
   renderCurrentPage(currentPage, list) {
@@ -293,6 +230,53 @@ class SupplierApp {
       this.renderCurrentPage(this.currentPage, this.productList);
     }
     this.curPagelabel.textContent = this.currentPage;
+  }
+
+  // TODOS OS EVENTLISTENERS
+  _allEventListeners() {
+    // LINDANDO COM OS EVENT LISTNERS
+    this.inputSearchSupplier?.addEventListener(
+      "input",
+      this._filterSearchSupp.bind(this)
+    );
+    this.sortByContainer?.addEventListener("click", this._sortBy.bind(this));
+    this.btnShowNewSupplierForm?.addEventListener(
+      "click",
+      this._showSupplierForm.bind(this)
+    );
+    this.supplierFormContainer?.addEventListener(
+      "click",
+      this._closeSupplierForm.bind(this)
+    );
+    this.supplierListContainer?.addEventListener(
+      "click",
+      this._editSupplierInfo.bind(this)
+    );
+
+    this.succesPopupContainer?.addEventListener(
+      "click",
+      this._hideSuccesPopup.bind(this)
+    );
+
+    this.deleteSupplierAlert?.addEventListener(
+      "click",
+      this._hideAlert.bind(this)
+    );
+    this.supplerDetailContainer?.addEventListener(
+      "click",
+      this._closeSupplierDetail.bind(this)
+    );
+
+    this.btnNextPage?.addEventListener("click", this.goToNextPage.bind(this));
+    this.btnPrevPage?.addEventListener(
+      "click",
+      this.goToPreviousPage.bind(this)
+    );
+  }
+
+  // FUNÇÕES AUTO-INICIALIZADAS
+  _init() {
+    // this._pagination(appData.supplier);
   }
 }
 const supplier = new SupplierApp();

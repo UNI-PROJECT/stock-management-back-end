@@ -25,8 +25,9 @@
     ></script>
     <script defer type="module" src="../js/controller.js"></script>
   </head>
-
   <body>
+    <div class="preloader"></div>
+
     <section class="dashboard-section main-section">
       <header class="main__header">
         <div class="search__div">
@@ -51,6 +52,7 @@
             <ion-icon name="sunny-outline" class="hidden light-icon"></ion-icon>
             <ion-icon name="moon-outline" class="dark-icon"></ion-icon>
           </a>
+          <!-- CONTAINER DE NOTIFICAÇÕES -->
           <div class="notification-header">
             <h3 class="heading-h3">Notificações</h3>
             <div class="filter-noti">
@@ -58,7 +60,9 @@
               <span>Todos</span>
             </div>
             <div class="notitification-list-header">
+              <!-- LISTA DE NOTIFICAÇÕES A SER RENDERIZADO -->
               <div class="list">
+                <!-- BOX DE NOTIFICAÇÃO -->
                 <div class="notifications-box">
                   <ion-icon name="notifications-outline"></ion-icon>
                   <div class="notification-text-container">
@@ -70,33 +74,6 @@
                       actualizar
                     </p>
                     <span class="notif-date">Agora mesmo</span>
-                  </div>
-                </div>
-
-                <div class="notifications-box">
-                  <ion-icon name="notifications-outline"></ion-icon>
-                  <div class="notification-text-container">
-                    <span class="notification-text-header">Estoque Baixo</span>
-                    <p>
-                      <span class="notif-product-name">Computador</span> está
-                      com nível baixo de estoque
-                      <span class="notif-product-sctock"></span> convêm
-                      actualizar
-                    </p>
-                    <span class="notif-date">Há 2h</span>
-                  </div>
-                </div>
-                <div class="notifications-box">
-                  <ion-icon name="notifications-outline"></ion-icon>
-                  <div class="notification-text-container">
-                    <span class="notification-text-header">Estoque Baixo</span>
-                    <p>
-                      <span class="notif-product-name">Computador</span> está
-                      com nível baixo de estoque
-                      <span class="notif-product-sctock"></span> convêm
-                      actualizar
-                    </p>
-                    <span class="notif-date">Ontem</span>
                   </div>
                 </div>
               </div>
@@ -123,7 +100,7 @@
         <div class="profile-infor-box">
           <ul class="profile-list">
             <li>
-              <a href="#" class="p-link"
+              <a href="perfil.html" class="p-link"
                 ><ion-icon name="person-outline"></ion-icon> Meu Perfil</a
               >
             </li>
@@ -133,7 +110,7 @@
               >
             </li>
             <li>
-              <a href="#" class="p-link btn-log-out"
+              <a href="" class="p-link btn-log-out"
                 ><ion-icon name="log-out-outline"></ion-icon> Terminar Sessão</a
               >
             </li>
@@ -185,7 +162,7 @@
               >
             </li>
             <li>
-              <a href="/relatorio" class="main-nav-link"
+              <a href="/relatorios" class="main-nav-link"
                 ><ion-icon name="bar-chart-outline"></ion-icon
                 ><span>Análises</span></a
               >
@@ -219,10 +196,14 @@
             </button>
           </div>
         </div>
+
+        <!-- CONTAINER DE TODOS OS PRODUCTOS -->
         <div class="statics-box product-container">
+          <!-- CABELARIO -->
           <div class="list-header">
             <h3 class="heading-h3">Todos os Productos</h3>
             <div class="sub-box-header">
+              <!-- INPUT DE PESQUISA NA LISTA DE PRODUCTOS -->
               <div class="seach-product">
                 <ion-icon name="search-outline"></ion-icon>
                 <input
@@ -231,7 +212,7 @@
                   class="input__search product-search-input"
                 />
               </div>
-
+              <!-- BOX DE FILTRAGEM NA LISTA DE PRODUCTOS -->
               <div class="sort-by">
                 <ion-icon name="filter-outline"></ion-icon>
                 <span class="default">Data</span>
@@ -255,36 +236,57 @@
                 <span>Data</span>
                 <span>Acção</span>
               </div>
-              <div class="product-list">
-                <div th:each="item: ${produtos}" class="product-item">
-                  <div>
-                    <span class="select-btn"
-                      ><ion-icon name="caret-down-outline"></ion-icon
-                    ></span>
-                    <span th:text="${item.nome}" class="product-name"
-                      >Lenovo 3rd Geração</span
-                    >
-                  </div>
-                  <span th:text="${item.categoria.nome}" class="product-category"></span>
-                  <span th:text="${item.preco + ' Kz'}" class="product-price">Kz</span>
-                  <span class="product-qtd">140</span>
-                  <span class="product-date">12/04/2023</span>
 
+              <!-- LISTA DE PRODUCTOS  ONDE SERÁ RENDERIZADO-->
+              <div class="product-list">
+                <!-- BOX DE PRODUCTO -->
+                <div
+                  th:each="item: ${produtos}" 
+                  
+                  class="product-item"
+                  data-id=""
+                >
+                  <div class="product-name-container">
+                    <span class=""
+                      ><ion-icon name="chevron-expand-outline"></ion-icon
+                    ></span>
+                    <span th:text="${item.nome}" class="product-name"></span>
+                  </div>
+                  <span
+                    th:text="${item.categoria.nome}"
+                    class="product-category"
+                    >Categoria</span
+                  >
+                  <span th:text="${item.preco + ' Kz'}" class="product-price"
+                    >Preço</span
+                  >
+                  <span th:text="${item.Quantidade}" class="product-qtd"
+                    >Estoque</span
+                  >
+
+                  <span
+                    th:text="${#strings.substring(item.createdAt, 0, 10)}"
+                    class="product-date"
+                    >Data</span
+                  >
                   <span class="product-action">
-                    <button class="btn-edit-product">
+                    <a th:href="@{'/produto/editar/' + ${item.id}}" class="btn-edit-product">
+
                       <ion-icon name="create-outline"></ion-icon>
-                    </button>
+                    </a>
                     <button class="btn-delete-product">
                       <ion-icon name="trash-outline"></ion-icon>
                     </button>
-                    <button class="btn-details-product">
+                    <a th:href="@{'/produto/detalhe/' + ${item.id}}" class="btn-details-product">
                       <ion-icon name="ellipsis-vertical-outline"></ion-icon>
-                    </button>
+                    </a>
                   </span>
                 </div>
               </div>
             </div>
           </div>
+
+          <!-- BOX DA PAGINAÇÃO DA LISTA -->
           <div class="pagination-box">
             <div class="pagination">
               Páginas <span class="total-pages-product">10</span>
@@ -302,95 +304,116 @@
         </div>
       </section>
 
+      <!-- CONTAINER PARA ADICIONAR UM PRODUCTO NOVO -->
       <section class="add-product-container hidden">
         <div class="overlay-new-product-form"></div>
-        <form action="#" class="new-product-form">
+        <!-- FORMULÁRIO PARA ADICIONAR PRODUCO -->
+        <form
+          action="#"
+          class="new-product-form"
+          th:action="@{/produtos/registrar}"
+          th:object="${produtoModel}"
+          method="post"
+        >
           <header class="add-new-header">
             <div>
-              <h2 class="heading-h2">Adicionar producto</h2>
+              <h2 class="heading-h2">Adicionar produto</h2>
               <span class="btn-close-add-new-product"
                 ><ion-icon name="close-outline"></ion-icon
               ></span>
             </div>
-            <span>Informações detalhadas do producto</span>
+            <span>Informações detalhadas do produto</span>
           </header>
+
           <div class="form-group">
             <div class="group">
-              <label for="product-name">Nome do producto</label>
+              <label for="product-name">Nome do produto</label>
               <input
                 type="text"
-                placeholder="Nome do producto"
+                id="product-name"
+                th:field="*{nome}"
+                placeholder="Nome do produto"
                 class="input-product-name input-edit-product-name"
               />
             </div>
           </div>
+
           <div class="form-group">
             <div class="group">
               <label for="product-category" class="product-category"
-                >Categoria
-                <span class="btn-new-category"
-                  ><ion-icon name="add-circle-outline"></ion-icon>
-                  Adicionar</span
-                ></label
+                >Categoria</label
               >
-              <select name="" id="" class="select-category">
-                <option value="">Escolha</option>
-                <option value="">Electronicos</option>
-                <option value="">Roupas</option>
-                <option value="">Mobilias</option>
-                <option value="">Calçados</option>
+              <select
+                id="product-category"
+                th:field="*{categoria}"
+                class="select-category"
+              >
+                <option value="" disabled selected>Escolha</option>
+                <option
+                  th:each="item : ${produtos}"
+                  th:value="${item.categoria.id}"
+                  th:text="${item.categoria.nome}"
+                ></option>
               </select>
+              <span class="btn-new-category"
+                ><ion-icon name="add-circle-outline"></ion-icon> Adicionar</span
+              >
             </div>
           </div>
+
           <div class="form-group">
             <div class="group">
-              <label for="product-name">Preço de venda</label>
+              <label for="sell-price">Preço de venda</label>
               <input
                 type="number"
+                id="sell-price"
+                th:field="*{preco}"
                 placeholder="Preço de venda"
                 class="input-sell-price input-edit-product-price"
               />
             </div>
-            <div class="group">
-              <label for="product-name">Preço de compra </label>
-              <input
-                type="number"
-                placeholder="Preço de compra"
-                class="input-buy-price input-edit-buy-price"
-              />
-            </div>
           </div>
+
           <div class="form-group">
             <div class="group">
-              <label for="product-name">Quantidade</label>
+              <label for="quantity">Quantidade</label>
               <input
                 type="number"
+                id="quantity"
+                th:field="*{quantidade}"
                 placeholder="Quantidade"
                 class="input-quantity"
               />
             </div>
           </div>
+
           <div class="form-group">
             <div class="group">
-              <label for="product-name">Descrição</label>
+              <label for="description">Descrição</label>
               <textarea
-                name=""
-                id=""
-                cols="10"
+                id="description"
+                th:field="*{descricao}"
                 rows="5"
                 class="product-description-input"
               ></textarea>
             </div>
           </div>
-          <!-- BUTTÕES DE EVENTO DO FORMULÁRIO -->
+
           <div class="form-group">
             <div class="btns">
-              <button class="confirmar-new-product">Adicionar</button>
-              <button class="cancelar-new-product">Cancelar</button>
+              <button type="submit" class="confirmar-new-product">
+                Adicionar
+              </button>
+              <button type="button" class="cancelar-new-product">
+                Cancelar
+              </button>
             </div>
           </div>
         </form>
+
         <!-- FIM DO FORMULÁRIO PARA ADICIONAR PRODUCTO -->
+
+        <!-- MINI FORMULÁRIO PARA CRIAR CATEGORIA NOVA -->
         <div class="create-category hidden">
           <div class="overlay-create-category"></div>
           <form action="" class="category-form">
@@ -407,22 +430,10 @@
         </div>
       </section>
 
-      <section class="details-container hidden">
-        <div class="overlay-product-detail"></div>
-        <div class="container">
-          <header class="details-header">
-            <div>
-              <h3 class="heading-h3">Ver detalhes</h3>
-              <span class="">Ver as informações de detalhe do producto</span>
-            </div>
-            <button class="btn-close-details">
-              <ion-icon name="close-outline"></ion-icon>
-            </button>
-          </header>
-        </div>
-      </section>
+   
     </section>
 
+    <!-- POPUP DE ALERTA DE CONFIRMAÇÃO PARA ELIMINAÇÃO DO PRODUCTO -->
     <div class="alert-message-container hidden">
       <div class="overlay-delete-product"></div>
       <div class="alerta-message">

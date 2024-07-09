@@ -1,7 +1,7 @@
 // REFACTORING THE CODE
 
-import { appData } from "./data.js";
-import { formatNumbers } from "./views/formatNumbers.js";
+// import { appData } from "./data.js";
+// import { formatNumbers } from "./views/formatNumbers.js";
 
 class VendasApp {
   sellCart = [];
@@ -35,6 +35,8 @@ class VendasApp {
     this.miniList = document.querySelector(
       ".product-list-select .mini-product-list"
     );
+    this.carListContainer = document.querySelector(".added-cart-list");
+    // this.btnRemoveProductTocart
 
     this.selectClientInput = document.querySelector(".select-client-input");
     this.miniClientContainer = document.querySelector(
@@ -47,22 +49,23 @@ class VendasApp {
     this.init();
   }
 
+  // MOSTRAR DETALHES DA VENDA
   _showsellDetail(e) {
     const target = e.target.closest(".sell-box");
     if (!target) return;
     this.sellID = target.dataset.id;
-    console.log(this.sellID);
     this.sellDetailContainer.classList.remove("hidden");
     this.sellDetailContainer.classList.remove("hide-detail");
     this.newSellFormContainer.classList.add("hidden");
-    this._settingDetailSellContent(this.sellID);
+    // this._settingDetailSellContent(this.sellID);
   }
 
+  // MOSTRAR O FORMULÁRIO PARA REALIZAR NOVA VEDA
   _showNewSellFunction() {
     this.sellDetailContainer.classList.add("hidden");
     this.newSellFormContainer.classList.remove("hidden");
   }
-
+  // CHECHAR O FORMULÁRIO DE NOVA VENDA
   _closeSellFormFunction(e) {
     const target = e.target;
     if (target.classList.contains("overlay-new-sell-form")) {
@@ -76,7 +79,7 @@ class VendasApp {
       this.newSellFormContainer.classList.add("hidden");
     }
   }
-
+  // FECHAR O DETALHE VENDA NO MOBILE
   _closeSellDetailFunction(e) {
     const target = e.target;
     if (target.classList.contains("overlay-sell-detail"))
@@ -85,6 +88,7 @@ class VendasApp {
       this.sellDetailContainer?.classList.add("hidden");
   }
 
+  // FECHAR SESSÕES DO DETALHE [DETALHES DA VENDA, DETALHES DO PRODUCTO, INFOMAÇÃO DO CLIENE...]
   _hideSingleDetailFunction(btn) {
     btn.addEventListener("click", function (e) {
       this.name = btn.dataset.class;
@@ -93,120 +97,106 @@ class VendasApp {
     });
   }
 
+  // FUNÇÃO PARA MOSTRAR A MINI LISTA DE PRODUCTOS NO INPUT PARA
   _selectProductFunction() {
     this.miniProductList.classList.remove("hidden");
   }
 
-  _miniListItemFunction(t) {
-    this.miniListItem?.forEach(function (item) {
-      item.addEventListener("click", function () {
-        t.miniProductList.classList.add("hidden");
-      });
-    });
-  }
-
+  // FECHAR A MINI LISTA DE PRODUCTOS AO SELECIONAR UM PRODUCTO
   _hideMiniList(e) {
     const target = e.target.closest(".product-item-select");
     if (!target) return;
-    const id = target.dataset.id;
-    this.selectedItem = appData.products.find((i) => i.id === +id);
-    this.selectProductInput.value = this.selectedItem.name;
     this.miniProductList.classList.add("hidden");
   }
 
+  // FILTRAR OS PRODUCTOS AO DIGITAR O NOME NO INPUT PARA SELECIONAR O PRODUCTO
   _filterMiniListProduct() {
     const value = this.selectProductInput.value.toLowerCase();
-    const filtered = appData.products.filter((item) =>
-      item.name.toLocaleLowerCase().startsWith(value)
-    );
-    this._renderMiniProductList(filtered);
+    //DESCOMENTAR E RENDERIZAR COM DADOS REAIS
+    // const filtered = appData.products.filter((item) =>
+    //   item.name.toLocaleLowerCase().startsWith(value)
+    // );
+    // this._renderMiniProductList(filtered);
   }
 
-  _renderMiniProductList(list) {
-    if (!this.miniList) return;
-
-    if (list.length === 0) {
-      this.miniList.innerHTML = "";
-
-      const markup = `
-    <span class="empty-list">Nenhum producto</span>`;
-      this.miniList.insertAdjacentHTML("afterbegin", markup);
-    }
-
-    if (list.length > 0) {
-      this.miniList.innerHTML = "";
-
-      list.forEach((item) => {
-        const html = `
-      <li class="product-item-select" data-id="${item.id} ">
-          <span class="product-item-name">${item.name} </span>
-                <span class="product-item-quantity">${item.stock}</span>
-            </li>
-      `;
-        this.miniList.insertAdjacentHTML("afterbegin", html);
-      });
-    }
-  }
-
+  // FUNÇÃO PARA ADICIONAR PRODUCTO NO CARRINHO
   _addProductToCart(e) {
     e.preventDefault();
-    if (this.selectProductInput.value && this.selectedProductQty.value) {
-      const item = {
-        productId: this.selectedItem.id,
-        quantity: this.selectedProductQty.value,
-      };
 
-      this.sellCart.push(item);
-      this._renderAddedProduct(this.sellCart);
-      this.selectProductInput.value = this.selectedProductQty.value = "";
-    } else alert("Preencha os campos");
+    //DESCOMENTAR PARA FUNCIONALIDADE DE ADICIONAR PRODUCO NO CARRINHO E RENDERIZAR
+    // if (this.selectProductInput.value && this.selectedProductQty.value) {
+    //   const item = {
+    //     productId: this.selectedItem.id,
+    //     quantity: this.selectedProductQty.value,
+    //   };
+
+    //   this.sellCart.push(item);
+    //   this._renderAddedProduct(this.sellCart);
+    //   this.selectProductInput.value = this.selectedProductQty.value = "";
+    // } else alert("Preencha os campos");
   }
 
-  _renderAddedProduct(list) {
-    this.carListContainer = document.querySelector(".added-cart-list");
-    if (!this.carListContainer) return;
-    this.carListContainer.innerHTML = "";
-
-    if (!this.carListContainer) return;
-    if (list.length === 0) {
-      this.carListContainer.innerHTML = "";
-      const html = `
-      <span class="empty-list">Nenhum producto adicionado</span>`;
-      this.carListContainer.insertAdjacentHTML("afterbegin", html);
-    }
-
-    if (list.length > 0) {
-      list.forEach((item) => {
-        const product = appData.products.find(
-          (ite) => ite.id === item.productId
-        );
-
-        const html = `
-       <li class="cart-item">
-       <div class="added-product">
-         <span>${product.name} </span>
-         <span class="added-product-name">${formatNumbers.formatCurrency(
-           product.price
-         )}</span>
-       </div>
-       <div class="added-product">
-         <span>${item.quantity}</span>
-         <span class="added-product-name">${formatNumbers.formatCurrency(
-           item.quantity * product.price
-         )}</span>
-       </div>
-        </li>
-      `;
-
-        this.carListContainer.insertAdjacentHTML("afterbegin", html);
-      });
-    }
+  // REMOVER PRODUCTO DA LISTA
+  _removeProductToCart(e) {
+    //DESCOMENTAR PARA A FUNCIONALIDADE DE REMOVER PRODUCTO NO CARRINHO
+    // const target = e.target.closest(".remove-item-to-cart");
+    // if (!target) return;
+    // const id = +target.closest(".cart-item").dataset.id;
+    // console.log(id);
+    // const index = this.sellCart.findIndex((item) => item.productId === id);
+    // this.sellCart.splice(index, 1);
+    // this._renderAddedProduct(this.sellCart);
   }
 
+  //DECOMENNTAR PARA A RENDERIZAÇÃO DE PRODUCTOS NO CARRINHO
+  // RENDRIZAR OS PRODUCTOS SELECIONADOS
+  // _renderAddedProduct(list) {
+  //   if (!this.carListContainer) return;
+  //   this.carListContainer.innerHTML = "";
+
+  //   if (!this.carListContainer) return;
+  //   if (list.length === 0) {
+  //     this.carListContainer.innerHTML = "";
+  //     const html = `
+  //     <span class="empty-list">Nenhum producto adicionado</span>`;
+  //     this.carListContainer.insertAdjacentHTML("afterbegin", html);
+  //   }
+
+  //   if (list.length > 0) {
+  //     list.forEach((item) => {
+  //       const product = appData.products.find(
+  //         (ite) => ite.id === item.productId
+  //       );
+
+  //       const html = `
+  //      <li class="cart-item" data-id="${product.id}">
+  //      <div class="added-product">
+  //        <span>${product.name} </span>
+  //        <span class="added-product-name">${formatNumbers.formatCurrency(
+  //          product.price
+  //        )}</span>
+  //      </div>
+  //      <span class="remove-item-to-cart"><ion-icon
+  //      name="trash-outline"></ion-icon></span>
+  //      <div class="added-product">
+  //        <span>${item.quantity}</span>
+  //        <span class="added-product-name">${formatNumbers.formatCurrency(
+  //          item.quantity * product.price
+  //        )}</span>
+  //      </div>
+  //       </li>
+  //     `;
+
+  //       this.carListContainer.insertAdjacentHTML("afterbegin", html);
+  //     });
+  //   }
+  // }
+
+  // MOSTRAR A MINI LISTA DE CLIENTE A SER SELECIONADO
   _showMiniClientList() {
     this.miniClientContainer.classList.remove("hidden");
   }
-
+  // SELECIONANDO O CLIENTE
   _selectClient(e) {
     e.preventDefault();
     if (e.target.closest(".btn-add-client")) {
@@ -215,56 +205,34 @@ class VendasApp {
     }
     const target = e.target.closest("li");
     if (!target) return;
-
-    const dataset = appData.clients.find((c) => c.id === +target.dataset.id);
-    this.selectClientInput.value = dataset.name;
+    //DECOMENTAR PARA ENCONTRAR CLIENTE COM DADOS REAIS
+    // const dataset = appData.clients.find((c) => c.id === +target.dataset.id);
+    // this.selectClientInput.value = dataset.name;
     this.miniClientContainer.classList.add("hidden");
-    c(e.target);
   }
+  // SE O CLIENTE NÃO FOR ENCONTRADO NA LISTA ADICIONAR A LISTA
   _newClientAdded() {
     this.alertSellContainer.classList.remove("hidden");
     const alertText = document.querySelector(".alert-sell-text");
     alertText.textContent = "Cliente adicionado com sucesso";
   }
 
-  _renderMiniClientList(arr) {
-    if (!this.miniClientList) return;
-
-    if (arr.length === 0) {
-      this.miniClientList.innerHTML = "";
-      const html = `
-      <div class="unknown-client">
-       <span>Não encontrado</span>
-              <button class="btn-add-client">Adicionar</button>
-          </div>`;
-      this.miniClientList.insertAdjacentHTML("afterbegin", html);
-      c(arr);
-    }
-    if (arr.length > 0) {
-      this.miniClientList.innerHTML = "";
-      arr.forEach((client) => {
-        const html = `
-      <li data-id="${client.id} ">
-      <span class="client-name">${client.name}</span><span>${client.purchaseHistory.length}</span>
-      </li>`;
-
-        this.miniClientList.insertAdjacentHTML("afterbegin", html);
-      });
-    }
-  }
-
+  // FILTRAR A LISTA DE CLIENTES AO DIGITAR O NOME NO INPUT
   _filterMiniClient() {
+    //PEGANDO O VALOR DO INPUT
     const value = this.selectClientInput.value.toLowerCase();
-    const filtered = appData.clients.filter((item) =>
-      item.name.toLowerCase().startsWith(value)
-    );
+    //DESCOMENTAR PARA A FILTRAGEM NA MINI LISTA DE CLIENTES
+    // const filtered = appData.clients.filter((item) =>
+    //   item.name.toLowerCase().startsWith(value)
+    // );
 
-    this._renderMiniClientList(filtered);
+    // this._renderMiniClientList(filtered);
   }
 
+  // CONFIGURAR OS CONTENT DE DETALHES DA VENDA COM BASE O ID DO PRODUCTO
   _settingDetailSellContent(id) {
-    const currentSell = appData.sales.find((item) => item.id === +id);
-    console.log(currentSell);
+    // DESCOMENTAR E RENDERIZAR COM PRODUCTOS REAIS
+    // const currentSell = appData.sales.find((item) => item.id === +id);
     const invoiceHeaderLabel = document.querySelector(
       ".invoice-number-label-header"
     );
@@ -305,39 +273,45 @@ class VendasApp {
       currentSell.totalAmount
     );
 
-    const renderSellItem = function (list) {
-      itemListContainer.innerHTML = "";
+    //DESCOMENTAR PARA RENDRIZAR A LISTA DE PRODUCTOS VENDIDOS
+    // RENDERIZAR OS PRODUCTOS DA VENDA
+    // const renderSellItem = function (list) {
+    //   itemListContainer.innerHTML = "";
 
-      list.forEach((item, i) => {
-        const product = appData.products.find((p) => p.id === item.productId);
+    //   list.forEach((item, i) => {
+    //     const product = appData.products.find((p) => p.id === item.productId);
 
-        const html = `
-      <div class="details-flex-box">
-         <span>Producto ${i + 1}</span>
-               <span class="costumer">${product.name}</span>
-           </div>
-           <ul class="product-description-list">
-               <li><span>Preço unitário</span> <span class="selled-product-price costumer">${formatNumbers.formatCurrency(
-                 item.price
-               )}</span></li>
-               <li><span>Quantidade</span> <span class="selled-product-price costumer">${
-                 item.quantity
-               }</span>
-               </li>
-           </ul>
-      `;
+    //     const html = `
+    //   <div class="details-flex-box">
+    //      <span>Producto ${i + 1}</span>
+    //            <span class="costumer">${product.name}</span>
+    //        </div>
+    //        <ul class="product-description-list">
+    //            <li><span>Preço unitário</span> <span class="selled-product-price costumer">${formatNumbers.formatCurrency(
+    //              item.price
+    //            )}</span></li>
+    //            <li><span>Quantidade</span> <span class="selled-product-price costumer">${
+    //              item.quantity
+    //            }</span>
+    //            </li>
+    //        </ul>
+    //   `;
 
-        itemListContainer.insertAdjacentHTML("afterbegin", html);
-      });
-    };
-
-    renderSellItem(currentSell.items);
+    //     itemListContainer.insertAdjacentHTML("afterbegin", html);
+    //   });
+    // };
+    // renderSellItem(currentSell.items);
   }
-  _confirmSell() {
+
+  // CONFIRMAR VENDA
+  _confirmSell(e) {
+    e.preventDefault();
     this.alertSellContainer.classList.remove("hidden");
     const alertText = document.querySelector(".alert-sell-text");
     alertText.textContent = "Venda realizada com sucesso";
   }
+
+  // GUARDAR O ALERTA DE REALIZAÇÃO DE VENDA
   _hideSellAlert(e) {
     const target = e.target;
     if (target.closest(".sell-overlay"))
@@ -345,52 +319,8 @@ class VendasApp {
     if (target.closest(".btn-ok-alert"))
       this.alertSellContainer.classList.add("hidden");
   }
-  _renderSaleList(arr) {
-    if (arr.length === 0) {
-      if (this.sellContainerList) this.sellContainerList.innerHTML = "";
 
-      const emptyList = `
-      <div class="empty-product">
-      <p>Nenhum registro encontrado</p>
-     </div>
-      `;
-
-      if (this.sellContainerList)
-        this.sellContainerList.insertAdjacentHTML("afterbegin", emptyList);
-    }
-    if (arr.length > 0)
-      if (this.sellContainerList) this.sellContainerList.innerHTML = "";
-    arr.forEach((item) => {
-      const html = `
-      <div class="sell-box" data-id="${item.id} ">
-      <div>
-          <span class="sell-icon"><ion-icon
-                  name="swap-horizontal-outline"></ion-icon></span>
-          <div class="sell-product-description">
-              <span class="invoice-number">${item.invoice.id} </span>
-          </div>
-      </div>
-      <span class="selled-roduct-price">${formatNumbers.formatCurrency(
-        item.totalAmount
-      )} </span>
-      <span class="selled-product-date">${formatNumbers.formatDates(
-        new Date(item.date)
-      )} </span>
-      <span class="selled-product-status ${item.status}-payment"> ${
-        item.status === "success" ? "Sucesso" : "Pendente"
-      }</span>
-      <span class="selled-product-costumer">${
-        appData.clients.find((cl) => cl.id === item.clientId).name
-      }</span>
-
-  </div>
-        `;
-
-      if (this.sellContainerList)
-        this.sellContainerList.insertAdjacentHTML("afterbegin", html);
-    });
-  }
-
+  //CLASSIFICAR A LISTA DE VENDAS
   _sortSellList(e) {
     const target = e.target.closest("span");
     const def = document.querySelector(".default");
@@ -418,6 +348,7 @@ class VendasApp {
     }
   }
 
+  // CLASSIFICAR PELA DATA
   _sortByDate() {
     const sorted = appData.sales.sort(
       (a, b) => new Date(a.date) - new Date(b.date)
@@ -426,6 +357,7 @@ class VendasApp {
     console.log(sorted);
   }
 
+  // CLASSIFICAR POR QUANTIDADE
   _sortByAmount() {
     const sorted = appData.sales.sort(
       (a, b) => new Date(a.totalAmount) - new Date(b.totalAmount)
@@ -433,31 +365,33 @@ class VendasApp {
     this._pagination(sorted);
   }
 
+  // FILTRAR VENDAS COM STATUS DE SUCESSO
   _sortBySuccess() {
     const sorted = appData.sales.filter((item) => item.status === "success");
     this._pagination(sorted);
   }
 
+  // FILTRAR OS PENDENTES
   _sortByPending() {
     const sorted = appData.sales.filter((item) => item.status === "pending");
     this._pagination(sorted);
   }
 
-  //SEACRH SELL
-
+  //PESQUISAR NA LISTA DE VENDAS
   _searchSell() {
+    //PEGANDO O VALUE DO INPUT
+
     const value = this.searchSellList.value.toLowerCase();
-    console.log(value);
-    const filtered = appData.sales.filter((item) =>
-      item.invoice.id.toLocaleLowerCase().startsWith(value)
-    );
-    this._pagination(filtered);
+    //DESCOMENTAR PARA PEGAR DADOS REAIS E FILTRAR
+    // const filtered = appData.sales.filter((item) =>
+    //   item.invoice.id.toLocaleLowerCase().startsWith(value)
+    // );
+    // this._pagination(filtered);
   }
 
   //PAGINAÇÃO
   _pagination(productList) {
     if (!this.totalPagesLabel) return;
-
     this.productList = productList;
     this.productsPerPage = 8;
     this.currentPage = 1;
@@ -469,11 +403,12 @@ class VendasApp {
     this.renderCurrentPage(this.currentPage, productList);
   }
 
+  // LISTA A SER RENDERIZADO
   renderPage(page, list) {
     this.startIndex = (page - 1) * this.productsPerPage;
     this.endIndex = this.startIndex + this.productsPerPage;
     this.productsToRender = list.slice(this.startIndex, this.endIndex);
-    this._renderSaleList(this.productsToRender);
+    // this._renderSaleList(this.productsToRender);
   }
 
   renderCurrentPage(currentPage, list) {
@@ -496,6 +431,7 @@ class VendasApp {
     this.curPagelabel.textContent = this.currentPage;
   }
 
+  // TODOS OS EVENT LISTENERS
   _eventListeners() {
     this.sellDetailContainer?.addEventListener(
       "click",
@@ -520,10 +456,16 @@ class VendasApp {
       "input",
       this._filterMiniListProduct.bind(this)
     );
+    //event para adicionar producto no carrinho
     this.btnAddProductCart?.addEventListener(
       "click",
       this._addProductToCart.bind(this)
     );
+    this.carListContainer?.addEventListener(
+      "click",
+      this._removeProductToCart.bind(this)
+    );
+    //event para mostrar o formulário de venda
     this.btnShowNewSellForm?.addEventListener(
       "click",
       this._showNewSellFunction.bind(this)
@@ -532,50 +474,45 @@ class VendasApp {
       "click",
       this._showsellDetail.bind(this)
     );
-    // this.btnCloseSellFormContainer?.addEventListener(
-    //   "click",
-    //   this._closeSellFormFunction.bind(this)
-    // );
+    // event para fechar o formulário de venda
     this.newSellFormContainer?.addEventListener(
       "click",
       this._closeSellFormFunction.bind(this)
     );
-    // this.btnCloseSellDetail?.addEventListener(
-    //   "click",
-    //   this._closeSellDetailFunction.bind(this)
-    // );
+    //event para fechar o seção de detalhe da venda [Detalhes venda, Detalhes Producto]
     this.btnHideSingleDetail?.forEach(
       this._hideSingleDetailFunction.bind(this)
     );
-
+    //event para selecionaro o producto
     this.selectProductInput?.addEventListener(
       "click",
       this._selectProductFunction.bind(this)
     );
+
+    // botoões da paginação
     this.btnNextPage?.addEventListener("click", this.goToNextPage.bind(this));
     this.btnPevPage?.addEventListener(
       "click",
       this.goToPreviousPage.bind(this)
     );
     this.sellSortList?.addEventListener("click", this._sortSellList.bind(this));
-
+    // botão para confirmar a venda ou realizar venda
     this.btnConfirmSell?.addEventListener(
       "click",
       this._confirmSell.bind(this)
     );
+    // event para fechar o popup da venda
     this.alertSellContainer?.addEventListener(
       "click",
       this._hideSellAlert.bind(this)
     );
   }
+
+  // INICIALIZADOR
   init() {
-    this._miniListItemFunction(this);
-    this._pagination(appData.sales);
-    this._renderMiniProductList(appData.products);
+    // this._pagination(appData.sales);
     this._eventListeners();
-    this._renderMiniClientList(appData.clients);
-    this._renderAddedProduct([]);
-    this._settingDetailSellContent(appData.sales.slice(-1)[0].id);
+    // this._settingDetailSellContent(appData.sales.slice(-1)[0].id);
   }
 }
 const sellApp = new VendasApp();
