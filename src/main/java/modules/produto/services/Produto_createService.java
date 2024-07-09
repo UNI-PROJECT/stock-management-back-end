@@ -12,10 +12,8 @@ import org.springframework.stereotype.Service;
 
 import modules.EntradaProduto.repository.EntradaProdutoRepository;
 import modules.categoria.repository.CategoriaRepository;
-import modules.estoque.repository.EstoqueRepository;
 import modules.models.CategoriaModel;
 import modules.models.EntradaProduto;
-import modules.models.EstoqueModel;
 import modules.models.ProdutoModel;
 import modules.produto.dtos.CreateProdutoInput;
 import modules.produto.dtos.UpdateProdutoInput;
