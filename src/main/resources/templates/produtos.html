@@ -274,9 +274,9 @@
 
                       <ion-icon name="create-outline"></ion-icon>
                     </a>
-                    <button class="btn-delete-product">
+                    <a th:href="@{'/produto/excluir/' + ${item.id}}" class="btn-delete-product">
                       <ion-icon name="trash-outline"></ion-icon>
-                    </button>
+                    </a>
                     <a th:href="@{'/produto/detalhe/' + ${item.id}}" class="btn-details-product">
                       <ion-icon name="ellipsis-vertical-outline"></ion-icon>
                     </a>

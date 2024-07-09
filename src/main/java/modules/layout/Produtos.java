@@ -67,8 +67,10 @@ public class Produtos {
         return "detalhes";
     }
 
+    
     @GetMapping("/produto/excluir/{id}")
     public String excluirProduto(@PathVariable UUID id) {
+        System.err.println("ID:" + id);
         produtoRepository.deleteById(id);
         return "redirect:/produtos";
     }
