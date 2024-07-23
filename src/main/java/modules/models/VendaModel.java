@@ -36,9 +36,11 @@ public class VendaModel implements Serializable{
     @JoinColumn(name = "id_funcionario")
     public modules.models.funcionarioModel funionario;
 
+
     public LocalDate data_da_venda;
     public Double totalDaVenda;
     public String descricao;
+    public String n_fatura;
 
     public UUID getId() {return id;}
     public void setId(UUID id) {this.id = id;}
@@ -54,6 +56,9 @@ public class VendaModel implements Serializable{
 
     public String getDescricao() {return descricao;}
     public void setDescricao(String descricao) {this.descricao = descricao;}
+
+    public String getFatura() {return n_fatura;}
+    public void setFatura(String n_fatura) {this.n_fatura = n_fatura;}
 
     public funcionarioModel getFunionario() {return funionario;}
 
