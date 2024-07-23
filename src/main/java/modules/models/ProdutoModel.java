@@ -45,7 +45,6 @@ public class ProdutoModel implements Serializable {
         updatedAt = Timestamp.valueOf(LocalDateTime.now());
     }
 
-    // Getters and Setters
 
     public UUID getId() {
         return id;

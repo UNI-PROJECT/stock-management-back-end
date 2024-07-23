@@ -146,24 +146,17 @@
                 <div class="grid-02-cols">
 
                     <div class="total-stock-box">
-                        <span class="stock-tag">Número total Productos</span>
+                        <span  class="stock-tag">Número total Productos</span>
                         <div>
-                            <span class="total-stock-number counter-num">12670</span>
+                            <span th:text="${totalQuantidades}" class="total-stock-number counter-num">12670</span>
                             <ion-icon name="file-tray-stacked-outline"></ion-icon>
                         </div>
 
                     </div>
-                    <div class="total-stock-box">
-                        <span class="stock-tag">Categorias</span>
-                        <div>
-                            <span class="total-stock-number counter-num">12800</span>
-                            <ion-icon name="refresh-outline"></ion-icon>
-                        </div>
-
-                    </div>
+                 
                 </div>
 
-                <div class="stock-notification-container">
+                <div class="grid-02-cols">
                     <h3 class="heading-h3">Notificações de Estoque</h3>
                     <div class="notification-stock-list">
 
@@ -196,9 +189,9 @@
 
             <div class="statics-box product-container">
 
-                <div class="list-header">
+                <div    class="list-header">
 
-                    <h3 class="heading-h3">Movimentação de Productos</h3>
+                    <h3 class="heading-h3">Produtos em estoque</h3>
                     <div class="sub-box-header">
 
                         <div class="seach-product">
@@ -224,44 +217,31 @@
                 <div class="container ">
                     <div class="estaticos">
                         <div class="products-historic-header">
-                            <span>Productos</span>
+                            <span>Nome</span>
                             <span>Categoria</span>
                             <span>Quantidade</span>
-                            <span>Tipo</span>
+                            <span>Quantidade</span>
                             <span>Data</span>
                             <span>Ver</span>
                         </div>
+                      
 
-                        <div class="product-in-out-history">
+                        <div  th:each="item: ${estoque}" class="product-in-out-history">
                             <div class="product-item-history" data-id="">
-                                <span class="product-name"><ion-icon name="arrow-down-outline"
-                                        class="in-product"></ion-icon>
-                                    Computador</span>
-
-                                <span class="product-category">Electronicos</span>
-                                <span class="product-price"> 120</span>
-                                <span class="product-qtd ">Entrada</span>
-                                <span class="product-date">Agora mesmo</span>
+                             
+                                <span th:text="${item.nome}" class="product-category">Electronicos</span>
+                                <span th:text="${item.categoria.nome}" class="product-category">Electronicos</span>
+                                <span th:text="${item.preco}" class="product-price"> 120</span>
+                                <span th:text="${item.quantidade}" class="product-qtd ">Entrada</span>
+                                <span   th:text="${#strings.substring(item.createdAt, 0, 10)}" class="product-date">Agora mesmo</span>
                                 <!-- ACÇÃO DO PRODUCTO, EDITAR, ELIMINAR, VER DETALHES -->
                                 <span class="product-action">
-                                    <button class="btn-update-stock"><ion-icon name="eye-outline"></ion-icon></button>
+                                    <a th:href="@{'/produto/detalhe/' + ${item.id}}" class="btn-details-product">
+                                        <ion-icon name="eye-outline"></ion-icon>
+                                      </a>
                                 </span>
                             </div>
-                            <div class="product-item-history" data-id="">
-
-                                <span class="product-name"><ion-icon name="arrow-up-outline"
-                                        class="out-product"></ion-icon>
-                                    Computador</span>
-
-                                <span class="product-category">Electronicos</span>
-                                <span class="product-price"> 120</span>
-                                <span class="product-qtd ">Saida</span>
-                                <span class="product-date">Agora mesmo</span>
-                                <!-- ACÇÃO DO PRODUCTO, EDITAR, ELIMINAR, VER DETALHES -->
-                                <span class="product-action">
-                                    <button class="btn-update-stock"><ion-icon name="eye-outline"></ion-icon></button>
-                                </span>
-                            </div>
+                           
                         </div>
                     </div>
 
@@ -283,42 +263,6 @@
     </section>
 
 
-    <section class="historic-product-detail hidden">
-        <div class="overlay-historic-detail"></div>
-        <div class="detail-historic">
-            <header class="">
-                <h2 class="heading-h3">Ver detalhes</h2>
-                <span class="btn-close-historic-detail"><ion-icon name="close-outline"></ion-icon></span>
-            </header>
-
-            <div>
-                <span class="detail-heading">Nome do Producto</span>
-                <span class="product-name-historic">Computador</span>
-            </div>
-            <div>
-                <span class="detail-heading">Categoria</span>
-                <span class="product-category-historic">Electronicos</span>
-            </div>
-
-            <div>
-                <span class="detail-heading">Evento</span>
-                <span class="product-event-type">Saida</span>
-            </div>
-
-            <div>
-                <span class="detail-heading">Quantidade</span>
-                <span class="product-qty-historic">Computador</span>
-            </div>
-            <div>
-                <span class="detail-heading">Data</span>
-                <span class="product-date-historic">12/05/2024</span>
-            </div>
-
-
-        </div>
-
-
-    </section>
 </body>
 
 </html>
