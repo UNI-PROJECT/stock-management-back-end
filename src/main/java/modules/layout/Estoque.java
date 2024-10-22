@@ -30,7 +30,6 @@ public class Estoque {
            model.addAttribute("totalQuantidades", totalQuantidades != null ? totalQuantidades : 0);
    
            System.out.println("Quantidade total: " + totalQuantidades);
-           System.out.println("Em estoque total: " + produtos);
 
    
            return "estoque";

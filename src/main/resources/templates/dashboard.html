@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org"
+xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="en">
 
 <head>
 	<meta charset="UTF-8">
@@ -81,10 +82,10 @@
 
 					</div>
 				</div>
-				<div class="header__profile-box">
+				<div sec:authorize="isAuthenticated()" class="header__profile-box">
 					<img src="assets/img/admin/admin.png" alt="" class="header__profile-img">
 					<div class="profile__name-box">
-						<span class="header__p-name">Márcio Lima</span>
+						<span sec:authentication="name" class="header__p-name">Márcio Lima</span>
 
 						<span class="permission">Admin <ion-icon name="chevron-down-outline"
 								class="profile-click-icon"></ion-icon></span>
