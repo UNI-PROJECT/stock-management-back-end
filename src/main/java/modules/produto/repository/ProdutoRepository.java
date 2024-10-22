@@ -15,6 +15,9 @@ public interface ProdutoRepository extends JpaRepository<ProdutoModel, UUID> {
      @Query("SELECT SUM(p.quantidade) FROM ProdutoModel p")
     Integer sumAllQuantidades();
 
+    @Query("SELECT COUNT(p) FROM ProdutoModel p")
+    Integer contarProdutos();
+
     @Query("SELECT p FROM ProdutoModel p WHERE p.quantidade != 0")
     List<ProdutoModel> findAllWithNonZeroQuantity();
 

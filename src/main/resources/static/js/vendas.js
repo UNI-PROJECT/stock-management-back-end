@@ -8,7 +8,7 @@ class VendasApp {
 
   constructor() {
     //SELECIONANDO AS VARIÁVEIS
-    this.sellDetailContainer = document.querySelector(".section-sell-ditails");
+    this.sellDetailContainer = document.querySelector(".section-new-sell");
     this.newSellFormContainer = document.querySelector(".section-new-sell");
     this.btnShowNewSellForm = document.querySelector(".btn-add-new-sell");
     this.btnCloseSellFormContainer = document.querySelector(

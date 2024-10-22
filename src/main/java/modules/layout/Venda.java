@@ -23,7 +23,7 @@ public class Venda {
     @GetMapping("/vendas")
     public String vendas(Model model) {
            List<ProdutoModel> produtos = produtoRepository.findAll();
-        model.addAttribute("produtos", produtos);
+        model.addAttribute("vendas", produtos);
 
         ProdutoModel produtoModel = new ProdutoModel(); 
         model.addAttribute("produtoModel", produtoModel);

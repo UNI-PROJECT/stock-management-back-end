@@ -5,6 +5,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import enums.Previlegio;
@@ -23,6 +24,10 @@ public class FuncinarioCrudService {
   @Autowired
   private FuncionarioRepository funcionarioRepository;
 
+  // Injete o BCryptPasswordEncoder
+  private final BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+
+
   public funcionarioModel create(CreateFuncionarioInput data) {
     var usuario = new UsuarioModel();
     usuario.setNome(data.nome);
@@ -31,7 +36,11 @@ public class FuncinarioCrudService {
     usuario.setEndereco(data.endereco);
     usuario.setTipoUsuario(TipoUsuario.FUNCIONARIO);
     usuario.setNacionalidade(data.nacionalidade);
+    usuario.setSenha(data.senha);
+    String senhaCriptografada = passwordEncoder.encode(data.senha);
+    usuario.setSenha(senhaCriptografada);
     usuarioRepository.save(usuario);
+
 
     var funcionario = new funcionarioModel();
     funcionario.setUsuario(usuario);

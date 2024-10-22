@@ -12,6 +12,5 @@ public class CreateClienteInput {
     public String telefone;
     public String nacionalidade;
     public String endereco;
-    public String senha;
 
 }

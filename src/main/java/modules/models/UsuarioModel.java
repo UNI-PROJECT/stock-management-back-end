@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.UUID;
 
 import enums.TipoUsuario;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -19,6 +20,7 @@ public class UsuarioModel implements Serializable{
     @GeneratedValue(strategy = GenerationType.AUTO)
     public UUID id;
     public String nome;
+    @Column(unique = true)
     public String email;
     public String telefone;
     public String nacionalidade;
