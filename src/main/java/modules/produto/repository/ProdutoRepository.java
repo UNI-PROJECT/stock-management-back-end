@@ -1,5 +1,6 @@
 package modules.produto.repository;
 
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -20,5 +21,8 @@ public interface ProdutoRepository extends JpaRepository<ProdutoModel, UUID> {
 
     @Query("SELECT p FROM ProdutoModel p WHERE p.quantidade != 0")
     List<ProdutoModel> findAllWithNonZeroQuantity();
+
+    @Query("SELECT p FROM ProdutoModel p ORDER BY p.createdAt DESC") 
+    List<ProdutoModel> findTop5ByOrderByDataCadastroDesc(Pageable pageable);
 
 }
