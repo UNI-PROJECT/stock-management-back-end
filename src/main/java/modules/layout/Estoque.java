@@ -29,7 +29,6 @@ public class Estoque {
            Integer totalQuantidades = produtoRepository.sumAllQuantidades();
            model.addAttribute("totalQuantidades", totalQuantidades != null ? totalQuantidades : 0);
    
-           System.out.println("Quantidade total: " + totalQuantidades);
 
    
            return "estoque";

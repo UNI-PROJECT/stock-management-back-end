@@ -162,8 +162,8 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="en">
 				<div class="total-box weekly-earning">
 					<div class="total-flex">
 						<span class="week-span-text">Ganhos semanais</span>
-						<span class="label__total-purchase-due tot-label-num week-earning-total">11390 Kz</span>
-						<span class="total-text">+<span class="percentage"> 43%</span> aumentado em relação a semana
+						<span th:text="${ganhoSemanal}" class="label__total-purchase-due tot-label-num week-earning-total">11390 Kz</span>
+						<span  class="total-text">+<span class="percentage"> 43%</span> aumentado em relação a semana
 							passada</span>
 					</div>
 					<div class="icon"><ion-icon name="bar-chart-outline"></ion-icon></div>
@@ -172,8 +172,8 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="en">
 
 				<div class="total-box weekly-earning">
 					<div class="total-flex">
-						<span class="week-span-text">Ganhos mensais</span>
-						<span class="label__total-purchase-due tot-label-num month-earn-total">24086 Kz</span>
+						<span  class="week-span-text">Ganhos mensais</span>
+						<span th:text="${ganhoMensal}" class="label__total-purchase-due tot-label-num month-earn-total">24086 Kz</span>
 						<span class="total-text">+<span class="percentage"> 79.9%</span> aumentado em relação ao mês
 							passad0</span>
 					</div>
@@ -217,7 +217,7 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="en">
 				<div class="total-box total__costumer-box tot-box-02">
 					<div class="total-flex">
 						<span class="total-text">Clientes</span>
-						<span class="label__total-purchase-due tot-label-num total-client-number">150</span>
+						<span th:text="${totalClientes}" class="label__total-purchase-due tot-label-num total-client-number">150</span>
 					</div>
 					<div class="total-icon"><ion-icon name="people-outline"></ion-icon></div>
 				</div>
@@ -235,7 +235,7 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="en">
 				<div class="total-box total__costumer-box tot-box-02 ">
 					<div class="total-flex">
 						<span class="total-text">Productos</span>
-						<span class="label__total-purchase-due tot-label-num total-product-number">100</span>
+						<span  th:text="${totalProdutos}" class="label__total-purchase-due tot-label-num total-product-number">100</span>
 					</div>
 					<div class="total-icon"><ion-icon name="cube-outline"></ion-icon></div>
 				</div>
@@ -271,14 +271,14 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="en">
 							</div>
 							<span>Categoria</span>
 						</div>
-						<div class="recent-product-list">
-							<!-- <div class="recent-product-notification">
+						<div th:each="item: ${produtosRecentes}"  class="recent-product-list">
+							<div class="recent-product-notification">
 								<div>
 									<ion-icon name="arrow-down-outline"></ion-icon>
-									<span class="product-name">Lenovo 3D 3GEn</span>
+									<span   th:text="${item.nome}"class="product-name">Lenovo 3D 3GEn</span>
 								</div>
-								<span class="product-price">Electonicos</span>
-							</div> -->
+								<span  th:text="${item.categoria.nome}" class="product-price">Electonicos</span>
+							</div>
 
 						</div>
 					</div>
@@ -298,20 +298,20 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="en">
 									name="arrow-forward-outline"></ion-icon></a>
 						</div>
 					</div>
-					<div class="fixed">
+					<div   th:each="item: ${vendas}"  class="fixed">
 						<div class="most-selled-list">
 
-							<div class="product-notification most-salled">
+							<div  class="product-notification most-salled">
 								<ion-icon name="trending-up-outline"></ion-icon>
 								<div>
 									<div class="flex-most-selled">
 
-										<span class="product-name">Lenovo 3D 3GEn</span>
+										<span  th:text="${item.produto.nome}" class="product-name">Lenovo 3D 3GEn</span>
 										<span class="number">Quantidade</span>
 									</div>
 									<div class="flex-most-selled">
 										<span class="product-price">$580</span>
-										<span class="sale-num">230</span>
+										<span  class="sale-num">230</span>
 									</div>
 								</div>
 
@@ -330,7 +330,7 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="en">
 									name="arrow-forward-outline"></ion-icon></a>
 						</div>
 					</div>
-					<div class="fixed transation-scroll">
+					<div  class="fixed transation-scroll">
 
 
 						<div class="recent-transation-heading">
@@ -340,12 +340,12 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="en">
 							<span>Satus</span>
 						</div>
 
-						<div class="recent-transation-list">
+						<div th:each="item: ${vendas}" class="recent-transation-list">
 							<div class="transation-recent">
 								<div class="invoice-container">
 									<ion-icon name="swap-horizontal-outline"></ion-icon>
 									<div>
-										<span class="invoice-number">SMO0934343</span>
+										<span  th:text="${item.n_fatura}" class="invoice-number">SMO0934343</span>
 										<span class="payment-type">Cash</span>
 									</div>
 								</div>
