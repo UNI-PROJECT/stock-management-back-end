@@ -310,93 +310,79 @@
         <form
           action="#"
           class="new-product-form"
-          th:action="@{/produtos/registrar}"
-          th:object="${produtoModel}"
+          th:action="@{/clientes/registrar}"
+          th:object="${clienteModel}"
           method="post"
         >
           <header class="add-new-header">
             <div>
-              <h2 class="heading-h2">Adicionar produto</h2>
+              <h2 class="heading-h2">Adicionar cliente</h2>
               <span class="btn-close-add-new-product"
                 ><ion-icon name="close-outline"></ion-icon
               ></span>
             </div>
-            <span>Informações detalhadas do produto</span>
+            <span>Informações do cliente</span>
           </header>
 
           <div class="form-group">
             <div class="group">
-              <label for="product-name">Nome do produto</label>
+              <label for="cliente-nome">Nome</label>
               <input
                 type="text"
-                id="product-name"
-                th:field="*{nome}"
+                id="cliente"
+                th:field="*{name}"
                 placeholder="Nome do produto"
                 class="input-product-name input-edit-product-name"
               />
             </div>
           </div>
 
-          <div class="form-group">
-            <div class="group">
-              <label for="product-category" class="product-category"
-                >Categoria</label
-              >
-              <select
-                id="product-category"
-                th:field="*{categoria}"
-                class="select-category"
-              >
-                <option value="" disabled selected>Escolha</option>
-                <option
-                  th:each="item : ${produtos}"
-                  th:value="${item.categoria.id}"
-                  th:text="${item.categoria.nome}"
-                ></option>
-              </select>
-              <span class="btn-new-category"
-                ><ion-icon name="add-circle-outline"></ion-icon> Adicionar</span
-              >
-            </div>
-          </div>
+<!-- 
+
 
           <div class="form-group">
             <div class="group">
-              <label for="sell-price">Preço de venda</label>
+              <label for="product-name">Email</label>
               <input
-                type="number"
-                id="sell-price"
-                th:field="*{preco}"
-                placeholder="Preço de venda"
-                class="input-sell-price input-edit-product-price"
+                type="text"
+                id="cliente-email"
+                th:field="*{email}"
+                placeholder="email"
+                class="input-product-name input-edit-product-name"
               />
             </div>
           </div>
 
+
+
           <div class="form-group">
             <div class="group">
-              <label for="quantity">Quantidade</label>
+              <label for="product-name">Telefone</label>
               <input
-                type="number"
-                id="quantity"
-                th:field="*{quantidade}"
-                placeholder="Quantidade"
-                class="input-quantity"
+                type="text"
+                id="cliente-telefone"
+                th:field="*{telefone}"
+                placeholder="Telefone"
+                class="input-product-name input-edit-product-name"
               />
             </div>
           </div>
 
+
+
           <div class="form-group">
             <div class="group">
-              <label for="description">Descrição</label>
-              <textarea
-                id="description"
-                th:field="*{descricao}"
-                rows="5"
-                class="product-description-input"
-              ></textarea>
+              <label for="product-name">Endereço</label>
+              <input
+                type="text"
+                id="cliente-endereco"
+                th:field="*{endereco}"
+                placeholder="Endereço do cliente"
+                class="input-product-name input-edit-product-name"
+              />
             </div>
-          </div>
+          </div> -->
+
 
           <div class="form-group">
             <div class="btns">
