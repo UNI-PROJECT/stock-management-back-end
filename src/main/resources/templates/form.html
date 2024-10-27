@@ -4,192 +4,55 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Formulário de Venda Profissional</title>
-    <style>
-        /* Configurações globais */
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #f7f9fc;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-            color: #4a4a4a;
-        }
-
-        /* Contêiner principal */
-        .container {
-            background-color: #fff;
-            padding: 25px 30px;
-            width: 720px;
-            border-radius: 10px;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-            position: relative;
-        }
-
-        h2 {
-            text-align: center;
-            color: #333;
-            font-weight: 600;
-        }
-
-        .section {
-            margin-bottom: 20px;
-        }
-
-        .section h3 {
-            font-size: 0.9rem;
-            color: #1f2937;
-            font-weight: bold;
-            border-left: 4px solid #007bff;
-            padding-left: 10px;
-            margin-bottom: 10px;
-        }
-
-        .input-group {
-            margin: 10px 0;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .input-group label {
-            font-size: 0.9rem;
-            margin-bottom: 5px;
-            color: #6b7280;
-        }
-
-        .input-group input, .input-group select {
-            padding: 10px;
-            font-size: 1rem;
-            border: 1px solid #d1d5db;
-            border-radius: 5px;
-            transition: border-color 0.3s;
-        }
-
-        .input-group input:focus, .input-group select:focus {
-            border-color: #007bff;
-            outline: none;
-        }
-
-        .add-product-btn, .complete-sale-btn {
-            background-color: #007bff;
-            color: white;
-            border: none;
-            padding: 12px;
-            cursor: pointer;
-            border-radius: 5px;
-            font-size: 1rem;
-            font-weight: bold;
-            transition: background-color 0.3s;
-            width: 100%;
-            margin-top: 15px;
-        }
-
-        .add-product-btn:hover, .complete-sale-btn:hover {
-            background-color: #0056b3;
-        }
-
-        .cart-icon {
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            font-size: 20px;
-            cursor: pointer;
-            color: #007bff;
-            display: flex;
-            align-items: center;
-        }
-
-        .cart-icon span {
-            background-color: #e11d48;
-            color: white;
-            border-radius: 50%;
-            padding: 3px 8px;
-            font-size: 0.8rem;
-            font-weight: bold;
-            margin-left: 5px;
-        }
-
-        .total {
-            text-align: right;
-            font-size: 1.2rem;
-            font-weight: bold;
-            color: #374151;
-            margin-top: 15px;
-        }
-
-        /* Estilos para a tabela de produtos */
-        .product-table {
-            max-height: 150px;
-            overflow-y: auto;
-            margin-top: 10px;
-            border: 1px solid #d1d5db;
-            border-radius: 5px;
-        }
-
-        .product-table table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-
-        .product-table th, .product-table td {
-            padding: 8px;
-            text-align: left;
-            border-bottom: 1px solid #d1d5db;
-        }
-
-        .remove-product-btn {
-            background-color: #dc3545;
-            color: white;
-            border: none;
-            padding: 5px 10px;
-            border-radius: 3px;
-            cursor: pointer;
-        }
-
-        .remove-product-btn:hover {
-            background-color: #c82333;
-        }
-    </style>
+  <link rel="stylesheet" href="/css/form.css">
+  
 </head>
 <body>
     <div class="container">
         <h2>Detalhes da Venda</h2>
 
-        <!-- Ícone de Carrinho -->
         <div class="cart-icon">
             🛒 <span id="cartCount">0</span>
         </div>
 
-        <div class="section">
-            <h3>Informações do Cliente</h3>
-            <div class="input-group">
-                <label>Nome:</label>
-                <input type="text" id="clientName" placeholder="Nome do Cliente">
+        <div class="flex-container">
+            <div class="section">
+                <h3>Informações do Cliente</h3>
+                <div class="input-group">
+                    <label>ID do Cliente:</label>
+                    <input type="text" id="clientId" placeholder="ID do Cliente" onblur="fillClientDetails()">
+                </div>
+                <div class="input-group">
+                    <label>Nome:</label>
+                    <input type="text" id="clientName" placeholder="Nome do Cliente">
+                </div>
+                <div class="input-group">
+                    <label>E-mail:</label>
+                    <input type="email" id="clientEmail" placeholder="email@exemplo.com">
+                </div>
             </div>
-            <div class="input-group">
-                <label>E-mail:</label>
-                <input type="email" id="clientEmail" placeholder="email@exemplo.com">
+
+            <div class="section" id="productForm">
+                <h3>Adicionar Produto</h3>
+                <div class="input-group">
+                    <label>ID do Produto:</label>
+                    <input type="text" id="productId" placeholder="ID do Produto" onblur="fillProductDetails()">
+                </div>
+                <div class="input-group">
+                    <label>Produto:</label>
+                    <input type="text" id="productName" placeholder="Nome do Produto" readonly>
+                </div>
+                <div class="input-group">
+                    <label>Preço Unitário (Kz):</label>
+                    <input type="number" id="productPrice" value="500" readonly>
+                </div>
+                <div class="input-group">
+                    <label>Quantidade:</label>
+                    <input type="number" id="productQuantity" value="1">
+                </div>
+                <button class="add-product-btn" onclick="addProduct()">+ Adicionar ao Carrinho</button>
             </div>
         </div>
-
-        <div class="section" id="productForm">
-            <h3>Adicionar Produto</h3>
-            <div class="input-group">
-                <label>Produto:</label>
-                <input type="text" id="productName" placeholder="Nome do Produto">
-            </div>
-            <div class="input-group">
-                <label>Preço Unitário (Kz):</label>
-                <input type="number" id="productPrice" value="500">
-            </div>
-            <div class="input-group">
-                <label>Quantidade:</label>
-                <input type="number" id="productQuantity" value="1">
-            </div>
-        </div>
-
-        <button class="add-product-btn" onclick="addProduct()">+ Adicionar ao Carrinho</button>
 
         <div class="section">
             <h3>Produtos no Carrinho</h3>
@@ -231,62 +94,99 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.13/jspdf.plugin.autotable.min.js"></script>
 
     <script>
+        const clientsData = [
+            { id: '1', name: 'Cliente A', email: 'clienteA@exemplo.com' },
+            { id: '2', name: 'Cliente B', email: 'clienteB@exemplo.com' },
+            { id: '3', name: 'Cliente C', email: 'clienteC@exemplo.com' },
+        ];
+
+        const productsData = [
+            { id: '1', name: 'Produto A', price: 500 },
+            { id: '2', name: 'Produto B', price: 800 },
+            { id: '3', name: 'Produto C', price: 1200 },
+        ];
+
         let products = [];
 
+        function fillClientDetails() {
+            const clientId = document.getElementById('clientId').value;
+            const client = clientsData.find(c => c.id === clientId);
+
+            if (client) {
+                document.getElementById('clientName').value = client.name;
+                document.getElementById('clientEmail').value = client.email;
+            } else {
+                document.getElementById('clientName').value = '';
+                document.getElementById('clientEmail').value = '';
+            }
+        }
+
+        function fillProductDetails() {
+            const productId = document.getElementById('productId').value;
+            const product = productsData.find(p => p.id === productId);
+
+            if (product) {
+                document.getElementById('productName').value = product.name;
+                document.getElementById('productPrice').value = product.price;
+            } else {
+                document.getElementById('productName').value = '';
+                document.getElementById('productPrice').value = 500; // Valor padrão se não encontrado
+            }
+        }
+
         function addProduct() {
-            const name = document.getElementById('productName').value;
-            const price = parseFloat(document.getElementById('productPrice').value);
-            const quantity = parseInt(document.getElementById('productQuantity').value);
+            const productId = document.getElementById('productId').value;
+            const productName = document.getElementById('productName').value;
+            const productPrice = parseFloat(document.getElementById('productPrice').value);
+            const productQuantity = parseInt(document.getElementById('productQuantity').value);
 
-            // Adicionar produto ao array
-            products.push({ name, price, quantity });
+            const existingProduct = products.find(p => p.id === productId);
 
-            // Atualizar o carrinho
-            document.getElementById('cartCount').innerText = products.length;
+            if (existingProduct) {
+                existingProduct.quantity += productQuantity; 
+            } else {
+                products.push({ id: productId, name: productName, price: productPrice, quantity: productQuantity });
+            }
 
-            // Adicionar à tabela de produtos
             updateProductTable();
-            updateTotal();
+            updateTotalAmount();
         }
 
         function updateProductTable() {
-            const tableBody = document.getElementById('productTableBody');
-            tableBody.innerHTML = ''; // Limpar a tabela existente
+            const tbody = document.getElementById('productTableBody');
+            tbody.innerHTML = ''; 
 
-            products.forEach((product, index) => {
+            products.forEach(product => {
                 const row = document.createElement('tr');
                 row.innerHTML = `
                     <td>${product.name}</td>
                     <td>${product.quantity}</td>
-                    <td><button class="remove-product-btn" onclick="removeProduct(${index})">Remover</button></td>
+                    <td><button class="remove-product-btn" onclick="removeProduct('${product.id}')">Remover</button></td>
                 `;
-                tableBody.appendChild(row);
+                tbody.appendChild(row);
             });
+
+            document.getElementById('cartCount').textContent = products.length; 
         }
 
-        function removeProduct(index) {
-            products.splice(index, 1); // Remover produto do array
-            document.getElementById('cartCount').innerText = products.length; // Atualizar contagem
-            updateProductTable(); // Atualizar tabela
-            updateTotal(); // Atualizar total
+        function removeProduct(productId) {
+            products = products.filter(p => p.id !== productId);
+            updateProductTable();
+            updateTotalAmount();
         }
 
-        function updateTotal() {
-            let total = 0;
-            products.forEach(product => {
-                total += product.price * product.quantity;
-            });
-            document.getElementById('totalAmount').innerText = `Kz ${total.toFixed(2)}`;
+        function updateTotalAmount() {
+            const total = products.reduce((sum, product) => sum + product.price * product.quantity, 0);
+            document.getElementById('totalAmount').textContent = `Kz ${total}`;
         }
 
         function generateInvoice() {
             const { jsPDF } = window.jspdf;
             const doc = new jsPDF();
 
-            // Configuração do cabeçalho da fatura
             doc.setFontSize(16);
             doc.setTextColor(40);
-            doc.text("Loja Exemplo", 20, 20); // Nome da loja
+            doc.text("Loja Exemplo", 20, 20);
             doc.setFontSize(12);
             doc.text("Fatura de Venda", 170, 20, null, null, "right");
             doc.setFontSize(10);
@@ -296,7 +196,6 @@
             doc.setLineWidth(0.5);
             doc.line(20, 35, 190, 35);
 
-            // Informações do Cliente
             const clientName = document.getElementById('clientName').value || "Cliente Desconhecido";
             const clientEmail = document.getElementById('clientEmail').value || "Não fornecido";
             const paymentMethod = document.getElementById('paymentMethod').value;
@@ -308,11 +207,9 @@
             doc.text(`E-mail: ${clientEmail}`, 20, 65);
             doc.text(`Método de Pagamento: ${paymentMethod}`, 20, 75);
 
-            // Linha Divisória
             doc.setLineWidth(0.5);
             doc.line(20, 80, 190, 80);
 
-            // Preparação dos dados da tabela
             const tableBody = products.map((product, index) => [
                 index + 1,
                 product.name,
@@ -321,7 +218,6 @@
                 `Kz ${(product.price * product.quantity).toFixed(2)}`
             ]);
 
-            // Cabeçalhos da tabela
             const tableHeaders = [
                 { title: "Nº", dataKey: "num" },
                 { title: "Produto", dataKey: "name" },
@@ -330,7 +226,6 @@
                 { title: "Subtotal (Kz)", dataKey: "subtotal" }
             ];
 
-            // Tabela de Produtos usando autoTable
             doc.autoTable({
                 startY: 90,
                 head: [tableHeaders],
@@ -347,17 +242,14 @@
                 }
             });
 
-            // Cálculo do total
             const totalAmount = products.reduce((sum, product) => sum + product.price * product.quantity, 0);
 
-            // Exibe o Total no final da Tabela
             doc.setFontSize(12);
             doc.setFont("Helvetica", "bold");
             doc.text("Total", 140, doc.lastAutoTable.finalY + 10);
             doc.text(`Kz ${totalAmount.toFixed(2)}`, 170, doc.lastAutoTable.finalY + 10, null, null, "left");
 
-            // Salvar o PDF
-            doc.save("fatura.pdf");
+            doc.output('dataurlnewwindow');
         }
     </script>
 </body>
