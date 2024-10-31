@@ -21,6 +21,7 @@ public class ClienteModel implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
+    public String numero_cliente;
 
 
     // @Transient
@@ -43,8 +44,16 @@ public class ClienteModel implements Serializable {
         this.id = id;
     }
 
+    public String getnumero_cliente(){
+        return numero_cliente;
+    }
+
+    public void setNumeroCliente(String numero_cliente){
+        this.numero_cliente = numero_cliente;
+    }
+
     public TipoCliente getTipo_cliente() {
-        return tipo_cliente;
+        return this.tipo_cliente;
     }
 
     public void setTipo_cliente(TipoCliente tipo_cliente) {

@@ -185,7 +185,8 @@
 
                     </div>
 
-                    <div class="container ">
+                 
+                  <div     class="container ">
                         <div class="scroll-container">
 
                             <div class="heading-sell">
@@ -200,7 +201,7 @@
 
                             </div>
 
-                            <div class="sell-container-list">
+                            <div th:each="item: ${vendas}" class="sell-container-list">
 
 
                                 <div class="sell-box">
@@ -211,10 +212,10 @@
                                             <span class="invoice-number">SMI034-950-9560</span>
                                         </div>
                                     </div>
-                                    <span class="selled-roduct-price">Kz 1200</span>
+                                    <span  class="selled-roduct-price">Kz 1200</span>
                                     <span class="selled-product-date">08 Abr 2023</span>
                                     <span class="selled-product-status success-payment">Sucesso</span>
-                                    <span class="selled-product-costumer">Mardoquéu Dickson</span>
+                                    <span th:text="${item.cliente.usuario.nome}" class="selled-product-costumer">Mardoquéu Dickson</span>
 
                                 </div>
                             </div>

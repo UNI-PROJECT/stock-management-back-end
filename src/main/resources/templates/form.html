@@ -1,256 +1,337 @@
 <!DOCTYPE html>
 <html lang="pt">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Formulário de Venda Profissional</title>
-  <link rel="stylesheet" href="/css/form.css">
-  
-</head>
-<body>
+    <link rel="stylesheet" href="/css/form.css" />
+  </head>
+  <body>
     <div class="container">
-        <h2>Detalhes da Venda</h2>
+      <h2>Detalhes da Venda</h2>
 
-        <div class="cart-icon">
-            🛒 <span id="cartCount">0</span>
-        </div>
+      <div class="cart-icon">🛒 <span id="cartCount">0</span></div>
 
-        <div class="flex-container">
-            <div class="section">
-                <h3>Informações do Cliente</h3>
-                <div class="input-group">
-                    <label>ID do Cliente:</label>
-                    <input type="text" id="clientId" placeholder="ID do Cliente" onblur="fillClientDetails()">
-                </div>
-                <div class="input-group">
-                    <label>Nome:</label>
-                    <input type="text" id="clientName" placeholder="Nome do Cliente">
-                </div>
-                <div class="input-group">
-                    <label>E-mail:</label>
-                    <input type="email" id="clientEmail" placeholder="email@exemplo.com">
-                </div>
-            </div>
-
-            <div class="section" id="productForm">
-                <h3>Adicionar Produto</h3>
-                <div class="input-group">
-                    <label>ID do Produto:</label>
-                    <input type="text" id="productId" placeholder="ID do Produto" onblur="fillProductDetails()">
-                </div>
-                <div class="input-group">
-                    <label>Produto:</label>
-                    <input type="text" id="productName" placeholder="Nome do Produto" readonly>
-                </div>
-                <div class="input-group">
-                    <label>Preço Unitário (Kz):</label>
-                    <input type="number" id="productPrice" value="500" readonly>
-                </div>
-                <div class="input-group">
-                    <label>Quantidade:</label>
-                    <input type="number" id="productQuantity" value="1">
-                </div>
-                <button class="add-product-btn" onclick="addProduct()">+ Adicionar ao Carrinho</button>
-            </div>
-        </div>
-
+      <div class="flex-container">
         <div class="section">
-            <h3>Produtos no Carrinho</h3>
-            <div class="product-table" id="productTable">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Produto</th>
-                            <th>Quantidade</th>
-                            <th>Ação</th>
-                        </tr>
-                    </thead>
-                    <tbody id="productTableBody">
-                        <!-- Os produtos serão adicionados aqui -->
-                    </tbody>
-                </table>
-            </div>
+          <h3>Informações do Cliente</h3>
+          <div class="input-group">
+            <label>ID do Cliente:</label>
+            <input
+              type="text"
+              id="clientId"
+              placeholder="ID do Cliente"
+              onblur="fillClientDetails()"
+            />
+          </div>
+          <div class="input-group">
+            <label>Nome:</label>
+            <input type="text" id="clientName" placeholder="Nome do Cliente" />
+          </div>
+          <div class="input-group">
+            <label>E-mail:</label>
+            <input
+              type="email"
+              id="clientEmail"
+              placeholder="email@exemplo.com"
+            />
+          </div>
         </div>
 
-        <div class="section">
-            <h3>Detalhe de Pagamento</h3>
-            <div class="input-group">
-                <label>Método de Pagamento:</label>
-                <select id="paymentMethod">
-                    <option>Cartão</option>
-                    <option>Dinheiro</option>
-                </select>
-            </div>
+        <div class="section" id="productForm">
+          <h3>Adicionar Produto</h3>
+          <div class="input-group">
+            <label>ID do Produto:</label>
+            <input
+              type="text"
+              id="productId"
+              placeholder="ID do Produto"
+              onblur="fillProductDetails()"
+            />
+          </div>
+          <div class="input-group">
+            <label>Produto:</label>
+            <input
+              type="text"
+              id="productName"
+              placeholder="Nome do Produto"
+              readonly
+            />
+          </div>
+          <div class="input-group">
+            <label>Preço Unitário (Kz):</label>
+            <input type="number" id="productPrice" value="500" readonly />
+          </div>
+          <div class="input-group">
+            <label>Quantidade:</label>
+            <input type="number" id="productQuantity" value="1" />
+          </div>
+          <button class="add-product-btn" onclick="addProduct()">
+            + Adicionar ao Carrinho
+          </button>
         </div>
+      </div>
 
-        <div class="total">
-            Total: <span id="totalAmount">Kz 0</span>
+      <div class="section">
+        <h3>Produtos no Carrinho</h3>
+        <div class="product-table" id="productTable">
+          <table>
+            <thead>
+              <tr>
+                <th>Produto</th>
+                <th>Quantidade</th>
+                <th>Ação</th>
+              </tr>
+            </thead>
+            <tbody id="productTableBody">
+              <!-- Os produtos serão adicionados aqui -->
+            </tbody>
+          </table>
         </div>
+      </div>
 
-        <button class="complete-sale-btn" onclick="generateInvoice()">Realizar Venda</button>
+      <div class="section">
+        <h3>Detalhe de Pagamento</h3>
+        <div class="input-group">
+          <label>Método de Pagamento:</label>
+          <select id="paymentMethod">
+            <option>Cartão</option>
+            <option>Dinheiro</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="total">Total: <span id="totalAmount">Kz 0</span></div>
+
+      <button class="complete-sale-btn" onclick="generateInvoice()">
+        Realizar Venda
+      </button>
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.13/jspdf.plugin.autotable.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
     <script>
-        const clientsData = [
-            { id: '1', name: 'Cliente A', email: 'clienteA@exemplo.com' },
-            { id: '2', name: 'Cliente B', email: 'clienteB@exemplo.com' },
-            { id: '3', name: 'Cliente C', email: 'clienteC@exemplo.com' },
-        ];
+      async function carregarProdutos() {
+        try {
+          const response1 = await axios.get(
+            "http://localhost:8080/cliente/listar"
+          );
+          const response = await axios.get(
+            "http://localhost:8080/produto/listar"
+          );
 
-        const productsData = [
-            { id: '1', name: 'Produto A', price: 500 },
-            { id: '2', name: 'Produto B', price: 800 },
-            { id: '3', name: 'Produto C', price: 1200 },
-        ];
+          const produtos = response.data;
+          const clientes = response1.data;
 
-        let products = [];
+          const clientsData = clientes.map((cliente) => {
+            return {
+              id: cliente.usuario.id,
+              nome: cliente.usuario.nome,
+              email: cliente.usuario.email,
+            };
+          });
 
-        function fillClientDetails() {
-            const clientId = document.getElementById('clientId').value;
-            const client = clientsData.find(c => c.id === clientId);
+          clientsData.forEach((client) => {
+            clientesData.push(client);
+          });
 
-            if (client) {
-                document.getElementById('clientName').value = client.name;
-                document.getElementById('clientEmail').value = client.email;
-            } else {
-                document.getElementById('clientName').value = '';
-                document.getElementById('clientEmail').value = '';
-            }
+          console.log(clientesData[0].id);
+          produtos.forEach((produto) => {
+            productsData.push(produto);
+          });
+        } catch (error) {
+          console.error("Erro ao carregar os produtos:", error);
+        }
+      }
+
+      document.addEventListener("DOMContentLoaded", () => {
+        carregarProdutos();
+      });
+
+      const clientesData = [];
+      const productsData = [];
+
+      let products = [];
+
+      function fillClientDetails() {
+        const clientId = document.getElementById("clientId").value;
+        const client = clientesData.find((c) => c.id === clientId);
+        console.log("Cliente:", client);
+
+        if (client) {
+          document.getElementById("clientName").value = client.nome;
+          document.getElementById("clientEmail").value = client.email;
+        } else {
+          document.getElementById("clientName").value = "";
+          document.getElementById("clientEmail").value = "";
+        }
+      }
+
+      function fillProductDetails() {
+        const productId = document.getElementById("productId").value;
+        const product = productsData.find((p) => p.id === productId);
+        console.log("Produto:", product);
+
+        if (product) {
+          document.getElementById("productName").value = product.nome;
+          document.getElementById("productPrice").value = product.preco;
+        } else {
+          document.getElementById("productName").value = "";
+          document.getElementById("productPrice").value = 500; // Valor padrão se não encontrado
+        }
+      }
+
+      function addProduct() {
+        const productId = document.getElementById("productId").value;
+        const productName = document.getElementById("productName").value;
+        const productPrice = parseFloat(
+          document.getElementById("productPrice").value
+        );
+        const productQuantity = parseInt(
+          document.getElementById("productQuantity").value
+        );
+
+        const existingProduct = products.find((p) => p.id === productId);
+
+        if (existingProduct) {
+          existingProduct.quantity += productQuantity;
+        } else {
+          products.push({
+            id: productId,
+            nome: productName,
+            preco: productPrice,
+            quantidade: productQuantity,
+          });
         }
 
-        function fillProductDetails() {
-            const productId = document.getElementById('productId').value;
-            const product = productsData.find(p => p.id === productId);
+        updateProductTable();
+        updateTotalAmount();
+      }
 
-            if (product) {
-                document.getElementById('productName').value = product.name;
-                document.getElementById('productPrice').value = product.price;
-            } else {
-                document.getElementById('productName').value = '';
-                document.getElementById('productPrice').value = 500; // Valor padrão se não encontrado
-            }
-        }
+      function updateProductTable() {
+        const tbody = document.getElementById("productTableBody");
+        tbody.innerHTML = "";
 
-        function addProduct() {
-            const productId = document.getElementById('productId').value;
-            const productName = document.getElementById('productName').value;
-            const productPrice = parseFloat(document.getElementById('productPrice').value);
-            const productQuantity = parseInt(document.getElementById('productQuantity').value);
-
-            const existingProduct = products.find(p => p.id === productId);
-
-            if (existingProduct) {
-                existingProduct.quantity += productQuantity; 
-            } else {
-                products.push({ id: productId, name: productName, price: productPrice, quantity: productQuantity });
-            }
-
-            updateProductTable();
-            updateTotalAmount();
-        }
-
-        function updateProductTable() {
-            const tbody = document.getElementById('productTableBody');
-            tbody.innerHTML = ''; 
-
-            products.forEach(product => {
-                const row = document.createElement('tr');
-                row.innerHTML = `
+        products.forEach((product) => {
+          const row = document.createElement("tr");
+          row.innerHTML = `
                     <td>${product.name}</td>
                     <td>${product.quantity}</td>
                     <td><button class="remove-product-btn" onclick="removeProduct('${product.id}')">Remover</button></td>
                 `;
-                tbody.appendChild(row);
-            });
+          tbody.appendChild(row);
+        });
 
-            document.getElementById('cartCount').textContent = products.length; 
-        }
+        document.getElementById("cartCount").textContent = products.length;
+      }
 
-        function removeProduct(productId) {
-            products = products.filter(p => p.id !== productId);
-            updateProductTable();
-            updateTotalAmount();
-        }
+      function removeProduct(productId) {
+        products = products.filter((p) => p.id !== productId);
+        updateProductTable();
+        updateTotalAmount();
+      }
 
-        function updateTotalAmount() {
-            const total = products.reduce((sum, product) => sum + product.price * product.quantity, 0);
-            document.getElementById('totalAmount').textContent = `Kz ${total}`;
-        }
+      function updateTotalAmount() {
+        const total = products.reduce(
+          (sum, product) => sum + product.price * product.quantity,
+          0
+        );
+        document.getElementById("totalAmount").textContent = `Kz ${total}`;
+      }
 
-        function generateInvoice() {
-            const { jsPDF } = window.jspdf;
-            const doc = new jsPDF();
+      function generateInvoice() {
+        const { jsPDF } = window.jspdf;
+        const doc = new jsPDF();
 
-            doc.setFontSize(16);
-            doc.setTextColor(40);
-            doc.text("Loja Exemplo", 20, 20);
-            doc.setFontSize(12);
-            doc.text("Fatura de Venda", 170, 20, null, null, "right");
-            doc.setFontSize(10);
-            doc.text("Data: " + new Date().toLocaleDateString(), 170, 30, null, null, "right");
+        doc.setFontSize(16);
+        doc.setTextColor(40);
+        doc.text("Loja Avante Iluminação", 20, 20);
+        doc.setFontSize(12);
+        doc.text("Fatura de Venda", 170, 20, null, null, "right");
+        doc.setFontSize(10);
+        doc.text(
+          "Data: " + new Date().toLocaleDateString(),
+          170,
+          30,
+          null,
+          null,
+          "right"
+        );
 
-            // Linha Divisória
-            doc.setLineWidth(0.5);
-            doc.line(20, 35, 190, 35);
+        // Linha Divisória
+        doc.setLineWidth(0.5);
+        doc.line(20, 35, 190, 35);
 
-            const clientName = document.getElementById('clientName').value || "Cliente Desconhecido";
-            const clientEmail = document.getElementById('clientEmail').value || "Não fornecido";
-            const paymentMethod = document.getElementById('paymentMethod').value;
+        const clientName =
+          document.getElementById("clientName").value || "Cliente Desconhecido";
+        const clientEmail =
+          document.getElementById("clientEmail").value || "Não fornecido";
+        const paymentMethod = document.getElementById("paymentMethod").value;
 
-            doc.setFontSize(12);
-            doc.text("Informações do Cliente", 20, 45);
-            doc.setFontSize(10);
-            doc.text(`Nome: ${clientName}`, 20, 55);
-            doc.text(`E-mail: ${clientEmail}`, 20, 65);
-            doc.text(`Método de Pagamento: ${paymentMethod}`, 20, 75);
+        doc.setFontSize(12);
+        doc.text("Informações do Cliente", 20, 45);
+        doc.setFontSize(10);
+        doc.text(`Nome: ${clientName}`, 20, 55);
+        doc.text(`E-mail: ${clientEmail}`, 20, 65);
+        doc.text("Rua do Comércio, 123", 20, 35);
+        doc.text(`Método de Pagamento: ${paymentMethod}`, 20, 75);
 
-            doc.setLineWidth(0.5);
-            doc.line(20, 80, 190, 80);
+        doc.setLineWidth(0.5);
+        doc.line(20, 80, 190, 80);
 
-            const tableBody = products.map((product, index) => [
-                index + 1,
-                product.name,
-                `Kz ${product.price.toFixed(2)}`,
-                product.quantity,
-                `Kz ${(product.price * product.quantity).toFixed(2)}`
-            ]);
+        const tableBody = products.map((product, index) => [
+          index + 1,
+          product.name,
+          `Kz ${product.price.toFixed(2)}`,
+          product.quantity,
+          `Kz ${(product.price * product.quantity).toFixed(2)}`,
+        ]);
 
-            const tableHeaders = [
-                { title: "Nº", dataKey: "num" },
-                { title: "Produto", dataKey: "name" },
-                { title: "Preço Unitário (Kz)", dataKey: "unitPrice" },
-                { title: "Quantidade", dataKey: "quantity" },
-                { title: "Subtotal (Kz)", dataKey: "subtotal" }
-            ];
+        const tableHeaders = [
+          { title: "Nº", dataKey: "num" },
+          { title: "Produto", dataKey: "name" },
+          { title: "Preço Unitário (Kz)", dataKey: "unitPrice" },
+          { title: "Quantidade", dataKey: "quantity" },
+          { title: "Subtotal (Kz)", dataKey: "subtotal" },
+        ];
 
-            doc.autoTable({
-                startY: 90,
-                head: [tableHeaders],
-                body: tableBody,
-                theme: "striped",
-                headStyles: { fillColor: [71, 135, 237] },
-                styles: { fontSize: 10 },
-                columnStyles: {
-                    0: { cellWidth: 10 },
-                    1: { cellWidth: 60 },
-                    2: { cellWidth: 35 },
-                    3: { cellWidth: 25 },
-                    4: { cellWidth: 35 },
-                }
-            });
+        doc.autoTable({
+          startY: 90,
+          head: [tableHeaders],
+          body: tableBody,
+          theme: "striped",
+          headStyles: { fillColor: [71, 135, 237] },
+          styles: { fontSize: 10 },
+          columnStyles: {
+            0: { cellWidth: 10 },
+            1: { cellWidth: 60 },
+            2: { cellWidth: 35 },
+            3: { cellWidth: 25 },
+            4: { cellWidth: 35 },
+          },
+        });
 
-            const totalAmount = products.reduce((sum, product) => sum + product.price * product.quantity, 0);
+        const totalAmount = products.reduce(
+          (sum, product) => sum + product.price * product.quantity,
+          0
+        );
 
-            doc.setFontSize(12);
-            doc.setFont("Helvetica", "bold");
-            doc.text("Total", 140, doc.lastAutoTable.finalY + 10);
-            doc.text(`Kz ${totalAmount.toFixed(2)}`, 170, doc.lastAutoTable.finalY + 10, null, null, "left");
+        doc.setFontSize(12);
+        doc.setFont("Helvetica", "bold");
+        doc.text("Total", 140, doc.lastAutoTable.finalY + 10);
+        doc.text(
+          `Kz ${totalAmount.toFixed(2)}`,
+          170,
+          doc.lastAutoTable.finalY + 10,
+          null,
+          null,
+          "left"
+        );
 
-            doc.output('dataurlnewwindow');
-        }
+        doc.output("dataurlnewwindow");
+      }
     </script>
-</body>
+  </body>
 </html>

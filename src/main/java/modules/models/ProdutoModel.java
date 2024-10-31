@@ -26,6 +26,7 @@ public class ProdutoModel implements Serializable {
     private String descricao;
     private double preco;
     private Integer quantidade;
+    public String numero_produdto;
     private Timestamp createdAt;
     private Timestamp updatedAt;
 
@@ -52,6 +53,15 @@ public class ProdutoModel implements Serializable {
 
     public void setId(UUID id) {
         this.id = id;
+    }
+
+
+    public String getNumeroProduto(){
+        return this.numero_produdto;
+    }
+
+    public void  setNumeroProduto(String numero){
+        this.numero_produdto = numero;
     }
 
     public String getNome() {

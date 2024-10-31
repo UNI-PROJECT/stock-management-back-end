@@ -6,8 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import modules.models.ProdutoModel;
-import modules.produto.repository.ProdutoRepository;
+import modules.models.VendaModel;
+import modules.venda.repository.VendaRepository;
 import org.springframework.ui.Model;
 
 
@@ -18,14 +18,14 @@ public class Venda {
 
 
     @Autowired
-    private ProdutoRepository produtoRepository;
+    private VendaRepository vendaRepository;
 
     @GetMapping("/vendas")
     public String vendas(Model model) {
-           List<ProdutoModel> produtos = produtoRepository.findAll();
+           List<VendaModel> produtos = vendaRepository.findAll();
         model.addAttribute("vendas", produtos);
 
-        ProdutoModel produtoModel = new ProdutoModel(); 
+        VendaModel produtoModel = new VendaModel(); 
         model.addAttribute("produtoModel", produtoModel);
         return "vendas";
     }

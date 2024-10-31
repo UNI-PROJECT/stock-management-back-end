@@ -26,10 +26,12 @@ public class SecurityConfig {
         http
             .csrf(csrf -> csrf.disable())
             .authorizeHttpRequests(authorize -> authorize
-                .requestMatchers("/funcionarios/cadastrar").permitAll()  // Permitir acesso sem autenticação
+                .requestMatchers("/funcionarios/cadastrar").permitAll()
+                .requestMatchers("produto/listar").permitAll() 
                 .anyRequest().authenticated())  // Requer autenticação para outras rotas
             .formLogin(form -> form.permitAll())  
-            .httpBasic();
+            .csrf(csrf -> csrf.disable());
+
     
         return http.build();
     }

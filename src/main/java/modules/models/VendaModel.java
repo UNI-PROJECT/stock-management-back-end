@@ -1,6 +1,7 @@
 package modules.models;
 
 import java.io.Serializable;
+import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.util.UUID;
 
@@ -13,7 +14,6 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 
-//Tabela de registros de venda
 @Entity
 @Table(name = "Venda")
 public class VendaModel implements Serializable{
@@ -41,6 +41,8 @@ public class VendaModel implements Serializable{
     public Double totalDaVenda;
     public String descricao;
     public String n_fatura;
+     private Timestamp createdAt;
+    private Timestamp updatedAt;
 
     public UUID getId() {return id;}
     public void setId(UUID id) {this.id = id;}
@@ -67,4 +69,20 @@ public class VendaModel implements Serializable{
     public ProdutoModel getProduto() {return produto;}
 
     public void setProduto(ProdutoModel produto) {this.produto = produto;}
+
+    public Timestamp getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(Timestamp createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public Timestamp getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(Timestamp updatedAt) {
+        this.updatedAt = updatedAt;
+    }
 }
