@@ -1,32 +1,24 @@
 package modules.layout;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 
-
-import modules.models.ProdutoModel;
-import modules.produto.repository.ProdutoRepository;
+import modules.models.VendaModel;
+import modules.venda.repository.VendaRepository;
 
 @Controller
 public class formVenda {
-    
+
     @Autowired
-    private ProdutoRepository produtoRepository;
-    
+    VendaRepository vendaRepository;
+
     @GetMapping("/venda/efetuar")
-    public String efetuarVenda(Model model){
-
-
-        List<ProdutoModel> produtos = produtoRepository.findAll();
-        model.addAttribute("produtos", produtos);
-
-        ProdutoModel produtoModel = new ProdutoModel(); 
-        model.addAttribute("produtoModel", produtoModel);
-        return "form";
+    public String efetuarVenda(@ModelAttribute VendaModel venda) {
+        System.err.println("Dados" + venda);
+        vendaRepository.save(venda);
+        return "redirect:/vendas";
     }
 
 }

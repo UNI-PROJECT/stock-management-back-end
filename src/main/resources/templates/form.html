@@ -7,7 +7,8 @@
     <link rel="stylesheet" href="/css/form.css" />
   </head>
   <body>
-    <div class="container">
+    <form  th:action="@{/venda/registrar}"
+    th:object="${produtoModel}"  class="container" method="post">
       <h2>Detalhes da Venda</h2>
 
       <div class="cart-icon">🛒 <span id="cartCount">0</span></div>
@@ -106,7 +107,7 @@
       <button class="complete-sale-btn" onclick="generateInvoice()">
         Realizar Venda
       </button>
-    </div>
+    </form>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.13/jspdf.plugin.autotable.min.js"></script>
@@ -179,7 +180,7 @@
           document.getElementById("productPrice").value = product.preco;
         } else {
           document.getElementById("productName").value = "";
-          document.getElementById("productPrice").value = 500; // Valor padrão se não encontrado
+          document.getElementById("productPrice").value = 500; 
         }
       }
 
