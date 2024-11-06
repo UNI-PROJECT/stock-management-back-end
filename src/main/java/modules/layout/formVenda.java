@@ -16,9 +16,8 @@ public class formVenda {
 
     @GetMapping("/venda/efetuar")
     public String efetuarVenda(@ModelAttribute VendaModel venda) {
-        System.err.println("Dados" + venda);
         vendaRepository.save(venda);
-        return "redirect:/vendas";
+        return "form";
     }
 
 }

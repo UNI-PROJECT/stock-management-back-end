@@ -7,8 +7,7 @@
     <link rel="stylesheet" href="/css/form.css" />
   </head>
   <body>
-    <form  th:action="@{/venda/registrar}"
-    th:object="${produtoModel}"  class="container" method="post">
+    <div th:object="${produtoModel}" id="saleForm" class="container">
       <h2>Detalhes da Venda</h2>
 
       <div class="cart-icon">🛒 <span id="cartCount">0</span></div>
@@ -67,9 +66,9 @@
             <label>Quantidade:</label>
             <input type="number" id="productQuantity" value="1" />
           </div>
-          <button class="add-product-btn" onclick="addProduct()">
+          <p class="add-product-btn" onclick="addProduct()">
             + Adicionar ao Carrinho
-          </button>
+          </p>
         </div>
       </div>
 
@@ -104,44 +103,49 @@
 
       <div class="total">Total: <span id="totalAmount">Kz 0</span></div>
 
-      <button class="complete-sale-btn" onclick="generateInvoice()">
+      <a class="complete-sale-btn" onclick="generateInvoice()">
         Realizar Venda
-      </button>
-    </form>
+      </a>
+    </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.13/jspdf.plugin.autotable.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
     <script>
+      const clientesData = [];
+      const produtosData = [];
+
       async function carregarProdutos() {
         try {
-          const response1 = await axios.get(
+          const responseClientes = await axios.get(
             "http://localhost:8080/cliente/listar"
           );
-          const response = await axios.get(
+          const responseProdutos = await axios.get(
             "http://localhost:8080/produto/listar"
           );
 
-          const produtos = response.data;
-          const clientes = response1.data;
+          const clientes = responseClientes.data.map((cliente) => ({
+            id: cliente.usuario.id,
+            nome: cliente.usuario.nome,
+            email: cliente.usuario.email,
+            cliente_id: cliente.id,
+            numero_cliente: cliente.numero_cliente,
+          }));
 
-          const clientsData = clientes.map((cliente) => {
-            return {
-              id: cliente.usuario.id,
-              nome: cliente.usuario.nome,
-              email: cliente.usuario.email,
-            };
-          });
+          const produtos = responseProdutos.data.map((produto) => ({
+            id: produto.id,
+            nome: produto.nome,
+            preco: produto.preco,
+            numeroProduto: produto.numeroProduto,
+          }));
 
-          clientsData.forEach((client) => {
-            clientesData.push(client);
-          });
-
-          console.log(clientesData[0].id);
-          produtos.forEach((produto) => {
-            productsData.push(produto);
-          });
+          console.log("Clientes:", clientes);
+          // Substitui diretamente os arrays globais
+          clientesData.length = 0;
+          produtosData.length = 0;
+          clientesData.push(...clientes);
+          produtosData.push(...produtos);
         } catch (error) {
           console.error("Erro ao carregar os produtos:", error);
         }
@@ -151,16 +155,17 @@
         carregarProdutos();
       });
 
-      const clientesData = [];
-      const productsData = [];
-
       let products = [];
+      let productIds = [];
 
       function fillClientDetails() {
         const clientId = document.getElementById("clientId").value;
-        const client = clientesData.find((c) => c.id === clientId);
-        console.log("Cliente:", client);
+        const clientIdNum = parseInt(clientId, 10);
 
+        const client = clientesData.find(
+          (c) => c.numero_cliente === clientIdNum
+        );
+ 
         if (client) {
           document.getElementById("clientName").value = client.nome;
           document.getElementById("clientEmail").value = client.email;
@@ -172,19 +177,20 @@
 
       function fillProductDetails() {
         const productId = document.getElementById("productId").value;
-        const product = productsData.find((p) => p.id === productId);
-        console.log("Produto:", product);
+        const product = produtosData.find((p) => p.numeroProduto === productId);
 
         if (product) {
           document.getElementById("productName").value = product.nome;
           document.getElementById("productPrice").value = product.preco;
         } else {
           document.getElementById("productName").value = "";
-          document.getElementById("productPrice").value = 500; 
+          document.getElementById("productPrice").value = 500;
         }
       }
 
       function addProduct() {
+        const cartCountElement = document.getElementById("cartCount");
+
         const productId = document.getElementById("productId").value;
         const productName = document.getElementById("productName").value;
         const productPrice = parseFloat(
@@ -197,14 +203,21 @@
         const existingProduct = products.find((p) => p.id === productId);
 
         if (existingProduct) {
-          existingProduct.quantity += productQuantity;
+          existingProduct.quantidade += productQuantity;
         } else {
+          const product = produtosData.find((p) => p.numeroProduto === productId);
+
+          productIds.push(product.id);
+          console.log("productIds", productIds);
+
           products.push({
             id: productId,
             nome: productName,
             preco: productPrice,
             quantidade: productQuantity,
           });
+
+      
         }
 
         updateProductTable();
@@ -212,20 +225,24 @@
       }
 
       function updateProductTable() {
+        document.getElementById("cartCount").value += 1;
+
         const tbody = document.getElementById("productTableBody");
         tbody.innerHTML = "";
 
         products.forEach((product) => {
           const row = document.createElement("tr");
           row.innerHTML = `
-                    <td>${product.name}</td>
-                    <td>${product.quantity}</td>
-                    <td><button class="remove-product-btn" onclick="removeProduct('${product.id}')">Remover</button></td>
-                `;
+      <td>${product.nome}</td>
+      <td>${product.quantidade}</td>
+      <td><button class="remove-product-btn" onclick="removeProduct('${product.id}')">Remover</button></td>
+    `;
           tbody.appendChild(row);
         });
 
         document.getElementById("cartCount").textContent = products.length;
+
+        console.log("Produtos no Carrinho:", products.length);
       }
 
       function removeProduct(productId) {
@@ -236,10 +253,52 @@
 
       function updateTotalAmount() {
         const total = products.reduce(
-          (sum, product) => sum + product.price * product.quantity,
+          (sum, product) => sum + product.preco * product.quantidade,
           0
         );
-        document.getElementById("totalAmount").textContent = `Kz ${total}`;
+        document.getElementById(
+          "totalAmount"
+        ).textContent = `Kz ${total.toFixed(2)}`;
+      }
+
+      async function cadastrarVenda() {
+        try {
+          console.log("clienteData", clientesData[0].cliente_id);
+          const descricao = "Venda de produtos";
+          const dataDaVenda = new Date().toISOString().split("T")[0]; // Formato de data YYYY-MM-DD
+
+          const vendaData = {
+            cliente_id: clientesData[0].cliente_id,
+            descricao: descricao,
+            data_da_venda: dataDaVenda,
+            produto_ids: productIds,
+            totalDaVenda: products.reduce(
+              (sum, product) => sum + product.preco * product.quantidade,
+              0
+            ),
+            // produtos: products.map((product) => ({
+            //   produto_id: product.id,
+            // })),
+          };
+
+          const response = await axios.post(
+            "http://localhost:8080/vendas/cadastrar",
+            vendaData
+          );
+
+          alert("Venda cadastrada com sucesso!");
+          console.log("Resposta do servidor:", response.data);
+
+          products = [];
+          updateProductTable();
+          updateTotalAmount();
+        } catch (error) {
+          console.log("aaaaaaaaaa", vendaData);
+
+          alert(
+            "Erro ao cadastrar a venda. Verifique os dados e tente novamente."
+          );
+        }
       }
 
       function generateInvoice() {
@@ -285,9 +344,9 @@
         const tableBody = products.map((product, index) => [
           index + 1,
           product.name,
-          `Kz ${product.price.toFixed(2)}`,
+          `Kz ${product.preco.toFixed(2)}`,
           product.quantity,
-          `Kz ${(product.price * product.quantity).toFixed(2)}`,
+          `Kz ${(product.preco * product.quantity).toFixed(2)}`,
         ]);
 
         const tableHeaders = [
@@ -331,7 +390,9 @@
           "left"
         );
 
-        doc.output("dataurlnewwindow");
+        // doc.output("dataurlnewwindow");
+
+        cadastrarVenda();
       }
     </script>
   </body>

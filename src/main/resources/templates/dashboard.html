@@ -163,8 +163,6 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="en">
 					<div class="total-flex">
 						<span class="week-span-text">Ganhos semanais</span>
 						<span th:text="${ganhoSemanal}" class="label__total-purchase-due tot-label-num week-earning-total">11390 Kz</span>
-						<span  class="total-text">+<span class="percentage"> 43%</span> aumentado em relação a semana
-							passada</span>
 					</div>
 					<div class="icon"><ion-icon name="bar-chart-outline"></ion-icon></div>
 				</div>
@@ -174,8 +172,6 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="en">
 					<div class="total-flex">
 						<span  class="week-span-text">Ganhos mensais</span>
 						<span th:text="${ganhoMensal}" class="label__total-purchase-due tot-label-num month-earn-total">24086 Kz</span>
-						<span class="total-text">+<span class="percentage"> 79.9%</span> aumentado em relação ao mês
-							passad0</span>
 					</div>
 					<div class="icon"><ion-icon name="bar-chart-outline"></ion-icon></div>
 				</div>
@@ -195,23 +191,7 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="en">
 				</div>
 
 
-				<div class="total-box total__purchase-box today">
-					<div class="total-icon"><ion-icon name="logo-usd"></ion-icon></div>
-
-					<div class="total-flex">
-						<span class="label__total-purchase-due tot-label-num">5670 Kz</span>
-						<span class="total-text">Productos Vendido</span>
-					</div>
-				</div>
-
-
-				<div class="total-box total__purchase-box today">
-					<div class="total-icon"><ion-icon name="logo-usd"></ion-icon></div>
-					<div class="total-flex">
-						<span class="label__total-purchase-due tot-label-num">2340 Kz</span>
-						<span class="total-text">Receita Total</span>
-					</div>
-				</div>
+		
 
 
 				<div class="total-box total__costumer-box tot-box-02">
@@ -223,13 +203,7 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="en">
 				</div>
 
 
-				<div class="total-box total__costumer-box tot-box-02 box-light-blue">
-					<div class="total-flex">
-						<span class="total-text">Fornecedores</span>
-						<span class="label__total-purchase-due tot-label-num total-supplier-number">3450</span>
-					</div>
-					<div class="total-icon"><ion-icon name="person-add-outline"></ion-icon></div>
-				</div>
+		
 
 
 				<div class="total-box total__costumer-box tot-box-02 ">
@@ -259,7 +233,7 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="en">
 					<div class="subheader">
 						<h3 class="heading-h3">Productos recentes</h3>
 						<div>
-							<a href="pages/products.html" class="see-all-link">Ver todos <ion-icon
+							<a href="/produtos" class="see-all-link">Ver todos <ion-icon
 									name="arrow-forward-outline"></ion-icon></a>
 						</div>
 					</div>
@@ -287,79 +261,7 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="en">
 			</div>
 
 
-			<div class="statics_recent-container grid-more">
-
-				<div class="recent-products-notification-box">
-
-					<div class="subheader">
-						<h3 class="heading-h3">Mais vendidos</h3>
-						<div>
-							<a href="pages/vendas.html" class="see-all-link">Ver todos<ion-icon
-									name="arrow-forward-outline"></ion-icon></a>
-						</div>
-					</div>
-					<div   th:each="item: ${vendas}"  class="fixed">
-						<div class="most-selled-list">
-
-							<div  class="product-notification most-salled">
-								<ion-icon name="trending-up-outline"></ion-icon>
-								<div>
-									<div class="flex-most-selled">
-
-										<span  th:text="${item.produto.nome}" class="product-name">Lenovo 3D 3GEn</span>
-										<span class="number">Quantidade</span>
-									</div>
-									<div class="flex-most-selled">
-										<span class="product-price">$580</span>
-										<span  class="sale-num">230</span>
-									</div>
-								</div>
-
-							</div>
-						</div>
-
-					</div>
-				</div>
-
-
-				<div class="statics-box">
-					<div class="subheader">
-						<h3 class="heading-h3">Vendas Recentes</h3>
-						<div>
-							<a href="#" class="see-all-link">Ver todos <ion-icon
-									name="arrow-forward-outline"></ion-icon></a>
-						</div>
-					</div>
-					<div  class="fixed transation-scroll">
-
-
-						<div class="recent-transation-heading">
-							<span>Factura</span>
-							<span>Total</span>
-							<span>Data</span>
-							<span>Satus</span>
-						</div>
-
-						<div th:each="item: ${vendas}" class="recent-transation-list">
-							<div class="transation-recent">
-								<div class="invoice-container">
-									<ion-icon name="swap-horizontal-outline"></ion-icon>
-									<div>
-										<span  th:text="${item.n_fatura}" class="invoice-number">SMO0934343</span>
-										<span class="payment-type">Cash</span>
-									</div>
-								</div>
-								<span class="total-sell">$ 23498</span>
-								<span class="sell-date">há 1 min</span>
-								<span class="sell-status">Sucesso</span>
-							</div>
-
-						</div>
-
-
-					</div>
-				</div>
-			</div>
+			
 		</section>
 	</section>
 

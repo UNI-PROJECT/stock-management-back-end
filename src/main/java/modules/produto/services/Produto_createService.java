@@ -5,6 +5,7 @@ import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
+import java.util.Random;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +24,7 @@ import java.util.NoSuchElementException;
 
 @Service
 public class Produto_createService {
+
   @Autowired
   private ProdutoRepository produtoRepository;
 
@@ -32,7 +34,19 @@ public class Produto_createService {
   @Autowired
   private EntradaProdutoRepository entradaRepository;
 
+  private String gerarNumeroProduto(String nomeProduto) {
+    String prefixo = nomeProduto.length() > 1 
+                    ? nomeProduto.substring(0, 2).toUpperCase() 
+                    : nomeProduto.toUpperCase();
+
+    int numeroAleatorio = new Random().nextInt(9000) + 1000;
+
+    return prefixo + numeroAleatorio;
+  }
+
   public EntradaProduto create(CreateProdutoInput data) {
+
+    String numeroProduto = gerarNumeroProduto(data.nome);
 
     var categoria = new CategoriaModel();
     categoria.setDescricao(data.descricao);
@@ -45,6 +59,7 @@ public class Produto_createService {
     produto.setPreco(data.preco);
     produto.setQuantidade(data.quantidade);
     produto.setCategoria(categoria);
+    produto.setNumeroProduto(numeroProduto);  
     produtoRepository.save(produto);
 
     var entrada = new EntradaProduto();

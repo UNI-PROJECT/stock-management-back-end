@@ -61,4 +61,5 @@ public class UsuarioModel implements Serializable{
 
     public TipoUsuario getTipoUsuario() {return tipoUsuario;}
     public void setTipoUsuario(TipoUsuario tipoUsuario) {this.tipoUsuario = tipoUsuario;}
+ 
 }

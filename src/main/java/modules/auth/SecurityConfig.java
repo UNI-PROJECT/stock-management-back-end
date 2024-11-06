@@ -28,7 +28,10 @@ public class SecurityConfig {
             .authorizeHttpRequests(authorize -> authorize
                 .requestMatchers("/funcionarios/cadastrar").permitAll()
                 .requestMatchers("produto/listar").permitAll() 
-                .anyRequest().authenticated())  // Requer autenticação para outras rotas
+                .requestMatchers("cliente/cadastrar").permitAll() 
+                .anyRequest().permitAll())  // Permite acesso a todas as rotas
+
+                // .anyRequest().authenticated())  // Requer autenticação para outras rotas
             .formLogin(form -> form.permitAll())  
             .csrf(csrf -> csrf.disable());
 

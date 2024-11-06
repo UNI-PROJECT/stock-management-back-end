@@ -7,4 +7,5 @@ public class CreateProdutoInput {
     public double preco;
     public Integer quantidade;
     public String categoria;
+    public String numeroProduto;
 }

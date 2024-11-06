@@ -201,21 +201,23 @@
 
                             </div>
 
-                            <div th:each="item: ${vendas}" class="sell-container-list">
+                            <div  class="sell-container-list">
 
 
-                                <div class="sell-box">
+                                <div th:each="item: ${vendas}" class="sell-box">
                                     <div>
                                         <span class="sell-icon"><ion-icon
                                                 name="swap-horizontal-outline"></ion-icon></span>
                                         <div class="sell-product-description">
-                                            <span class="invoice-number">SMI034-950-9560</span>
+                                            <span th:text="${item.fatura}"  class="invoice-number">SMI034-950-9560</span>
                                         </div>
                                     </div>
-                                    <span  class="selled-roduct-price">Kz 1200</span>
-                                    <span class="selled-product-date">08 Abr 2023</span>
+                                    <span th:text="${item.totalDaVenda}" class="selled-roduct-price">Kz 1200</span>
+                                    <span th:text="${item.data_da_venda}"  class="selled-product-date">08 Abr 2023</span>
                                     <span class="selled-product-status success-payment">Sucesso</span>
-                                    <span th:text="${item.cliente.usuario.nome}" class="selled-product-costumer">Mardoquéu Dickson</span>
+                                    <!-- <span th:text="${item.cliente.usuario.nome}" class="selled-product-costumer">Mardoquéu Dickson</span> -->
+                                    <span th:text="${item.cliente != null ? (item.cliente.usuario != null ? item.cliente.usuario.nome : 'Usuário não disponível') : 'Cliente não disponível'}" class="selled-product-costumer"></span>
+
 
                                 </div>
                             </div>
@@ -242,146 +244,100 @@
                 </div>
 
 
-                <!-- -----------------DETAHLHES DO PRODUCTO------------------- -->
-                <div class="section-sell-ditails hide-detail">
-                    <div class="overlay-sell-detail"></div>
-                    <div class="sell-detail-container">
-                        <span class="btn-close-sell-details"><ion-icon name="close-outline"></ion-icon></span>
-                        <div class="current-sell-product btn-close-header">
+              <!-- -----------------DETAHLHES DO PRODUCTO------------------- -->
+<div class="section-sell-ditails hide-detail">
+    <div class="overlay-sell-detail"></div>
+    <div class="sell-detail-container">
+        <span class="btn-close-sell-details"><ion-icon name="close-outline"></ion-icon></span>
+        <div class="current-sell-product btn-close-header">
 
-                            <div class="detail-header">
-                                <span class="sell-icon detail-icon"><ion-icon
-                                        name="swap-horizontal-outline"></ion-icon></span>
-                                <span class="current-product-sell-name invoice-number-label-header">Computador</span>
-                            </div>
-                            <span class="selled-product-status single-status ">Sucesso</span>
-                        </div>
-                        <div class="detail-container">
-                            <div class="current-sell-product border-detail">
-                                <div>
-                                    <span class="current-product-sell-name sell-label">Detalhes da venda</span>
-
-                                </div>
-                                <span class="hide-dett" data-class="data-sell-detail"><ion-icon
-                                        name="chevron-down-outline"></ion-icon></span>
-                            </div>
-                            <div class="details sell-details data-sell-detail">
-                                <div class="details-flex-box">
-                                    <span>Número da Fatura</span>
-                                    <span class="current-sell-invoice-number">SMI034-950-9560</span>
-                                </div>
-                                <div class="details-flex-box">
-                                    <span>Data da venda</span>
-                                    <span class="current-sell-date">Ago 23, 2023, 16:01 PM</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="detail-container">
-                            <div class="current-sell-product border-detail">
-                                <div>
-                                    <span class="current-product-sell-name sell-label">Detalhes dos Productos</span>
-
-                                </div>
-                                <span class="hide-dett" data-class="data-sell-product-detail"><ion-icon
-                                        name="chevron-down-outline"></ion-icon></span>
-                            </div>
-                            <div class="details sell-details data-sell-product-detail">
-                                <div class="sell-item-list">
-
-                                    <div class="details-flex-box">
-                                        <span>Producto 1</span>
-                                        <span class="costumer">Computador</span>
-                                    </div>
-                                    <ul class="product-description-list">
-                                        <li><span>Preço unitário</span> <span class="selled-product-price costumer">Kz
-                                                500</span></li>
-                                        <li><span>Quantidade</span> <span
-                                                class="selled-product-price costumer">40</span>
-                                        </li>
-                                    </ul>
-                                    <div class="details-flex-box">
-                                        <span>Producto 1</span>
-                                        <span class="costumer">Computador</span>
-                                    </div>
-                                    <ul class="product-description-list">
-                                        <li><span>Preço unitário</span> <span class="selled-product-price costumer">Kz 500</span></li>
-                                        <li><span>Quantidade</span> <span
-                                                class="selled-product-price costumer">40</span>
-                                        </li>
-                                    </ul>
-                                    <div class="details-flex-box">
-                                        <span>Producto 1</span>
-                                        <span class="costumer">Computador</span>
-                                    </div>
-                                    <ul class="product-description-list">
-                                        <li><span>Preço unitário</span> <span class="selled-product-price costumer">$
-                                                500</span></li>
-                                        <li><span>Quantidade</span> <span
-                                                class="selled-product-price costumer">40</span>
-                                        </li>
-                                    </ul>
-                                </div>
-
-                            </div>
-
-
-                        </div>
-                        <div class="detail-container">
-                            <div class="current-sell-product border-detail">
-                                <div>
-                                    <span class="current-product-sell-name sell-label">Informações do Cliente</span>
-
-                                </div>
-                                <span class="hide-dett" data-class="data-sell-costumer-detail"><ion-icon
-                                        name="chevron-down-outline"></ion-icon></span>
-                            </div>
-                            <div class="details sell-details data-sell-costumer-detail">
-                                <div class="details-flex-box">
-                                    <span>Nome</span>
-                                    <span class="costumer costumer-name">Mardoquéu Dickson</span>
-                                </div>
-                                <div class="details-flex-box">
-                                    <span>E-mail</span>
-                                    <span class="costumer costumer-email">mardoqueudickson@gmail.com</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="detail-container">
-                            <div class="current-sell-product border-detail">
-                                <div>
-                                    <span class="current-product-sell-name sell-label">Detalhe de Pagamento</span>
-
-                                </div>
-                                <span class="hide-dett" data-class="data-sell-payment-detail"><ion-icon
-                                        name="chevron-down-outline"></ion-icon></span>
-                            </div>
-                            <div class="details sell-details data-sell-payment-detail">
-                                <div class="details-flex-box">
-                                    <span>Método de Pagamento</span>
-                                    <span class="payment-type">Cartão</span>
-                                </div>
-                                <!-- <div class="details-flex-box">
-                                    <span>Preço Unitário </span>
-                                    <span class="current-parcel">$ 3050</span>
-                                </div>
-                                <div class="details-flex-box">
-                                    <span>Quantidade</span>
-                                    <span class="current-parcel">50</span>
-                                </div> -->
-                            </div>
-                        </div>
-                        <div class="detail-container">
-                            <div class="current-sell-product border-detail">
-                                <div>
-                                    <span class="current-product-sell-name sell-label">Total</span>
-
-                                </div>
-                                <span class="total-sell">$ 495 890,00</span>
-                            </div>
-
-                        </div>
-                    </div>
+            <div class="detail-header">
+                <span class="sell-icon detail-icon"><ion-icon name="swap-horizontal-outline"></ion-icon></span>
+                <span class="current-product-sell-name invoice-number-label-header">Fatura</span>
+            </div>
+            <span class="selled-product-status single-status ">Sucesso</span>
+        </div>
+        <div class="detail-container">
+            <div class="current-sell-product border-detail">
+                <div>
+                    <span class="current-product-sell-name sell-label">Detalhes da venda</span>
                 </div>
+                <span class="hide-dett" data-class="data-sell-detail"><ion-icon name="chevron-down-outline"></ion-icon></span>
+            </div>
+            <div class="details sell-details data-sell-detail">
+                <div class="details-flex-box">
+                    <span>Número da Fatura</span>
+                    <span th:text="${ultimaVenda.fatura}" class="current-sell-invoice-number">SMI034-950-9560</span>
+                </div>
+                <div class="details-flex-box">
+                    <span>Data da venda</span>
+                    <span th:text="${ultimaVenda.data_da_venda}" class="current-sell-date">Ago 23, 2023, 16:01 PM</span>
+                </div>
+            </div>
+        </div>
+        <div class="detail-container">
+            <div class="current-sell-product border-detail">
+                <div>
+                    <span class="current-product-sell-name sell-label">Detalhes dos Produtos</span>
+                </div>
+                <span class="hide-dett" data-class="data-sell-product-detail"><ion-icon name="chevron-down-outline"></ion-icon></span>
+            </div>
+            <div class="details sell-details data-sell-product-detail">
+                <!-- Iterando sobre os produtos -->
+                <div th:each="produto : ${ultimaVenda.produtos}" class="sell-item-list">
+                    <div class="details-flex-box">
+                        <span th:text="'Produto ' + ${produto.nome}" class="costumer"></span>
+                    </div>
+                    <ul class="product-description-list">
+                        <li><span>Preço unitário</span> <span th:text="'Kz ' + ${produto.preco}" class="selled-product-price costumer"></span></li>
+                        <li><span>Quantidade</span> <span th:text="${produto.quantidade}" class="selled-product-price costumer"></span></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="detail-container">
+            <div class="current-sell-product border-detail">
+                <div>
+                    <span class="current-product-sell-name sell-label">Informações do Cliente</span>
+                </div>
+                <span class="hide-dett" data-class="data-sell-costumer-detail"><ion-icon name="chevron-down-outline"></ion-icon></span>
+            </div>
+            <div class="details sell-details data-sell-costumer-detail">
+                <div class="details-flex-box">
+                    <span>Nome</span>
+                    <span th:text="${ultimaVenda.cliente.usuario.nome}" class="costumer costumer-name">Mardoquéu Dickson</span>
+                </div>
+                <div class="details-flex-box">
+                    <span>E-mail</span>
+                    <span th:text="${ultimaVenda.cliente.usuario.email}" class="costumer costumer-email">mardoqueudickson@gmail.com</span>
+                </div>
+            </div>
+        </div>
+        <div class="detail-container">
+            <div class="current-sell-product border-detail">
+                <div>
+                    <span class="current-product-sell-name sell-label">Detalhe de Pagamento</span>
+                </div>
+                <span class="hide-dett" data-class="data-sell-payment-detail"><ion-icon name="chevron-down-outline"></ion-icon></span>
+            </div>
+            <div class="details sell-details data-sell-payment-detail">
+                <div class="details-flex-box">
+                    <span>Método de Pagamento</span>
+                    <span class="payment-type">Cartão</span>
+                </div>
+            </div>
+        </div>
+        <div class="detail-container">
+            <div class="current-sell-product border-detail">
+                <div>
+                    <span class="current-product-sell-name sell-label">Total</span>
+                </div>
+                <span th:text="'$ ' + ${ultimaVenda.totalDaVenda}" class="total-sell"></span>
+            </div>
+        </div>
+    </div>
+</div>
+
 
                 <!-- -----------------REALIZAR NOVA VENDA------------------- -->
                 <div class="section-new-sell hidden">
